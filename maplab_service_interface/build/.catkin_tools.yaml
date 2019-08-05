@@ -1,0 +1,6 @@
+devel_space: /home/berlukas/Documents/workspace/maplab_darpa/src/maplab_darpa/maplab_service_interface/devel
+install: false
+install_space: /home/berlukas/Documents/workspace/maplab_darpa/src/maplab_darpa/maplab_service_interface/install
+profile: default
+source_space: /home/berlukas/Documents/workspace/maplab_darpa/src/maplab_darpa/maplab_service_interface/src
+workspace: /home/berlukas/Documents/workspace/maplab_darpa/src/maplab_darpa/maplab_service_interface
