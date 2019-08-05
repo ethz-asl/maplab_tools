@@ -1,5 +1,5 @@
 #include <maplab-service-interface/maplab-service-interface-node.h>
-#include <maplab-service-interface/service-handler.h>
+#include <maplab-service-interface/service-type.h>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
 #include <sstream>
@@ -12,6 +12,7 @@ MaplabServiceInterfaceNode::MaplabServiceInterfaceNode(ros::NodeHandle& nh,
     spinner_(1), should_exit_(false) {
   LOG(INFO) << "[MaplabSeriviceInterface] Initializing service interface...";
   
+  // Register service calls and the corresponding callbacks.
   setupServiceCalls(kSanityServiceTopic, 
       &MaplabServiceInterfaceNode::onSanityServiceCall);
   setupServiceCalls(kRunMaplabConsoleCall, 
@@ -63,6 +64,8 @@ bool MaplabServiceInterfaceNode::onRunMaplabConsoleCall
      std_srvs::Empty::Response&) {
   VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
           << " the run maplab service.";
+  ++run_maplab_console_call_count_;
+  service_handler_.handleServiceCall(ServiceType::kSanityService);
   return true;
 }
 
@@ -71,7 +74,9 @@ bool MaplabServiceInterfaceNode::onFetchAllMaps
      std_srvs::Empty::Response&) {
   VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
           << " the fetch all maps service.";
-  return true;
+  ++fetch_all_maps_count_;
+  return service_handler_.handleServiceCall(
+      ServiceType::kRunMaplabConsole);
 }
 
 bool MaplabServiceInterfaceNode::onOptimizeMapsAlone
@@ -79,8 +84,9 @@ bool MaplabServiceInterfaceNode::onOptimizeMapsAlone
      std_srvs::Empty::Response&) {
   VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
           << " the optimize maps alone service.";
-
-  return true;
+  ++optimize_maps_alone_count_;
+  return service_handler_.handleServiceCall(
+      ServiceType::kOptimizeMapsAlone);
 }
 
 bool MaplabServiceInterfaceNode::onOptimizeMapsTogether
@@ -88,8 +94,9 @@ bool MaplabServiceInterfaceNode::onOptimizeMapsTogether
      std_srvs::Empty::Response&) {
   VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
           << " the optimize maps together service.";
-
-  return true;
+  ++optimize_maps_together_count_;
+  return service_handler_.handleServiceCall(
+      ServiceType::kOptimizeMapsTogether);
 }
 
 } // namespace maplab

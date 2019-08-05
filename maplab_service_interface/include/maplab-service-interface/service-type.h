@@ -6,7 +6,9 @@ namespace maplab {
 enum class ServiceType {
   kSanityService = 0u,
   kRunMaplabConsole = 1u, 
-  KFetchAllMaps = 2u,
+  kFetchAllMaps = 2u,
+  kOptimizeMapsAlone = 3u,
+  kOptimizeMapsTogether = 4u,
 };
 
 } // namespace maplab

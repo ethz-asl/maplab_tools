@@ -9,14 +9,16 @@ namespace maplab {
 
 class ServiceHandler final {
   public:
-    static bool handleServiceCall(const ServiceType type);
+    ServiceHandler() = default;
+    bool handleServiceCall(const ServiceType type);
 
   private:
-    ServiceHandler() = default;
 
-    static bool sanityServiceCall();
-    static bool runMaplabConsole();
-    static bool fetchAllMaps(); 
+    bool sanityServiceCall();
+    bool runMaplabConsole();
+    bool fetchAllMaps(); 
+    bool optimizeMapsAlone(); 
+    bool optimizeMapsTogether(); 
 
 };
 

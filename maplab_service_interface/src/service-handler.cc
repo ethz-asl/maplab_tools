@@ -15,11 +15,18 @@ bool ServiceHandler::handleServiceCall(const ServiceType type) {
     case ServiceType::kRunMaplabConsole:
       return ServiceHandler::runMaplabConsole();
 
-    case ServiceType::KFetchAllMaps:
+    case ServiceType::kFetchAllMaps:
       return ServiceHandler::fetchAllMaps();
 
+    case ServiceType::kOptimizeMapsAlone:
+      return ServiceHandler::optimizeMapsAlone();
+
+    case ServiceType::kOptimizeMapsTogether:
+      return ServiceHandler::optimizeMapsTogether();
+
     default:
-      LOG(ERROR) << "Unkown service call type.";
+      LOG(ERROR) << "[ServiceHandler] Unkown service call type: " 
+                 << static_cast<uint8_t>(type);
       return false;
   }
 }
@@ -36,6 +43,16 @@ bool ServiceHandler::runMaplabConsole() {
 
 bool ServiceHandler::fetchAllMaps() {
   LOG(INFO) << "[MaplabServiceInterface] Synchronizing with all maps from robots";
+  return true; 
+}
+
+bool ServiceHandler::optimizeMapsAlone() {
+
+  return true; 
+}
+
+bool ServiceHandler::optimizeMapsTogether() {
+
   return true; 
 }
 

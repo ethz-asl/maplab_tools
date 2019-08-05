@@ -6,6 +6,7 @@
 #include <std_srvs/Empty.h>
 
 #include <maplab-service-interface/service-type.h>
+#include <maplab-service-interface/service-handler.h>
 
 #include <vector>
 #include <atomic>
@@ -65,6 +66,8 @@ class MaplabServiceInterfaceNode {
     std::size_t fetch_all_maps_count_ = 0u;
     std::size_t optimize_maps_alone_count_ = 0u;
     std::size_t optimize_maps_together_count_ = 0u;
+
+    ServiceHandler service_handler_;
 };
 
 template <typename FuncType>
