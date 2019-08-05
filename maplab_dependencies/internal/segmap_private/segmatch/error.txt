@@ -1,0 +1,1069 @@
+[1m[33m_____________________________________________________________________________________________________[0m[0m
+[1m[33mWarnings[0m  [33m <<[0m [36mlibnabo[0m:[34mmake[0m [1m[33m/home/berlukas/Documents/workspace/maplab/logs/libnabo/build.make.111.log[0m[0m 
+warning: Tag `SYMBOL_CACHE_SIZE' at line 289 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `SHOW_DIRECTORIES' at line 473 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `HTML_ALIGN_MEMBERS' at line 799 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_SCHEMA' at line 1136 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_DTD' at line 1142 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: doxygen no longer ships with the FreeSans font.
+You may want to clear or change DOT_FONTNAME.
+Otherwise you run the risk that the wrong font is being used for dot generated graphs.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:200: warning: multiple use of section label 'ANN' while adding anchor, (first occurrence: /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h, line 171)
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:50: warning: Compound Nabo::runtime_error is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/third_party/any.hpp:36: warning: Compound linb::any is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/third_party/any.hpp:27: warning: Compound linb::bad_any_cast is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:219: warning: Member invalidIndex() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:224: warning: Member invalidValue() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:219: warning: Member invalidIndex() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:224: warning: Member invalidValue() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/third_party/any.hpp:29: warning: Member what() const noexcept override (function) of class linb::bad_any_cast is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:219: warning: Member invalidIndex() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:224: warning: Member invalidValue() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:78: warning: Member Vector (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:79: warning: Member Matrix (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:80: warning: Member Index (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:81: warning: Member IndexVector (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:82: warning: Member IndexMatrix (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:92: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Index k, const T epsilon, const unsigned optionFlags, const T maxRadius) const (function) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:93: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:264: warning: Member Vector (typedef) of class Nabo::BruteForceSearchOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:265: warning: Member Matrix (typedef) of class Nabo::BruteForceSearchOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:266: warning: Member Index (typedef) of class Nabo::BruteForceSearchOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:278: warning: Member Vector (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:279: warning: Member Matrix (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:280: warning: Member Index (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:281: warning: Member IndexVector (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:282: warning: Member IndexMatrix (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:354: warning: Member Vector (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:355: warning: Member Matrix (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:356: warning: Member Index (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:357: warning: Member IndexVector (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:358: warning: Member IndexMatrix (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:100: warning: Member Vector (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:101: warning: Member Matrix (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:102: warning: Member Index (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:103: warning: Member IndexVector (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:104: warning: Member IndexMatrix (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:53: warning: Member operator<<(const T &t) (function) of class Nabo::runtime_error is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:64: warning: Member runtime_error(const runtime_error &re) (function) of class Nabo::runtime_error is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:51: warning: Member ss (variable) of class Nabo::runtime_error is not documented.
+[1m[30mcd /home/berlukas/Documents/workspace/maplab/build/libnabo; catkin build --get-env libnabo | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -[0m
+[0m[33m.....................................................................................................[0m[0m
+[1m[33m_____________________________________________________________________________________________________[0m[0m
+[1m[33mWarnings[0m  [33m <<[0m [36mlibnabo[0m:[34minstall[0m [1m[33m/home/berlukas/Documents/workspace/maplab/logs/libnabo/build.install.111.log[0m[0m
+warning: Tag `SYMBOL_CACHE_SIZE' at line 289 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `SHOW_DIRECTORIES' at line 473 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `HTML_ALIGN_MEMBERS' at line 799 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_SCHEMA' at line 1136 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_DTD' at line 1142 of file `/home/berlukas/Documents/workspace/maplab/build/libnabo/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: doxygen no longer ships with the FreeSans font.
+You may want to clear or change DOT_FONTNAME.
+Otherwise you run the risk that the wrong font is being used for dot generated graphs.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:200: warning: multiple use of section label 'ANN' while adding anchor, (first occurrence: /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h, line 171)
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:50: warning: Compound Nabo::runtime_error is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/third_party/any.hpp:36: warning: Compound linb::any is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/third_party/any.hpp:27: warning: Compound linb::bad_any_cast is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:219: warning: Member invalidIndex() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:224: warning: Member invalidValue() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:219: warning: Member invalidIndex() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:224: warning: Member invalidValue() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/third_party/any.hpp:29: warning: Member what() const noexcept override (function) of class linb::bad_any_cast is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:219: warning: Member invalidIndex() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.h:224: warning: Member invalidValue() (function) of namespace Nabo is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:78: warning: Member Vector (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:79: warning: Member Matrix (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:80: warning: Member Index (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:81: warning: Member IndexVector (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:82: warning: Member IndexMatrix (typedef) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:92: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Index k, const T epsilon, const unsigned optionFlags, const T maxRadius) const (function) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:93: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::BruteForceSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:264: warning: Member Vector (typedef) of class Nabo::BruteForceSearchOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:265: warning: Member Matrix (typedef) of class Nabo::BruteForceSearchOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:266: warning: Member Index (typedef) of class Nabo::BruteForceSearchOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:278: warning: Member Vector (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:279: warning: Member Matrix (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:280: warning: Member Index (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:281: warning: Member IndexVector (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:282: warning: Member IndexMatrix (typedef) of class Nabo::KDTreeBalancedPtInLeavesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:354: warning: Member Vector (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:355: warning: Member Matrix (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:356: warning: Member Index (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:357: warning: Member IndexVector (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:358: warning: Member IndexMatrix (typedef) of class Nabo::KDTreeBalancedPtInNodesStackOpenCL is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:100: warning: Member Vector (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:101: warning: Member Matrix (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:102: warning: Member Index (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:103: warning: Member IndexVector (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:104: warning: Member IndexMatrix (typedef) of class Nabo::KDTreeUnbalancedPtInLeavesImplicitBoundsStackOpt is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:228: warning: Member Vector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:229: warning: Member Matrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:230: warning: Member Index (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:231: warning: Member IndexVector (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:232: warning: Member IndexMatrix (typedef) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo_private.h:257: warning: Member knn(const Matrix &query, IndexMatrix &indices, Matrix &dists2, const Vector &maxRadii, const Index k=1, const T epsilon=0, const unsigned optionFlags=0) const (function) of class Nabo::OpenCLSearch is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:53: warning: Member operator<<(const T &t) (function) of class Nabo::runtime_error is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:64: warning: Member runtime_error(const runtime_error &re) (function) of class Nabo::runtime_error is not documented.
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/libnabo/nabo/nabo.cpp:51: warning: Member ss (variable) of class Nabo::runtime_error is not documented.
+[1m[30mcd /home/berlukas/Documents/workspace/maplab/build/libnabo; catkin build --get-env libnabo | catkin env -si  /usr/bin/make install; cd -[0m
+[0m[33m.....................................................................................................[0m[0m
+[1m[33m_____________________________________________________________________________________________________[0m[0m
+[1m[33mWarnings[0m  [33m <<[0m [36mlaser_slam[0m:[34mmake[0m [1m[33m/home/berlukas/Documents/workspace/maplab/logs/laser_slam/build.make.097.log[0m[0m
+warning: Tag `XML_SCHEMA' at line 1797 of file `/home/berlukas/Documents/workspace/maplab/build/laser_slam/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_DTD' at line 1803 of file `/home/berlukas/Documents/workspace/maplab/build/laser_slam/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+[1m[30mcd /home/berlukas/Documents/workspace/maplab/build/laser_slam; catkin build --get-env laser_slam | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -[0m
+[0m[33m.....................................................................................................[0m[0m
+[1m[33m_____________________________________________________________________________________________________[0m[0m
+[1m[33mWarnings[0m  [33m <<[0m [36msegmatch[0m:[34mmake[0m [1m[33m/home/berlukas/Documents/workspace/maplab/logs/segmatch/build.make.007.log[0m[0m
+warning: Tag `XML_SCHEMA' at line 1796 of file `/home/berlukas/Documents/workspace/maplab/build/segmatch/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_DTD' at line 1802 of file `/home/berlukas/Documents/workspace/maplab/build/segmatch/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+[1m[30mcd /home/berlukas/Documents/workspace/maplab/build/segmatch; catkin build --get-env segmatch | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -[0m
+[0m[33m.....................................................................................................[0m[0m
+[1m[33m_____________________________________________________________________________________________________[0m[0m
+[1m[33mWarnings[0m  [33m <<[0m [36mvio_common[0m:[34mmake[0m [1m[33m/home/berlukas/Documents/workspace/maplab/logs/vio_common/build.make.093.log[0m[0m
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/imu-measurements-buffer.h:16:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/pose-lookup-buffer.h:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/src/pose-lookup-buffer.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/imu-measurements-buffer.h:16:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/src/imu-measurements-buffer.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/imu-measurements-buffer.h:16:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/imu-forward-propagation.h:4,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/src/imu-forward-propagation.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-update.h:9:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/test/vio-update-simulation.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/src/test/vio-update-simulation.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-update.h:9:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-update-serialization.h:6,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/src/vio-update-serialization.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+[1m[30mcd /home/berlukas/Documents/workspace/maplab/build/vio_common; catkin build --get-env vio_common | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -[0m
+[0mWARNING: Could not encode unicode characters. Please set the PYTHONIOENCODING environment variable to see complete output. (i.e. PYTHONIOENCODING=UTF-8)
+[33m.....................................................................................................[0m[0m
+[1m[33m_____________________________________________________________________________________________________[0m[0m
+[1m[33mWarnings[0m  [33m <<[0m [36monline_map_builders[0m:[34mmake[0m [1m[33m/home/berlukas/Documents/workspace/maplab/logs/online_map_builders/build.make.092.log[0m[0m
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-update.h:9:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/algorithms/online_map_builders/include/online-map-builders/keyframed-map-builder.h:12,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/algorithms/online_map_builders/src/keyframed-map-builder.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/algorithms/online_map_builders/src/stream-map-builder.cc:10:0:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+[1m[30mcd /home/berlukas/Documents/workspace/maplab/build/online_map_builders; catkin build --get-env online_map_builders | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -[0m
+[0m[33m.....................................................................................................[0m[0m
+[1m[31m_____________________________________________________________________________________________________[0m[0m
+[1m[31mErrors[0m    [31m <<[0m [36msegmatcher[0m:[34mmake[0m [1m[31m/home/berlukas/Documents/workspace/maplab/logs/segmatcher/build.make.088.log[0m[0m
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/datasource.h:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/datasource.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:13:0:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/implementation/rotation-quaternion-inl.h:29:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/rotation-quaternion.h:235,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/quat-transformation.h:28,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/aslam_cv2/aslam_cv_common/include/aslam/common/pose-types.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/aslam_cv2/aslam_cv_cameras/include/aslam/cameras/ncamera.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-factory.h:4,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:1:
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h: In instantiation of ?std::__cxx11::string* google::Check_EQImpl(const T1&, const T2&, const char*) [with T1 = long unsigned int; T2 = int; std::__cxx11::string = std::__cxx11::basic_string<char>]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceImplInl.hpp:127:3:   required from ?rovio::RovioInterfaceImpl<FILTER>::RovioInterfaceImpl(const rovio::FilterConfiguration&, const CameraCalibrationVector&) [with FILTER = rovio::RovioFilter<rovio::FilterState<25, 4, 6, 1, 1, true> >; rovio::CameraCalibrationVector = std::vector<rovio::CameraCalibration, Eigen::aligned_allocator<rovio::CameraCalibration> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceBuilder.hpp:75:10:   required from ?rovio::RovioInterface* rovio::createRovioInterface(const rovio::FilterConfiguration&, const CameraCalibrationVector&) [with long unsigned int kNumCameras = 1; bool kEnableMapLocalization = true; int kNPoses = 1; long unsigned int kMaxNumFeatures = 25; long unsigned int kPyramidLevels = 4; long unsigned int kFeaturePatchSizePx = 6; rovio::CameraCalibrationVector = std::vector<rovio::CameraCalibration, Eigen::aligned_allocator<rovio::CameraCalibration> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:41:60:   required from ?rovio::RovioInterface* segmatcher::{anonymous}::RovioBuilder<kNumCameras>::operator()(const rovio::FilterConfiguration&, const CameraCalibrationVector&) [with int kNumCameras = 1; rovio::CameraCalibrationVector = std::vector<rovio::CameraCalibration, Eigen::aligned_allocator<rovio::CameraCalibration> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:188:72:   required from here
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:717:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ DEFINE_CHECK_OP_IMPL(Check_EQ, ==)  // Compilation error with CHECK_EQ(NULL, x)?
+                                ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:148:53: note: in definition of macro ?GOOGLE_PREDICT_TRUE?
+ #define GOOGLE_PREDICT_TRUE(x) (__builtin_expect(!!(x), 1))
+                                                     ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:717:1: note: in expansion of macro ?DEFINE_CHECK_OP_IMPL?
+ DEFINE_CHECK_OP_IMPL(Check_EQ, ==)  // Compilation error with CHECK_EQ(NULL, x)?
+ ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/lightweight_filtering/include/lightweight_filtering/common.hpp:17:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:32,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceBuilder.hpp:47,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-factory.h:5,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/lightweight_filtering/include/lightweight_filtering/PropertyHandler.hpp: In instantiation of ?void LWF::Register<TYPE>::registerDiagonalMatrix(std::__cxx11::string, Eigen::MatrixBase<OtherDerived>&) [with Derived = Eigen::Matrix<double, 3, 3>; TYPE = double; std::__cxx11::string = std::__cxx11::basic_string<char>]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/ImgUpdate.hpp:322:5:   required from ?rovio::ImgUpdate<FILTERSTATE>::ImgUpdate() [with FILTERSTATE = rovio::FilterState<25, 4, 6, 1, 1, true>]?
+/usr/include/c++/7/tuple:123:22:   required from ?constexpr std::_Head_base<_Idx, _Head, false>::_Head_base() [with long unsigned int _Idx = 0; _Head = rovio::ImgUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >]?
+/usr/include/c++/7/tuple:207:29:   required from ?constexpr std::_Tuple_impl<_Idx, _Head, _Tail ...>::_Tuple_impl() [with long unsigned int _Idx = 0; _Head = rovio::ImgUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >; _Tail = {rovio::PoseUpdate<rovio::FilterState<25, 4, 6, 1, 1, true>, 0, -1>, rovio::VelocityUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >, rovio::LocalizationLandmarkUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >}]?
+/usr/include/c++/7/tuple:582:20:   required from ?constexpr std::tuple<_Elements>::tuple() [with _Dummy = void; typename std::enable_if<std::tuple<_Elements>::_TC2<_Dummy>::_ImplicitlyDefaultConstructibleTuple(), bool>::type <anonymous> = 1; _Elements = {rovio::ImgUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >, rovio::PoseUpdate<rovio::FilterState<25, 4, 6, 1, 1, true>, 0, -1>, rovio::VelocityUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >, rovio::LocalizationLandmarkUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >}]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/lightweight_filtering/include/lightweight_filtering/FilterBase.hpp:104:15:   required from ?LWF::FilterBase<Prediction, Updates>::FilterBase() [with Prediction = rovio::ImuPrediction<rovio::FilterState<25, 4, 6, 1, 1, true> >; Updates = {rovio::ImgUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >, rovio::PoseUpdate<rovio::FilterState<25, 4, 6, 1, 1, true>, 0, -1>, rovio::VelocityUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >, rovio::LocalizationLandmarkUpdate<rovio::FilterState<25, 4, 6, 1, 1, true> >}]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioFilter.hpp:87:16:   [ skipping 9 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/Memory.hpp:22:36:   required from ?std::shared_ptr<_Tp> rovio::aligned_shared(Arguments&& ...) [with Type = rovio::RovioFilter<rovio::FilterState<25, 4, 6, 1, 1, true> >; Arguments = {}]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceImplInl.hpp:109:50:   required from ?rovio::RovioInterfaceImpl<FILTER>::RovioInterfaceImpl(const rovio::FilterConfiguration&) [with FILTER = rovio::RovioFilter<rovio::FilterState<25, 4, 6, 1, 1, true> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceImplInl.hpp:125:39:   required from ?rovio::RovioInterfaceImpl<FILTER>::RovioInterfaceImpl(const rovio::FilterConfiguration&, const CameraCalibrationVector&) [with FILTER = rovio::RovioFilter<rovio::FilterState<25, 4, 6, 1, 1, true> >; rovio::CameraCalibrationVector = std::vector<rovio::CameraCalibration, Eigen::aligned_allocator<rovio::CameraCalibration> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceBuilder.hpp:75:10:   required from ?rovio::RovioInterface* rovio::createRovioInterface(const rovio::FilterConfiguration&, const CameraCalibrationVector&) [with long unsigned int kNumCameras = 1; bool kEnableMapLocalization = true; int kNPoses = 1; long unsigned int kMaxNumFeatures = 25; long unsigned int kPyramidLevels = 4; long unsigned int kFeaturePatchSizePx = 6; rovio::CameraCalibrationVector = std::vector<rovio::CameraCalibration, Eigen::aligned_allocator<rovio::CameraCalibration> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:41:60:   required from ?rovio::RovioInterface* segmatcher::{anonymous}::RovioBuilder<kNumCameras>::operator()(const rovio::FilterConfiguration&, const CameraCalibrationVector&) [with int kNumCameras = 1; rovio::CameraCalibrationVector = std::vector<rovio::CameraCalibration, Eigen::aligned_allocator<rovio::CameraCalibration> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:188:72:   required from here
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/lightweight_filtering/include/lightweight_filtering/PropertyHandler.hpp:60:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(unsigned int i=0;i<N;i++){
+                          ~^~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/lightweight_filtering/include/lightweight_filtering/PropertyHandler.hpp:63:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(unsigned int i=0;i<N;i++){
+                          ~^~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/lightweight_filtering/include/lightweight_filtering/PropertyHandler.hpp:64:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for(unsigned int j=0;j<N;j++){
+                            ~^~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:35:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:38,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceBuilder.hpp:47,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-factory.h:5,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/MultilevelPatch.hpp: In instantiation of ?void rovio::MultilevelPatch<nLevels, patchSize>::extractMultilevelPatchFromImage(const rovio::ImagePyramid<nLevels>&, const rovio::FeatureCoordinates&, int, bool) [with int nLevels = 4; int patchSize = 6]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/ImgUpdate.hpp:749:15:   required from ?void rovio::ImgUpdate<FILTERSTATE>::preProcess(rovio::ImgUpdate<FILTERSTATE>::mtFilterState&, const mtMeas&, bool&) [with FILTERSTATE = rovio::FilterState<25, 4, 6, 2, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtFilterState = rovio::FilterState<25, 4, 6, 2, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtMeas = rovio::ImgUpdateMeas<rovio::State<25, 4, 6, 2, 1, true> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:199:1:   required from here
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/MultilevelPatch.hpp:213:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(unsigned int i=0;i<=l;i++){
+                          ~^~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/implementation/rotation-quaternion-inl.h:29:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/rotation-quaternion.h:235,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/quat-transformation.h:28,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/aslam_cv2/aslam_cv_common/include/aslam/common/pose-types.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/aslam_cv2/aslam_cv_cameras/include/aslam/cameras/ncamera.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-factory.h:4,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:1:
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h: In instantiation of ?std::__cxx11::string* google::Check_LEImpl(const T1&, const T2&, const char*) [with T1 = long unsigned int; T2 = long int; std::__cxx11::string = std::__cxx11::basic_string<char>]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:676:7:   required from ?rovio::FilterState<nMax, nLevels, patchSize, nCam, nPose, enableMapLocalization>::resetLocalizationMapBaseframeCovariance(const Matrix3d&, const Matrix3d&)::<lambda(size_t, size_t, const MatrixXd&, Eigen::MatrixXd*)> [with unsigned int nMax = 25; int nLevels = 4; int patchSize = 6; int nCam = 2; int nPose = 1; bool enableMapLocalization = true; size_t = long unsigned int; Eigen::MatrixXd = Eigen::Matrix<double, -1, -1>]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:672:10:   required from ?struct rovio::FilterState<nMax, nLevels, patchSize, nCam, nPose, enableMapLocalization>::resetLocalizationMapBaseframeCovariance(const Matrix3d&, const Matrix3d&) [with unsigned int nMax = 25; int nLevels = 4; int patchSize = 6; int nCam = 2; int nPose = 1; bool enableMapLocalization = true; Eigen::Matrix3d = Eigen::Matrix<double, 3, 3>]::<lambda(size_t, size_t, const MatrixXd&, Eigen::MatrixXd*)>?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:671:10:   required from ?void rovio::FilterState<nMax, nLevels, patchSize, nCam, nPose, enableMapLocalization>::resetLocalizationMapBaseframeCovariance(const Matrix3d&, const Matrix3d&) [with unsigned int nMax = 25; int nLevels = 4; int patchSize = 6; int nCam = 2; int nPose = 1; bool enableMapLocalization = true; Eigen::Matrix3d = Eigen::Matrix<double, 3, 3>]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceImplInl.hpp:342:5:   required from ?void rovio::RovioInterfaceImpl<FILTER>::resetLocalizationMapBaseframeAndCovariance(const V3D&, const QPD&, double, double) [with FILTER = rovio::RovioFilter<rovio::FilterState<25, 4, 6, 2, 1, true> >; V3D = Eigen::Matrix<double, 3, 1>; QPD = kindr::RotationQuaternion<double>]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:199:1:   required from here
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:719:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ DEFINE_CHECK_OP_IMPL(Check_LE, <=)
+                                ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:148:53: note: in definition of macro ?GOOGLE_PREDICT_TRUE?
+ #define GOOGLE_PREDICT_TRUE(x) (__builtin_expect(!!(x), 1))
+                                                     ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:719:1: note: in expansion of macro ?DEFINE_CHECK_OP_IMPL?
+ DEFINE_CHECK_OP_IMPL(Check_LE, <=)
+ ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h: In instantiation of ?std::__cxx11::string* google::Check_EQImpl(const T1&, const T2&, const char*) [with T1 = long int; T2 = long unsigned int; std::__cxx11::string = std::__cxx11::basic_string<char>]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:678:7:   required from ?rovio::FilterState<nMax, nLevels, patchSize, nCam, nPose, enableMapLocalization>::resetLocalizationMapBaseframeCovariance(const Matrix3d&, const Matrix3d&)::<lambda(size_t, size_t, const MatrixXd&, Eigen::MatrixXd*)> [with unsigned int nMax = 25; int nLevels = 4; int patchSize = 6; int nCam = 2; int nPose = 1; bool enableMapLocalization = true; size_t = long unsigned int; Eigen::MatrixXd = Eigen::Matrix<double, -1, -1>]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:672:10:   required from ?struct rovio::FilterState<nMax, nLevels, patchSize, nCam, nPose, enableMapLocalization>::resetLocalizationMapBaseframeCovariance(const Matrix3d&, const Matrix3d&) [with unsigned int nMax = 25; int nLevels = 4; int patchSize = 6; int nCam = 2; int nPose = 1; bool enableMapLocalization = true; Eigen::Matrix3d = Eigen::Matrix<double, 3, 3>]::<lambda(size_t, size_t, const MatrixXd&, Eigen::MatrixXd*)>?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:671:10:   required from ?void rovio::FilterState<nMax, nLevels, patchSize, nCam, nPose, enableMapLocalization>::resetLocalizationMapBaseframeCovariance(const Matrix3d&, const Matrix3d&) [with unsigned int nMax = 25; int nLevels = 4; int patchSize = 6; int nCam = 2; int nPose = 1; bool enableMapLocalization = true; Eigen::Matrix3d = Eigen::Matrix<double, 3, 3>]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceImplInl.hpp:342:5:   required from ?void rovio::RovioInterfaceImpl<FILTER>::resetLocalizationMapBaseframeAndCovariance(const V3D&, const QPD&, double, double) [with FILTER = rovio::RovioFilter<rovio::FilterState<25, 4, 6, 2, 1, true> >; V3D = Eigen::Matrix<double, 3, 1>; QPD = kindr::RotationQuaternion<double>]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:199:1:   required from here
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:717:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ DEFINE_CHECK_OP_IMPL(Check_EQ, ==)  // Compilation error with CHECK_EQ(NULL, x)?
+                                ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:148:53: note: in definition of macro ?GOOGLE_PREDICT_TRUE?
+ #define GOOGLE_PREDICT_TRUE(x) (__builtin_expect(!!(x), 1))
+                                                     ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:717:1: note: in expansion of macro ?DEFINE_CHECK_OP_IMPL?
+ DEFINE_CHECK_OP_IMPL(Check_EQ, ==)  // Compilation error with CHECK_EQ(NULL, x)?
+ ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FilterStates.hpp:38:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceBuilder.hpp:47,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-factory.h:5,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp: In instantiation of ?std::unordered_set<unsigned int> rovio::FeatureSetManager<nLevels, patchSize, nCam, nMax>::addBestCandidates(const FeatureCoordinatesVec&, const rovio::ImagePyramid<nLevels>&, int, double, int, int, int, int, double, double, double, bool, float) [with int nLevels = 4; int patchSize = 6; int nCam = 2; int nMax = 25; rovio::FeatureCoordinatesVec = std::vector<rovio::FeatureCoordinates, Eigen::aligned_allocator<rovio::FeatureCoordinates> >]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/ImgUpdate.hpp:1047:42:   required from ?void rovio::ImgUpdate<FILTERSTATE>::commonPostProcess(rovio::ImgUpdate<FILTERSTATE>::mtFilterState&, const mtMeas&) [with FILTERSTATE = rovio::FilterState<25, 4, 6, 2, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtFilterState = rovio::FilterState<25, 4, 6, 2, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtMeas = rovio::ImgUpdateMeas<rovio::State<25, 4, 6, 2, 1, true> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/ImgUpdate.hpp:823:24:   required from ?void rovio::ImgUpdate<FILTERSTATE>::postProcess(rovio::ImgUpdate<FILTERSTATE>::mtFilterState&, const mtMeas&, const mtOutlierDetection&, bool&) [with FILTERSTATE = rovio::FilterState<25, 4, 6, 2, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtFilterState = rovio::FilterState<25, 4, 6, 2, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtMeas = rovio::ImgUpdateMeas<rovio::State<25, 4, 6, 2, 1, true> >; rovio::ImgUpdate<FILTERSTATE>::mtOutlierDetection = rovio::ImgOutlierDetection<rovio::State<25, 4, 6, 2, 1, true> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:199:1:   required from here
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:299:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i=0;i<candidates.size();i++){
+                 ~^~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:320:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i=0;i<candidates.size();i++){
+                 ~^~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:324:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         if(newBucketID>nDetectionBuckets-1) newBucketID = nDetectionBuckets-1;
+            ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:343:51: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+           for (unsigned int bucketID = 1;bucketID < nDetectionBuckets;bucketID++) {
+                                          ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:385:51: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for (unsigned int bucketID2 = 1;bucketID2 <= bucketID;bucketID2++) {
+                                         ~~~~~~~~~~^~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp: In instantiation of ?std::unordered_set<unsigned int> rovio::FeatureSetManager<nLevels, patchSize, nCam, nMax>::addBestCandidates(const FeatureCoordinatesVec&, const rovio::ImagePyramid<nLevels>&, int, double, int, int, int, int, double, double, double, bool, float) [with int nLevels = 4; int patchSize = 6; int nCam = 1; int nMax = 25; rovio::FeatureCoordinatesVec = std::vector<rovio::FeatureCoordinates, Eigen::aligned_allocator<rovio::FeatureCoordinates> >]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/ImgUpdate.hpp:1047:42:   required from ?void rovio::ImgUpdate<FILTERSTATE>::commonPostProcess(rovio::ImgUpdate<FILTERSTATE>::mtFilterState&, const mtMeas&) [with FILTERSTATE = rovio::FilterState<25, 4, 6, 1, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtFilterState = rovio::FilterState<25, 4, 6, 1, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtMeas = rovio::ImgUpdateMeas<rovio::State<25, 4, 6, 1, 1, true> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/ImgUpdate.hpp:823:24:   required from ?void rovio::ImgUpdate<FILTERSTATE>::postProcess(rovio::ImgUpdate<FILTERSTATE>::mtFilterState&, const mtMeas&, const mtOutlierDetection&, bool&) [with FILTERSTATE = rovio::FilterState<25, 4, 6, 1, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtFilterState = rovio::FilterState<25, 4, 6, 1, 1, true>; rovio::ImgUpdate<FILTERSTATE>::mtMeas = rovio::ImgUpdateMeas<rovio::State<25, 4, 6, 1, 1, true> >; rovio::ImgUpdate<FILTERSTATE>::mtOutlierDetection = rovio::ImgOutlierDetection<rovio::State<25, 4, 6, 1, 1, true> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:199:1:   required from here
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:299:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i=0;i<candidates.size();i++){
+                 ~^~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:320:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i=0;i<candidates.size();i++){
+                 ~^~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:324:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         if(newBucketID>nDetectionBuckets-1) newBucketID = nDetectionBuckets-1;
+            ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:343:51: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+           for (unsigned int bucketID = 1;bucketID < nDetectionBuckets;bucketID++) {
+                                          ~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/FeatureManager.hpp:385:51: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for (unsigned int bucketID2 = 1;bucketID2 <= bucketID;bucketID2++) {
+                                         ~~~~~~~~~~^~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/implementation/rotation-quaternion-inl.h:29:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/rotation-quaternion.h:235,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/minkindr/minkindr/include/kindr/minimal/quat-transformation.h:28,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/aslam_cv2/aslam_cv_common/include/aslam/common/pose-types.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/aslam_cv2/aslam_cv_cameras/include/aslam/cameras/ncamera.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-factory.h:4,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:1:
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h: In instantiation of ?std::__cxx11::string* google::Check_LTImpl(const T1&, const T2&, const char*) [with T1 = long unsigned int; T2 = int; std::__cxx11::string = std::__cxx11::basic_string<char>]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/maplab_rovio/include/rovio/RovioInterfaceStatesImpl.hpp:94:5:   required from ?bool rovio::RovioFeatureStateImpl<FILTER>::get_isFeatureValid(size_t) const [with FILTER = rovio::RovioFilter<rovio::FilterState<25, 4, 6, 1, 1, true> >; size_t = long unsigned int]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-factory.cc:199:1:   required from here
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:720:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ DEFINE_CHECK_OP_IMPL(Check_LT, < )
+                                ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:148:53: note: in definition of macro ?GOOGLE_PREDICT_TRUE?
+ #define GOOGLE_PREDICT_TRUE(x) (__builtin_expect(!!(x), 1))
+                                                     ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:720:1: note: in expansion of macro ?DEFINE_CHECK_OP_IMPL?
+ DEFINE_CHECK_OP_IMPL(Check_LT, < )
+ ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-flow.h:11:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-localization-handler.h:4,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-localization-handler.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/rovio-flow.h:11:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/rovio-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/datasource.h:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/datasource-factory.h:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/datasource-factory.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/datasource-rostopic.h:11:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/datasource-rostopic.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/datasource-rosbag.h:12:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/datasource-rosbag.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/flow-topics.h:5:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/data-publisher-flow.h:22,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/data-publisher-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/devel/include/pointmatcher/PointMatcher.h:63:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/devel/include/pointmatcher/Parametrizable.h:46:0: warning: "BOOST_ASSIGN_MAX_PARAMS" redefined
+ #define BOOST_ASSIGN_MAX_PARAMS 6
+ 
+In file included from /home/berlukas/Documents/workspace/maplab/devel/include/gtsam/nonlinear/NonlinearFactor.h:30:0,
+                 from /home/berlukas/Documents/workspace/maplab/devel/include/gtsam/nonlinear/NonlinearFactorGraph.h:25,
+                 from /home/berlukas/Documents/workspace/maplab/devel/include/gtsam/nonlinear/ISAM2.h:22,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:7,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/usr/include/boost/assign/list_of.hpp:378:0: note: this is the location of the previous definition
+ #define BOOST_ASSIGN_MAX_PARAMS 5
+ 
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/flow-topics.h:5:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/data-publisher-flow.h:22,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:11,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp: In constructor ?curves::SamplingPolicy::SamplingPolicy(int, curves::Time)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:18:7: warning: ?curves::SamplingPolicy::minimumMeasurements_? will be initialized after [-Wreorder]
+   int minimumMeasurements_;
+       ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:17:7: warning:   ?int curves::SamplingPolicy::measurementsSinceLastExtend_? [-Wreorder]
+   int measurementsSinceLastExtend_;
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:30:3: warning:   when initialized here [-Wreorder]
+   SamplingPolicy(int minimumMeasurements, Time minSamplingPeriod) :
+   ^~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp: In member function ?curves::Key curves::SamplingPolicy::interpolationExtend(const Time&, const ValueType&, CurveType*)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:43:3: warning: no return statement in function returning non-void [-Wreturn-type]
+   }
+   ^
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp: In member function ?curves::Key curves::SamplingPolicy::defaultExtend(const Time&, const ValueType&, CurveType*)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:50:3: warning: no return statement in function returning non-void [-Wreturn-type]
+   }
+   ^
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:9:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::saveCorrectionCurveAtTimes(const string&, std::vector<long int>) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:155:54: warning: unused parameter ?filename? [-Wunused-parameter]
+   void saveCorrectionCurveAtTimes(const std::string& filename, std::vector<Time> times) const {};
+                                                      ^~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:155:82: warning: unused parameter ?times? [-Wunused-parameter]
+   void saveCorrectionCurveAtTimes(const std::string& filename, std::vector<Time> times) const {};
+                                                                                  ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setCorrectionTimes(const std::vector<long int>&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:170:52: warning: unused parameter ?times? [-Wunused-parameter]
+   void setCorrectionTimes(const std::vector<Time>& times) {};
+                                                    ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::removeCorrectionCoefficientAtTime(curves::Time)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:173:47: warning: unused parameter ?time? [-Wunused-parameter]
+   void removeCorrectionCoefficientAtTime(Time time) {};
+                                               ^~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setCorrectionCoefficientAtTime(curves::Time, curves::SE3Curve::ValueType)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:176:44: warning: unused parameter ?time? [-Wunused-parameter]
+   void setCorrectionCoefficientAtTime(Time time, ValueType value) {};
+                                            ^~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:176:60: warning: unused parameter ?value? [-Wunused-parameter]
+   void setCorrectionCoefficientAtTime(Time time, ValueType value) {};
+                                                            ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::resetCorrectionCurve(const std::vector<long int>&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:179:54: warning: unused parameter ?times? [-Wunused-parameter]
+   void resetCorrectionCurve(const std::vector<Time>& times) {};
+                                                      ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setBaseCurve(const std::vector<long int>&, const std::vector<kindr::minimal::QuatTransformationTemplate<double>, std::allocator<kindr::minimal::QuatTransformationTemplate<double> > >&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:183:46: warning: unused parameter ?times? [-Wunused-parameter]
+   void setBaseCurve(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                              ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:183:83: warning: unused parameter ?values? [-Wunused-parameter]
+   void setBaseCurve(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                                   ^~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setBaseCurvePart(const std::vector<long int>&, const std::vector<kindr::minimal::QuatTransformationTemplate<double>, std::allocator<kindr::minimal::QuatTransformationTemplate<double> > >&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:186:50: warning: unused parameter ?times? [-Wunused-parameter]
+   void setBaseCurvePart(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                  ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:186:87: warning: unused parameter ?values? [-Wunused-parameter]
+   void setBaseCurvePart(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                                       ^~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::modifyBaseCoefficientsValuesInBatch(const std::vector<long int>&, const std::vector<kindr::minimal::QuatTransformationTemplate<double>, std::allocator<kindr::minimal::QuatTransformationTemplate<double> > >&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:190:69: warning: unused parameter ?times? [-Wunused-parameter]
+   void modifyBaseCoefficientsValuesInBatch(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                     ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:190:106: warning: unused parameter ?values? [-Wunused-parameter]
+   void modifyBaseCoefficientsValuesInBatch(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                                                          ^~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::getBaseCurveTimes(std::vector<long int>*) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:192:45: warning: unused parameter ?outTimes? [-Wunused-parameter]
+   void getBaseCurveTimes(std::vector<Time>* outTimes) const {};
+                                             ^~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::getBaseCurveTimesInWindow(std::vector<long int>*, curves::Time, curves::Time) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:194:53: warning: unused parameter ?outTimes? [-Wunused-parameter]
+   void getBaseCurveTimesInWindow(std::vector<Time>* outTimes, Time begTime, Time endTime) const {};
+                                                     ^~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:194:68: warning: unused parameter ?begTime? [-Wunused-parameter]
+   void getBaseCurveTimesInWindow(std::vector<Time>* outTimes, Time begTime, Time endTime) const {};
+                                                                    ^~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:194:82: warning: unused parameter ?endTime? [-Wunused-parameter]
+   void getBaseCurveTimesInWindow(std::vector<Time>* outTimes, Time begTime, Time endTime) const {};
+                                                                                  ^~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::saveCorrectionCurveTimesAndValues(const string&) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:199:61: warning: unused parameter ?filename? [-Wunused-parameter]
+   void saveCorrectionCurveTimesAndValues(const std::string& filename) const {};
+                                                             ^~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp: In function ?void laser_slam::writeEigenMatrixXdCSV(const MatrixXd&, const string&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:178:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (size_t i = 0u; i < matrix.rows(); ++i) {
+                       ~~^~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:180:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (size_t j = 0u; j < matrix.cols(); ++j) {
+                         ~~^~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/message_flow/include/message-flow/message-delivery-queue.h:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/message_flow/include/message-flow/message-flow.h:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:8,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h: In instantiation of ?std::__cxx11::string* google::Check_GEImpl(const T1&, const T2&, const char*) [with T1 = long unsigned int; T2 = int; std::__cxx11::string = std::__cxx11::basic_string<char>]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:156:3:   required from here
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:721:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ DEFINE_CHECK_OP_IMPL(Check_GE, >=)
+                                ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:148:53: note: in definition of macro ?GOOGLE_PREDICT_TRUE?
+ #define GOOGLE_PREDICT_TRUE(x) (__builtin_expect(!!(x), 1))
+                                                     ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:721:1: note: in expansion of macro ?DEFINE_CHECK_OP_IMPL?
+ DEFINE_CHECK_OP_IMPL(Check_GE, >=)
+ ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp: At global scope:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:438:13: warning: ?void segmatch_ros::publishBoundingBoxes(const std::vector<segmatch_ros::BoundingBox>&, const string&, const ros::Publisher&, const segmatch_ros::Color&, double)? defined but not used [-Wunused-function]
+ static void publishBoundingBoxes(const std::vector<BoundingBox>& bounding_boxes,
+             ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:379:13: warning: ?void segmatch_ros::drawCovarianceEllipsoids(const string&, const CovarianceMsgs&, const ros::Publisher&)? defined but not used [-Wunused-function]
+ static void drawCovarianceEllipsoids(const std::string& frame,
+             ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:366:13: warning: ?void segmatch_ros::convert_to_geometry_msg_pose(const SE3&, geometry_msgs::Pose*)? defined but not used [-Wunused-function]
+ static void convert_to_geometry_msg_pose(const segmatch::SE3& pose,
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:325:27: warning: ?segmatch::PclPoint segmatch_ros::tfTransformToPoint(const tf::StampedTransform&)? defined but not used [-Wunused-function]
+ static segmatch::PclPoint tfTransformToPoint(const tf::StampedTransform& tf_transform) {
+                           ^~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:314:40: warning: ?segmatch::GroundTruthParameters segmatch_ros::getGroundTruthParams(const ros::NodeHandle&, const string&)? defined but not used [-Wunused-function]
+ static segmatch::GroundTruthParameters getGroundTruthParams(
+                                        ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:264:29: warning: ?segmatch_ros::SegMatchWorkerParams segmatch_ros::getSegMatchWorkerParams(const ros::NodeHandle&, const string&)? defined but not used [-Wunused-function]
+ static SegMatchWorkerParams getSegMatchWorkerParams(const ros::NodeHandle& nh,
+                             ^~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:112:13: warning: ?void segmatch_ros::publishCloud(const PointICloud&, const string&, const ros::Publisher&)? defined but not used [-Wunused-function]
+ static void publishCloud(const segmatch::PointICloud& cloud, const std::string& frame,
+             ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:104:13: warning: ?void segmatch_ros::convert_to_point_cloud_2_msg(const PointCloud&, const string&, sensor_msgs::PointCloud2*)? defined but not used [-Wunused-function]
+ static void convert_to_point_cloud_2_msg(const segmatch::PointCloud& cloud,
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:84:13: warning: ?void segmatch_ros::convert_to_pcl_point_cloud(const PointCloud2&, segmatch::PointICloud*)? defined but not used [-Wunused-function]
+ static void convert_to_pcl_point_cloud(const sensor_msgs::PointCloud2& cloud_message,
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:56:13: warning: ?void segmatch_ros::publishLineSet(const PointPairs&, const string&, float, const segmatch_ros::Color&, const ros::Publisher&)? defined but not used [-Wunused-function]
+ static void publishLineSet(const segmatch::PointPairs& point_pairs,
+             ^~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:14:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:13,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:158:19: warning: ?segmatch::PointCloud segmatch::mapPoint2PointCloud(const MapCloud&)? defined but not used [-Wunused-function]
+ static PointCloud mapPoint2PointCloud(const MapCloud& map_cloud) {
+                   ^~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:131:17: warning: ?segmatch::PclPoint segmatch::calculateCentroid(const PointCloud&)? defined but not used [-Wunused-function]
+ static PclPoint calculateCentroid(const PointCloud& point_cloud){
+                 ^~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:111:13: warning: ?void segmatch::applyRandomFilterToCloud(double, segmatch::PointICloud*)? defined but not used [-Wunused-function]
+ static void applyRandomFilterToCloud(double ratio_of_points_to_keep,
+             ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:83:13: warning: ?void segmatch::transformPclPoint(const SE3&, segmatch::PclPoint*)? defined but not used [-Wunused-function]
+ static void transformPclPoint(const SE3& transform, PclPoint* point) {
+             ^~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:71:15: warning: ?double segmatch::pointToPointDistance(const PclPoint&, const PclPoint&)? defined but not used [-Wunused-function]
+ static double pointToPointDistance(const PclPoint& p1, const PclPoint& p2) {
+               ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:63:17: warning: ?segmatch::PclPoint segmatch::se3ToPclPoint(const SE3&)? defined but not used [-Wunused-function]
+ static PclPoint se3ToPclPoint(const SE3& transform) {
+                 ^~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:56:12: warning: ?segmatch::SE3 segmatch::fromApproximateTransformationMatrix(const Matrix4f&)? defined but not used [-Wunused-function]
+ static SE3 fromApproximateTransformationMatrix(const Eigen::Matrix4f& matrix) {
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:38:13: warning: ?void segmatch::displayPerformances(unsigned int, unsigned int, unsigned int, unsigned int)? defined but not used [-Wunused-function]
+ static void displayPerformances(unsigned int tp, unsigned int tn,
+             ^~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:281:13: warning: ?void laser_slam::getMeanAndSigma(std::vector<double>, double*, double*)? defined but not used [-Wunused-function]
+ static void getMeanAndSigma(std::vector<double> values, double* mean_out,
+             ^~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:271:15: warning: ?double laser_slam::distanceBetweenTwoSE3(const SE3&, const SE3&)? defined but not used [-Wunused-function]
+ static double distanceBetweenTwoSE3(const SE3& pose1, const SE3& pose2) {
+               ^~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:263:12: warning: ?laser_slam::SE3 laser_slam::convertTransformationMatrixToSE3(const TransformationParameters&)? defined but not used [-Wunused-function]
+ static SE3 convertTransformationMatrixToSE3(
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:232:13: warning: ?void laser_slam::toEigenMatrixXd(std::map<long int, double>, Eigen::MatrixXd*)? defined but not used [-Wunused-function]
+ static void toEigenMatrixXd(std::map<Time, double> map_in, Eigen::MatrixXd* matrix_out) {
+             ^~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:211:13: warning: ?void laser_slam::loadEigenMatrixXdCSV(std::__cxx11::string, Eigen::MatrixXd*)? defined but not used [-Wunused-function]
+ static void loadEigenMatrixXdCSV(std::string file_name, Eigen::MatrixXd* matrix) {
+             ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:173:13: warning: ?void laser_slam::writeEigenMatrixXdCSV(const MatrixXd&, const string&)? defined but not used [-Wunused-function]
+ static void writeEigenMatrixXdCSV(const Eigen::MatrixXd& matrix, const std::string& filename) {
+             ^~~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/segmatcher-node.h:14,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/segmatcher-node.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:136:13: warning: ?void laser_slam::correctTransformationMatrix(PointMatcher<float>::TransformationParameters*)? defined but not used [-Wunused-function]
+ static void correctTransformationMatrix(
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:78:34: warning: ?gtsam::Expression<double> laser_slam::multiplyVectors(const gtsam::Expression<Eigen::Matrix<double, 3, 1> >&, const gtsam::Expression<Eigen::Matrix<double, 3, 1> >&)? defined but not used [-Wunused-function]
+ static gtsam::Expression<double> multiplyVectors(const gtsam::Expression<Eigen::Vector3d>& C1,
+                                  ^~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/devel/include/pointmatcher/PointMatcher.h:63:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/devel/include/pointmatcher/Parametrizable.h:46:0: warning: "BOOST_ASSIGN_MAX_PARAMS" redefined
+ #define BOOST_ASSIGN_MAX_PARAMS 6
+ 
+In file included from /home/berlukas/Documents/workspace/maplab/devel/include/gtsam/nonlinear/NonlinearFactor.h:30:0,
+                 from /home/berlukas/Documents/workspace/maplab/devel/include/gtsam/nonlinear/NonlinearFactorGraph.h:25,
+                 from /home/berlukas/Documents/workspace/maplab/devel/include/gtsam/nonlinear/ISAM2.h:22,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:7,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/usr/include/boost/assign/list_of.hpp:378:0: note: this is the location of the previous definition
+ #define BOOST_ASSIGN_MAX_PARAMS 5
+ 
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp: In constructor ?curves::SamplingPolicy::SamplingPolicy(int, curves::Time)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:18:7: warning: ?curves::SamplingPolicy::minimumMeasurements_? will be initialized after [-Wreorder]
+   int minimumMeasurements_;
+       ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:17:7: warning:   ?int curves::SamplingPolicy::measurementsSinceLastExtend_? [-Wreorder]
+   int measurementsSinceLastExtend_;
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:30:3: warning:   when initialized here [-Wreorder]
+   SamplingPolicy(int minimumMeasurements, Time minSamplingPeriod) :
+   ^~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp: In member function ?curves::Key curves::SamplingPolicy::interpolationExtend(const Time&, const ValueType&, CurveType*)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:43:3: warning: no return statement in function returning non-void [-Wreturn-type]
+   }
+   ^
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp: In member function ?curves::Key curves::SamplingPolicy::defaultExtend(const Time&, const ValueType&, CurveType*)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/SamplingPolicy.hpp:50:3: warning: no return statement in function returning non-void [-Wreturn-type]
+   }
+   ^
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:9:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::saveCorrectionCurveAtTimes(const string&, std::vector<long int>) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:155:54: warning: unused parameter ?filename? [-Wunused-parameter]
+   void saveCorrectionCurveAtTimes(const std::string& filename, std::vector<Time> times) const {};
+                                                      ^~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:155:82: warning: unused parameter ?times? [-Wunused-parameter]
+   void saveCorrectionCurveAtTimes(const std::string& filename, std::vector<Time> times) const {};
+                                                                                  ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setCorrectionTimes(const std::vector<long int>&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:170:52: warning: unused parameter ?times? [-Wunused-parameter]
+   void setCorrectionTimes(const std::vector<Time>& times) {};
+                                                    ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::removeCorrectionCoefficientAtTime(curves::Time)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:173:47: warning: unused parameter ?time? [-Wunused-parameter]
+   void removeCorrectionCoefficientAtTime(Time time) {};
+                                               ^~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setCorrectionCoefficientAtTime(curves::Time, curves::SE3Curve::ValueType)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:176:44: warning: unused parameter ?time? [-Wunused-parameter]
+   void setCorrectionCoefficientAtTime(Time time, ValueType value) {};
+                                            ^~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:176:60: warning: unused parameter ?value? [-Wunused-parameter]
+   void setCorrectionCoefficientAtTime(Time time, ValueType value) {};
+                                                            ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::resetCorrectionCurve(const std::vector<long int>&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:179:54: warning: unused parameter ?times? [-Wunused-parameter]
+   void resetCorrectionCurve(const std::vector<Time>& times) {};
+                                                      ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setBaseCurve(const std::vector<long int>&, const std::vector<kindr::minimal::QuatTransformationTemplate<double>, std::allocator<kindr::minimal::QuatTransformationTemplate<double> > >&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:183:46: warning: unused parameter ?times? [-Wunused-parameter]
+   void setBaseCurve(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                              ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:183:83: warning: unused parameter ?values? [-Wunused-parameter]
+   void setBaseCurve(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                                   ^~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::setBaseCurvePart(const std::vector<long int>&, const std::vector<kindr::minimal::QuatTransformationTemplate<double>, std::allocator<kindr::minimal::QuatTransformationTemplate<double> > >&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:186:50: warning: unused parameter ?times? [-Wunused-parameter]
+   void setBaseCurvePart(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                  ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:186:87: warning: unused parameter ?values? [-Wunused-parameter]
+   void setBaseCurvePart(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                                       ^~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::modifyBaseCoefficientsValuesInBatch(const std::vector<long int>&, const std::vector<kindr::minimal::QuatTransformationTemplate<double>, std::allocator<kindr::minimal::QuatTransformationTemplate<double> > >&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:190:69: warning: unused parameter ?times? [-Wunused-parameter]
+   void modifyBaseCoefficientsValuesInBatch(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                     ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:190:106: warning: unused parameter ?values? [-Wunused-parameter]
+   void modifyBaseCoefficientsValuesInBatch(const std::vector<Time>& times, const std::vector<ValueType>& values) {};
+                                                                                                          ^~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::getBaseCurveTimes(std::vector<long int>*) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:192:45: warning: unused parameter ?outTimes? [-Wunused-parameter]
+   void getBaseCurveTimes(std::vector<Time>* outTimes) const {};
+                                             ^~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::getBaseCurveTimesInWindow(std::vector<long int>*, curves::Time, curves::Time) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:194:53: warning: unused parameter ?outTimes? [-Wunused-parameter]
+   void getBaseCurveTimesInWindow(std::vector<Time>* outTimes, Time begTime, Time endTime) const {};
+                                                     ^~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:194:68: warning: unused parameter ?begTime? [-Wunused-parameter]
+   void getBaseCurveTimesInWindow(std::vector<Time>* outTimes, Time begTime, Time endTime) const {};
+                                                                    ^~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:194:82: warning: unused parameter ?endTime? [-Wunused-parameter]
+   void getBaseCurveTimesInWindow(std::vector<Time>* outTimes, Time begTime, Time endTime) const {};
+                                                                                  ^~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp: In member function ?virtual void curves::DiscreteSE3Curve::saveCorrectionCurveTimesAndValues(const string&) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/mincurves/mincurves/include/mincurves/DiscreteSE3Curve.hpp:199:61: warning: unused parameter ?filename? [-Wunused-parameter]
+   void saveCorrectionCurveTimesAndValues(const std::string& filename) const {};
+                                                             ^~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp: In function ?void laser_slam::writeEigenMatrixXdCSV(const MatrixXd&, const string&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:178:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (size_t i = 0u; i < matrix.rows(); ++i) {
+                       ~~^~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:180:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (size_t j = 0u; j < matrix.cols(); ++j) {
+                         ~~^~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/flow-topics.h:5:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:17,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h: In constructor ?vio::LaserMeasurement::LaserMeasurement()?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:188:16: warning: ?vio::LaserMeasurement::cloud? will be initialized after [-Wreorder]
+   CloudDataPtr cloud;
+                ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:187:11: warning:   ?int64_t vio::LaserMeasurement::timestamp_ns? [-Wreorder]
+   int64_t timestamp_ns;
+           ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/common/vio-common/include/vio-common/vio-types.h:181:3: warning:   when initialized here [-Wreorder]
+   LaserMeasurement() : cloud(new CloudData()),
+   ^~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc: In member function ?vio::LaserMeasurement segmatcher::CloudProcessFlow::downSampleMeasurement(const ConstPtr&) const?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:87:45: warning: unused parameter ?laser? [-Wunused-parameter]
+     (const vio::LaserMeasurement::ConstPtr &laser) const {
+                                             ^~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc: In member function ?void segmatcher::CloudProcessFlow::transformPointcloudToCam(const ConstPtr&)?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:100:8: warning: variable ?pos? set but not used [-Wunused-but-set-variable]
+   auto pos = last_pose_.T_w.getPosition();
+        ^~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/message_flow/include/message-flow/message-delivery-queue.h:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/common/message_flow/include/message-flow/message-flow.h:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:9,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h: In instantiation of ?std::__cxx11::string* google::Check_GEImpl(const T1&, const T2&, const char*) [with T1 = long unsigned int; T2 = int; std::__cxx11::string = std::__cxx11::basic_string<char>]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:156:3:   required from here
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:721:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ DEFINE_CHECK_OP_IMPL(Check_GE, >=)
+                                ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:148:53: note: in definition of macro ?GOOGLE_PREDICT_TRUE?
+ #define GOOGLE_PREDICT_TRUE(x) (__builtin_expect(!!(x), 1))
+                                                     ^
+/home/berlukas/Documents/workspace/maplab/devel/include/glog/logging.h:721:1: note: in expansion of macro ?DEFINE_CHECK_OP_IMPL?
+ DEFINE_CHECK_OP_IMPL(Check_GE, >=)
+ ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:18:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h: In instantiation of ?segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::findMatch()::<lambda(const std::pair<long unsigned int, FlowB>&)> [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:115:52:   required from ?struct segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::findMatch() [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]::<lambda(const struct std::pair<long unsigned int, std::shared_ptr<const vio::LaserMeasurement> >&)>?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:111:33:   required from ?void segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::findMatch() [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:74:16:   required from ?void segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::findAndProcessMatches() [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:41:28:   required from ?void segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::callback1(const FlowA&) [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:62:49:   required from here
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:113:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+               if (timestamp_a > flow.first) {
+                   ~~~~~~~~~~~~^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h: In instantiation of ?void segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::findMatch() [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]?:
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:74:16:   required from ?void segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::findAndProcessMatches() [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:41:28:   required from ?void segmatcher::MessageSync<FlowA, FlowB, TimestampExtractorA, TimestampExtractorB>::callback1(const FlowA&) [with FlowA = std::shared_ptr<const segmatcher::RovioEstimate>; FlowB = std::shared_ptr<const vio::LaserMeasurement>; TimestampExtractorA = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const segmatcher::RovioEstimate> >; TimestampExtractorB = segmatcher::DefaultTimestampExtractor<std::shared_ptr<const vio::LaserMeasurement> >]?
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:62:49:   required from here
+/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/message-sync.h:92:12: warning: variable ?it_a_end? set but not used [-Wunused-but-set-variable]
+       auto it_a_end = list_a_.end();
+            ^~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp: At global scope:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:438:13: warning: ?void segmatch_ros::publishBoundingBoxes(const std::vector<segmatch_ros::BoundingBox>&, const string&, const ros::Publisher&, const segmatch_ros::Color&, double)? defined but not used [-Wunused-function]
+ static void publishBoundingBoxes(const std::vector<BoundingBox>& bounding_boxes,
+             ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:379:13: warning: ?void segmatch_ros::drawCovarianceEllipsoids(const string&, const CovarianceMsgs&, const ros::Publisher&)? defined but not used [-Wunused-function]
+ static void drawCovarianceEllipsoids(const std::string& frame,
+             ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:366:13: warning: ?void segmatch_ros::convert_to_geometry_msg_pose(const SE3&, geometry_msgs::Pose*)? defined but not used [-Wunused-function]
+ static void convert_to_geometry_msg_pose(const segmatch::SE3& pose,
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:325:27: warning: ?segmatch::PclPoint segmatch_ros::tfTransformToPoint(const tf::StampedTransform&)? defined but not used [-Wunused-function]
+ static segmatch::PclPoint tfTransformToPoint(const tf::StampedTransform& tf_transform) {
+                           ^~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:314:40: warning: ?segmatch::GroundTruthParameters segmatch_ros::getGroundTruthParams(const ros::NodeHandle&, const string&)? defined but not used [-Wunused-function]
+ static segmatch::GroundTruthParameters getGroundTruthParams(
+                                        ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:264:29: warning: ?segmatch_ros::SegMatchWorkerParams segmatch_ros::getSegMatchWorkerParams(const ros::NodeHandle&, const string&)? defined but not used [-Wunused-function]
+ static SegMatchWorkerParams getSegMatchWorkerParams(const ros::NodeHandle& nh,
+                             ^~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:112:13: warning: ?void segmatch_ros::publishCloud(const PointICloud&, const string&, const ros::Publisher&)? defined but not used [-Wunused-function]
+ static void publishCloud(const segmatch::PointICloud& cloud, const std::string& frame,
+             ^~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:104:13: warning: ?void segmatch_ros::convert_to_point_cloud_2_msg(const PointCloud&, const string&, sensor_msgs::PointCloud2*)? defined but not used [-Wunused-function]
+ static void convert_to_point_cloud_2_msg(const segmatch::PointCloud& cloud,
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:13:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:84:13: warning: ?void segmatch_ros::convert_to_pcl_point_cloud(const PointCloud2&, segmatch::PointICloud*)? defined but not used [-Wunused-function]
+ static void convert_to_pcl_point_cloud(const sensor_msgs::PointCloud2& cloud_message,
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:56:13: warning: ?void segmatch_ros::publishLineSet(const PointPairs&, const string&, float, const segmatch_ros::Color&, const ros::Publisher&)? defined but not used [-Wunused-function]
+ static void publishLineSet(const segmatch::PointPairs& point_pairs,
+             ^~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch_ros/include/segmatch_ros/common.hpp:14:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:13,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:158:19: warning: ?segmatch::PointCloud segmatch::mapPoint2PointCloud(const MapCloud&)? defined but not used [-Wunused-function]
+ static PointCloud mapPoint2PointCloud(const MapCloud& map_cloud) {
+                   ^~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:131:17: warning: ?segmatch::PclPoint segmatch::calculateCentroid(const PointCloud&)? defined but not used [-Wunused-function]
+ static PclPoint calculateCentroid(const PointCloud& point_cloud){
+                 ^~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:111:13: warning: ?void segmatch::applyRandomFilterToCloud(double, segmatch::PointICloud*)? defined but not used [-Wunused-function]
+ static void applyRandomFilterToCloud(double ratio_of_points_to_keep,
+             ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:83:13: warning: ?void segmatch::transformPclPoint(const SE3&, segmatch::PclPoint*)? defined but not used [-Wunused-function]
+ static void transformPclPoint(const SE3& transform, PclPoint* point) {
+             ^~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:71:15: warning: ?double segmatch::pointToPointDistance(const PclPoint&, const PclPoint&)? defined but not used [-Wunused-function]
+ static double pointToPointDistance(const PclPoint& p1, const PclPoint& p2) {
+               ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:63:17: warning: ?segmatch::PclPoint segmatch::se3ToPclPoint(const SE3&)? defined but not used [-Wunused-function]
+ static PclPoint se3ToPclPoint(const SE3& transform) {
+                 ^~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:56:12: warning: ?segmatch::SE3 segmatch::fromApproximateTransformationMatrix(const Matrix4f&)? defined but not used [-Wunused-function]
+ static SE3 fromApproximateTransformationMatrix(const Eigen::Matrix4f& matrix) {
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/segmap_private/segmatch/include/segmatch/utilities.hpp:38:13: warning: ?void segmatch::displayPerformances(unsigned int, unsigned int, unsigned int, unsigned int)? defined but not used [-Wunused-function]
+ static void displayPerformances(unsigned int tp, unsigned int tn,
+             ^~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:281:13: warning: ?void laser_slam::getMeanAndSigma(std::vector<double>, double*, double*)? defined but not used [-Wunused-function]
+ static void getMeanAndSigma(std::vector<double> values, double* mean_out,
+             ^~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:271:15: warning: ?double laser_slam::distanceBetweenTwoSE3(const SE3&, const SE3&)? defined but not used [-Wunused-function]
+ static double distanceBetweenTwoSE3(const SE3& pose1, const SE3& pose2) {
+               ^~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:263:12: warning: ?laser_slam::SE3 laser_slam::convertTransformationMatrixToSE3(const TransformationParameters&)? defined but not used [-Wunused-function]
+ static SE3 convertTransformationMatrixToSE3(
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:232:13: warning: ?void laser_slam::toEigenMatrixXd(std::map<long int, double>, Eigen::MatrixXd*)? defined but not used [-Wunused-function]
+ static void toEigenMatrixXd(std::map<Time, double> map_in, Eigen::MatrixXd* matrix_out) {
+             ^~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:211:13: warning: ?void laser_slam::loadEigenMatrixXdCSV(std::__cxx11::string, Eigen::MatrixXd*)? defined but not used [-Wunused-function]
+ static void loadEigenMatrixXdCSV(std::string file_name, Eigen::MatrixXd* matrix) {
+             ^~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:173:13: warning: ?void laser_slam::writeEigenMatrixXdCSV(const MatrixXd&, const string&)? defined but not used [-Wunused-function]
+ static void writeEigenMatrixXdCSV(const Eigen::MatrixXd& matrix, const std::string& filename) {
+             ^~~~~~~~~~~~~~~~~~~~~
+In file included from /home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/incremental_estimator.hpp:10:0,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/include/segmatcher/cloudprocess-flow.h:10,
+                 from /home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/segmatcher/src/cloudprocess-flow.cc:1:
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:136:13: warning: ?void laser_slam::correctTransformationMatrix(PointMatcher<float>::TransformationParameters*)? defined but not used [-Wunused-function]
+ static void correctTransformationMatrix(
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/berlukas/Documents/workspace/maplab/src/maplab_dependencies/internal/laser_slam/laser_slam/include/laser_slam/common.hpp:78:34: warning: ?gtsam::Expression<double> laser_slam::multiplyVectors(const gtsam::Expression<Eigen::Matrix<double, 3, 1> >&, const gtsam::Expression<Eigen::Matrix<double, 3, 1> >&)? defined but not used [-Wunused-function]
+ static gtsam::Expression<double> multiplyVectors(const gtsam::Expression<Eigen::Vector3d>& C1,
+                                  ^~~~~~~~~~~~~~~
+CMakeFiles/segmatcher_lib.dir/src/cloudprocess-flow.cc.o: In function `segmatch_ros::geometryMsgTransformToSE3(geometry_msgs::Transform_<std::allocator<void> > const&)':
+cloudprocess-flow.cc:(.text+0xb40): multiple definition of `segmatch_ros::geometryMsgTransformToSE3(geometry_msgs::Transform_<std::allocator<void> > const&)'
+CMakeFiles/segmatcher_lib.dir/src/segmatcher-node.cc.o:segmatcher-node.cc:(.text+0x3d0): first defined here
+CMakeFiles/segmatcher_lib.dir/src/cloudprocess-flow.cc.o: In function `segmatch_ros::SE3ToGeometryMsgTransform(kindr::minimal::QuatTransformationTemplate<double> const&)':
+cloudprocess-flow.cc:(.text+0x1bb0): multiple definition of `segmatch_ros::SE3ToGeometryMsgTransform(kindr::minimal::QuatTransformationTemplate<double> const&)'
+CMakeFiles/segmatcher_lib.dir/src/segmatcher-node.cc.o:segmatcher-node.cc:(.text+0x470): first defined here
+collect2: error: ld returned 1 exit status
+make[2]: *** [/home/berlukas/Documents/workspace/maplab/devel/lib/libsegmatcher_lib.so] Error 1
+make[1]: *** [CMakeFiles/segmatcher_lib.dir/all] Error 2
+make: *** [all] Error 2
+[1m[30mcd /home/berlukas/Documents/workspace/maplab/build/segmatcher; catkin build --get-env segmatcher | catkin env -si  /usr/bin/make --jobserver-fds=6,7 -j; cd -[0m
+[0m[31m.....................................................................................................[0m[0m
+[1m[31mFailed[0m    [31m <<[0m [36msegmatcher[0m:[34mmake                               [0m[ [33mExited with code [1m[33m2[0m ][0m                   
