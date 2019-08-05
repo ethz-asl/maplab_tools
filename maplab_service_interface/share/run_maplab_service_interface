@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+REST=$@
+
+rosrun maplab_service_interface maplab_service_interface \
+  --v=0 \
+  --alsologtostderr \
+  $REST
