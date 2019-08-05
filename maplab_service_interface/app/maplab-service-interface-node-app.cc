@@ -25,7 +25,6 @@ int main(int argc, char** argv) {
   ros_common::parseGflagsFromRosParams(argv[0], nh_private);
 
   maplab::MaplabServiceInterfaceNode maplab_interface(nh, nh_private);
-  std::cout << "should be there" << std::endl;
 
   if (!maplab_interface.run()) {
    ROS_FATAL("Failed to start running the maplab node!");
