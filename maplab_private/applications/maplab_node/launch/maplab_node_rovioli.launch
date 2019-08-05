@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+
+<launch>
+	<!-- ================================== PLAY ROSBAG ============================================== -->
+
+	<!-- <node pkg="rosbag" type="play" name="rosbag" args="/home/mfehr/experimental_ws/maplab/gonzen_bags/gonzen_run_14_2019-02-15-15-36-01.bag -q -d 5"/> -->
+	<!-- <node pkg="rosbag" type="play" name="rosbag" args="/home/mfehr/experimental_ws/maplab/gonzen_bags/gonzen_rsl_network_dataset_2019-02-15-11-26-42.bag -q -d 5"/> -->
+	<!-- <node pkg="rosbag" type="play" name="rosbag" args="/home/mfehr/experimental_ws/maplab/gonzen_bags/gonzen_run_2_2019-02-13-15-52-12.bag -q -d 5 -r 1.5"/> -->
+
+	<node pkg="rosbag" type="play" name="rosbag" args="/media/mfehr/SSD_1TB/darpa_gonzen/new/run_2_2019-03-11-09-39-37.bag -q -d 5 -r 1.5"/>
+	<!-- <node pkg="rosbag" type="play" name="rosbag" args="/media/mfehr/SSD_1TB/darpa_gonzen/new/run_3_2019-03-11-09-46-24.bag -q -d 5 -r 1.5"/> -->
+
+
+	<!-- ================================== ROVIOLI ================================================== -->
+
+	<group ns="rovioli">
+
+		<!-- SENSORS AND CALIBRATION -->
+		<arg name="sensor_calibration_file" default="$(find maplab_node)/share/example_calibrations/lidarstick-150-deg-cams-sensors.yaml"/>
+		<arg name="external_imu_parameters_rovio" default=""/>
+		<arg name="imu_to_camera_time_offset_ns" default="19779092"/>
+
+		<!-- DATA SOURCE -->
+		<arg name="datasource_type" default="rostopic"/>
+		<arg name="datasource_rosbag" default=""/>
+
+		<!-- MAP BUILDING (DISABLED) -->
+		<arg name="rovioli_run_map_builder" default="false"/>
+		<arg name="save_map_folder" default=""/>
+		<arg name="overwrite_existing_map" default="false"/>
+		<arg name="optimize_map_to_localization_map" default="false"/>
+		<arg name="map_builder_save_image_as_resources" default="false"/>
+
+		<!-- VISUAL LOCALIZATION (DISABLED) -->
+		<arg name="vio_localization_map_folder" default=""/>
+
+		<!-- DEBUGGING AND LOGGING -->
+		<arg name="alsologtostderr" default="true"/>
+		<arg name="colorlogtostderr" default="true"/>
+		<arg name="v" default="0"/>
+		<arg name="publish_debug_markers" default="true"/>
+
+		<!-- TF -->
+		<arg name="tf_map_frame" default="map"/>
+		<arg name="tf_mission_frame" default="rovio_mission"/>
+		<arg name="tf_imu_frame" default="rovio_imu"/>
+
+		<include file="$(find rovioli)/launch/rovioli.launch" pass_all_args="true"/>
+	</group>
+
+	<!-- ===================================== MAPLAB NODE =========================================== -->
+
+	<group ns="maplab_node">
+		<remap from="/odometry/maplab_odom_T_M_I" to="/rovioli/maplab_odom_T_M_I"/>
+
+		<!-- SENSORS -->
+		<arg name="sensor_calibration_file" default="$(find maplab_node)/share/example_calibrations/lidarstick-150-deg-cams-sensors.yaml"/>
+		<!-- only needed if there are multiple ncameras/lidars/imus/odometries in the calibration file. -->
+		<arg name="selected_ncamera_sensor_id" default=""/>
+		<arg name="selected_imu_sensor_id" default=""/>
+		<arg name="selected_lidar_sensor_id" default=""/>
+		<arg name="selected_odometry_6dof_sensor_id" default=""/>
+
+		<!-- DATA SOURCE -->
+		<arg name="datasource_type" default="rostopic"/>
+		<arg name="datasource_rosbag" default=""/>
+		<arg name="imu_to_camera_time_offset_ns" default="19779092"/>
+
+		<!-- LOCALIZATION BASED ON VISION -->
+		<arg name="enable_visual_localization" default="true"/>
+		<arg name="visual_localization_map_folder" default="/home/mfehr/experimental_ws/maplab/gonzen_rovioli_okvis/maplab_gonzen_7_okvis"/>
+
+		<!-- LOCALIZATION BASED ON LIDAR -->
+		<arg name="enable_lidar_localization" default="false"/>
+		<arg name="lidar_localization_map_folder" default=""/>
+
+		<!-- ONLINE MAPPING -->
+		<arg name="enable_online_mapping" default="false"/>
+
+		<!-- MAP BUILDING -->
+		<arg name="map_output_folder" default="/home/mfehr/experimental_ws/maplab/maplab_gonzen_2_rovioli_loc"/>
+		<arg name="map_save_on_shutdown" default="true"/>
+		<arg name="map_overwrite_enabled" default="false"/>
+		<arg name="map_compute_localization_map" default="false"/>
+		<arg name="map_builder_save_image_as_resources" default="false"/>
+		<arg name="map_builder_save_point_clouds_as_resources" default="false"/>
+
+		<!-- TF -->
+		<arg name="tf_map_frame" default="map"/>
+		<arg name="tf_mission_frame" default="maplab_mission"/>
+		<arg name="tf_imu_frame" default="maplab_imu"/>
+		<arg name="tf_imu_refined_frame" default="maplab_imu_refined"/>
+
+		<!-- DEBUGGING AND LOGGING -->
+		<arg name="alsologtostderr" default="true"/>
+		<arg name="colorlogtostderr" default="true"/>
+		<arg name="v" default="1"/>
+		<arg name="publish_debug_markers" default="true"/>
+
+		<arg name="detection_visualize_keypoints" default="true"/>
+		<arg name="feature_tracker_visualize_feature_tracks" default="true"/>
+		<arg name="feature_tracker_visualize_keypoint_matches" default="true"/>
+		<arg name="feature_tracker_visualize_keypoints" default="true"/>
+		<arg name="feature_tracker_visualize_keypoints_individual_frames" default="true"/>
+
+		<!-- MAPLAB_NODE -->
+		<include file="$(find maplab_node)/launch/maplab_node.launch" pass_all_args="true"/>
+	</group>
+</launch>

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<launch>
+	<!-- SENSORS -->
+	<arg name="sensor_calibration_file" default=""/>
+	<!-- only needed if there are multiple ncameras/lidars/imus/odometries in the calibration file. -->
+	<arg name="selected_ncamera_sensor_id" default=""/>
+	<arg name="selected_imu_sensor_id" default=""/>
+	<arg name="selected_lidar_sensor_id" default=""/>
+	<arg name="selected_odometry_6dof_sensor_id" default=""/>
+	<arg name="imu_to_camera_time_offset_ns" default="0"/>
+
+	<!-- DATA SOURCE -->
+	<arg name="datasource_type" default="rosbag"/>
+	<arg name="datasource_rosbag" default=""/>
+
+	<!-- LOCALIZATION BASED ON VISION -->
+	<arg name="enable_visual_localization" default="false"/>
+	<arg name="visual_localization_map_folder" default=""/>
+
+	<!-- LOCALIZATION BASED ON LIDAR -->
+	<arg name="enable_lidar_localization" default="false"/>
+	<arg name="lidar_localization_map_folder" default=""/>
+
+	<!-- ONLINE MAPPING -->
+	<arg name="enable_online_mapping" default="false"/>
+
+	<!-- MAP BUILDING -->
+	<arg name="map_output_folder" default=""/>
+	<arg name="map_save_on_shutdown" default="false"/>
+	<arg name="map_overwrite_enabled" default="false"/>
+	<arg name="map_compute_localization_map" default="false"/>
+	<!-- ATTACHING RESOURCES TO MAP -->
+	<arg name="map_builder_save_image_as_resources" default="false"/>
+	<arg name="map_builder_save_point_clouds_as_resources" default="false"/>
+
+	<!-- TF -->
+	<arg name="tf_map_frame" default="map"/>
+	<arg name="tf_mission_frame" default="mission"/>
+	<arg name="tf_imu_frame" default="imu"/>
+	<arg name="tf_imu_refined_frame" default="imu_refined"/>
+
+	<!-- DEBUGGING AND LOGGING -->
+	<arg name="alsologtostderr" default="true"/>
+	<arg name="colorlogtostderr" default="true"/>
+	<arg name="v" default="3"/>
+	<arg name="publish_debug_markers" default="true"/>
+
+	<arg name="detection_visualize_keypoints" default="false"/>
+	<arg name="feature_tracker_visualize_feature_tracks" default="false"/>
+	<arg name="feature_tracker_visualize_keypoint_matches" default="false"/>
+	<arg name="feature_tracker_visualize_keypoints" default="false"/>
+	<arg name="feature_tracker_visualize_keypoints_individual_frames" default="false"/>
+
+	<node name="maplab_node" pkg="maplab_node" type="maplab_node" required="true" output="screen" clear_params="true">
+
+		<!-- SENSORS -->
+		<param name="sensor_calibration_file" value="$(arg sensor_calibration_file)"/>
+		<param name="selected_ncamera_sensor_id" value="$(arg selected_ncamera_sensor_id)"/>
+		<param name="selected_imu_sensor_id" value="$(arg selected_imu_sensor_id)"/>
+		<param name="selected_lidar_sensor_id" value="$(arg selected_lidar_sensor_id)"/>
+		<param name="selected_odometry_6dof_sensor_id" value="$(arg selected_odometry_6dof_sensor_id)"/>
+
+		<!-- DATA SOURCE -->
+		<param name="datasource_rosbag" value="$(arg datasource_rosbag)"/>
+		<param name="datasource_type" value="$(arg datasource_type)"/>
+		<param name="imu_to_camera_time_offset_ns" value="$(arg imu_to_camera_time_offset_ns)"/>
+
+		<!-- VISION -->
+		<param name="enable_visual_localization" value="$(arg enable_visual_localization)"/>
+		<param name="visual_localization_map_folder" value="$(arg visual_localization_map_folder)"/>
+
+		<!-- LIDAR -->
+		<param name="enable_lidar_localization" value="$(arg enable_lidar_localization)"/>
+		<param name="lidar_localization_map_folder" value="$(arg lidar_localization_map_folder)"/>
+
+		<!-- ONLINE MAPPING -->
+		<param name="enable_online_mapping" value="$(arg enable_online_mapping)"/>
+
+		<!-- MAP -->
+		<param name="map_output_folder" value="$(arg map_output_folder)"/>
+		<param name="map_save_on_shutdown" value="$(arg map_save_on_shutdown)"/>
+		<param name="map_overwrite_enabled" value="$(arg map_overwrite_enabled)"/>
+		<param name="map_compute_localization_map" value="$(arg map_compute_localization_map)"/>
+		<!-- ATTACHING RESOURCES TO MAP -->
+		<param name="map_builder_save_image_as_resources" value="$(arg map_builder_save_image_as_resources)"/>
+		<param name="map_builder_save_point_clouds_as_resources" value="$(arg map_builder_save_point_clouds_as_resources)"/>
+
+		<!-- TF -->
+		<param name="tf_map_frame" value="$(arg tf_map_frame)"/>
+		<param name="tf_mission_frame" value="$(arg tf_mission_frame)"/>
+		<param name="tf_imu_frame" value="$(arg tf_imu_frame)"/>
+		<param name="tf_imu_refined_frame" value="$(arg tf_imu_refined_frame)"/>
+
+		<!-- DEBUGGING AND LOGGING -->
+		<param name="alsologtostderr" value="$(arg alsologtostderr)"/>
+		<param name="colorlogtostderr" value="$(arg colorlogtostderr)"/>
+		<param name="v" value="$(arg v)"/>
+		<param name="publish_debug_markers" value="$(arg publish_debug_markers)"/>
+
+		<param name="detection_visualize_keypoints" value="$(arg detection_visualize_keypoints)"/>
+		<param name="feature_tracker_visualize_feature_tracks" value="$(arg feature_tracker_visualize_feature_tracks)"/>
+		<param name="feature_tracker_visualize_keypoint_matches" value="$(arg feature_tracker_visualize_keypoint_matches)"/>
+		<param name="feature_tracker_visualize_keypoints" value="$(arg feature_tracker_visualize_keypoints)"/>
+		<param name="feature_tracker_visualize_keypoints_individual_frames" value="$(arg feature_tracker_visualize_keypoints_individual_frames)"/>
+	</node>
+</launch>

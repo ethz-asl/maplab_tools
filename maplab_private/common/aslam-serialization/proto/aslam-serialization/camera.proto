@@ -1,0 +1,36 @@
+package aslam.proto;
+
+import "aslam/common/id.proto";
+import "maplab-common/eigen.proto";
+
+message Camera {
+  enum CameraType {
+    kPinhole = 0;
+    kUnifiedProjection = 1;
+  }
+
+  enum DistortionType {
+    kNoDistortion = 0;
+    kEquidistant = 1;
+    kFisheye = 2;
+    kRadTan = 3;
+  }
+
+  optional aslam.proto.Id id = 1;
+  optional CameraType camera_type = 2;
+  repeated double intrinsics = 3;
+  optional uint32 image_height = 4;
+  optional uint32 image_width = 5;
+  optional DistortionType distortion_type = 6;
+  repeated double distortion_parameters = 7;
+  optional string topic = 8;
+  optional string description = 9;
+}
+
+message NCamera {
+  optional aslam.proto.Id id = 1;
+  optional string topic = 2;
+  optional string description = 3;
+  repeated Camera cameras = 4;
+  repeated common.proto.SemiStaticMatrixd T_C_I_transforms = 5;
+}

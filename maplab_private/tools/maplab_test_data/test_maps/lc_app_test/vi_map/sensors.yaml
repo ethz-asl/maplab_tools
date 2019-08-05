@@ -1,0 +1,74 @@
+sensors:
+  - id: 0fbb7dceb7644143e47938043f60b136
+    sensor_type: NCAMERA
+    topic: ""
+    description: Sensor stick camera setup
+    cameras:
+      - camera:
+          id: 9be7b5000f15adb3c0da8ac6b729ee05
+          sensor_type: CAMERA
+          topic: /VersaVIS/cam0
+          description: Color camera
+          line-delay-nanoseconds: 0
+          image_height: 540
+          image_width: 720
+          type: pinhole
+          intrinsics:
+            rows: 4
+            cols: 1
+            data:
+              - 288.408207812205
+              - 288.2231103613684
+              - 362.6636545997341
+              - 274.6270363549055
+          distortion:
+            type: equidistant
+            parameters:
+              rows: 4
+              cols: 1
+              data:
+                - 0.007267463899378662
+                - -0.003416892997276599
+                - 0.0005955948706648939
+                - -0.0004223559610193976
+        T_B_C:
+          rows: 4
+          cols: 4
+          data:
+            - [-0.9999237459683412, -0.00887049095954965, -0.008591661002224566, -0.0342271585535882]
+            - [-0.008578055805414566, -0.001570668851441637, 0.9999619742560005, 0.05631226626235313]
+            - [-0.008883648306849611, 0.9999594228714962, 0.001494457515136882, 0.05622655837534755]
+            - [0, 0, 0, 1]
+  - id: 5d2fcf479caf7592b35518478a2fe08f
+    sensor_type: IMU
+    topic: /VersaVIS/imu
+    description: ADIS IMU
+    sigmas:
+      gyro_noise_density: 0.005
+      gyro_bias_random_walk_noise_density: 4e-06
+      acc_noise_density: 0.01
+      acc_bias_random_walk_noise_density: 0.0002
+    saturation_accel_max_mps2: 150
+    saturation_gyro_max_radps: 7.5
+    gravity_magnitude_mps2: 9.808083883386614
+extrinsics:
+  - sensor_id: 0fbb7dceb7644143e47938043f60b136
+    base_sensor_id: 5d2fcf479caf7592b35518478a2fe08f
+    T_B_S:
+      rows: 4
+      cols: 4
+      data:
+        - [-0.9999237459683412, -0.00887049095954965, -0.008591661002224566, -0.0342271585535882]
+        - [-0.008578055805414566, -0.001570668851441637, 0.9999619742560005, 0.05631226626235313]
+        - [-0.008883648306849611, 0.9999594228714962, 0.001494457515136882, 0.05622655837534755]
+        - [0, 0, 0, 1]
+  - sensor_id: 5d2fcf479caf7592b35518478a2fe08f
+    base_sensor_id: 5d2fcf479caf7592b35518478a2fe08f
+    T_B_S:
+      rows: 4
+      cols: 4
+      data:
+        - [1, 0, 0, 0]
+        - [0, 1, 0, 0]
+        - [0, 0, 1, 0]
+        - [0, 0, 0, 1]

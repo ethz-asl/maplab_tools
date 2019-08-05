@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<!-- ===================================== MAPLAB NODE =========================================== -->
+
+	<group ns="maplab_node">
+		<!-- SENSORS -->
+		<arg name="sensor_calibration_file" default="$(find maplab_node)/share/example_calibrations/lidarstick-150-deg-cams-sensors.yaml"/>
+		<!-- only needed if there are multiple ncameras/lidars/imus/odometries in the calibration file. -->
+		<arg name="selected_ncamera_sensor_id" default=""/>
+		<arg name="selected_imu_sensor_id" default=""/>
+		<arg name="selected_lidar_sensor_id" default=""/>
+		<arg name="selected_odometry_6dof_sensor_id" default=""/>
+
+		<!-- DATA SOURCE -->
+		<arg name="datasource_type" default="rosbag"/>
+		<arg name="datasource_rosbag" default="/home/mfehr/experimental_ws/maplab/gonzen_bags/gonzen_run_14_2019-02-15-15-36-01.bag"/>
+		<arg name="imu_to_camera_time_offset_ns" value="19779092"/>
+
+		<!-- LOCALIZATION BASED ON VISION -->
+		<arg name="enable_visual_localization" default="true"/>
+		<arg name="visual_localization_map_folder" default=""/>
+
+		<!-- LOCALIZATION BASED ON LIDAR -->
+		<arg name="enable_lidar_localization" default="true"/>
+		<arg name="lidar_localization_map_folder" default=""/>
+
+		<!-- ONLINE MAPPING -->
+		<arg name="enable_online_mapping" default="true"/>
+
+		<!-- MAP BUILDING -->
+		<arg name="map_output_folder" default="/home/mfehr/experimental_ws/maplab/maplab_map"/>
+		<arg name="map_save_on_shutdown" default="true"/>
+		<arg name="map_overwrite_enabled" default="false"/>
+		<arg name="map_compute_localization_map" default="false"/>
+		<arg name="map_builder_save_image_as_resources" default="false"/>
+		<arg name="map_builder_save_point_clouds_as_resources" default="false"/>
+
+		<!-- TF -->
+		<arg name="tf_map_frame" default="map"/>
+		<arg name="tf_mission_frame" default="maplab_mission"/>
+		<arg name="tf_imu_frame" default="maplab_imu"/>
+		<arg name="tf_imu_refined_frame" default="maplab_imu_refined"/>
+
+		<!-- DEBUGGING AND LOGGING -->
+		<arg name="alsologtostderr" default="true"/>
+		<arg name="colorlogtostderr" default="true"/>
+		<arg name="v" default="3"/>
+		<arg name="publish_debug_markers" default="true"/>
+
+		<arg name="detection_visualize_keypoints" default="false"/>
+		<arg name="feature_tracker_visualize_feature_tracks" default="false"/>
+		<arg name="feature_tracker_visualize_keypoint_matches" default="false"/>
+		<arg name="feature_tracker_visualize_keypoints" default="false"/>
+		<arg name="feature_tracker_visualize_keypoints_individual_frames" default="false"/>
+
+		<include file="$(find maplab_node)/launch/maplab_node.launch" pass_all_args="true"/>
+	</group>
+</launch>
