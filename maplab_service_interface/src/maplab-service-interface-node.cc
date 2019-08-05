@@ -2,6 +2,7 @@
 #include <maplab-service-interface/service-handler.h>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
+#include <sstream>
 
 
 namespace maplab {
@@ -11,23 +12,17 @@ MaplabServiceInterfaceNode::MaplabServiceInterfaceNode(ros::NodeHandle& nh,
     spinner_(1), should_exit_(false) {
   LOG(INFO) << "[MaplabSeriviceInterface] Initializing service interface...";
   
-
-//  pipeline_service_ = nh.advertiseService("maplab_pipeline_service", callback2);
   setupServiceCalls(kSanityServiceTopic, 
       &MaplabServiceInterfaceNode::onSanityServiceCall);
+  setupServiceCalls(kRunMaplabConsoleCall, 
+      &MaplabServiceInterfaceNode::onRunMaplabConsoleCall);
+  setupServiceCalls(kFetchAllMaps, 
+      &MaplabServiceInterfaceNode::onFetchAllMaps);
+  setupServiceCalls(kOptimizeMapsAlone, 
+      &MaplabServiceInterfaceNode::onOptimizeMapsAlone);
+  setupServiceCalls(kOptimizeMapsTogether, 
+      &MaplabServiceInterfaceNode::onOptimizeMapsTogether);
 }
-
-/*
-void MaplabServiceInterfaceNode::setupServiceCalls(const std::string &topic,
-        std::function<bool(std_srvs::Empty::Request&, 
-                           std_srvs::Empty::Response&)> func) {
-  // Register the service callback.
-  boost::function<bool(
-    std_srvs::Empty::Request&, std_srvs::Empty::Response&)> callback =
-    boost::bind(func, this, _1, _2);
-  services_.emplace_back(nh_.advertiseService(topic, callback));
-}
-    */
 
 bool MaplabServiceInterfaceNode::run() {
   LOG(INFO) << "[MaplabSeriviceInterface] Starting...";
@@ -44,23 +39,56 @@ std::atomic<bool>& MaplabServiceInterfaceNode::shouldExit() {
 }
 
 std::string MaplabServiceInterfaceNode::printStatistics() const {
-  return "bla bla";
+  std::stringstream ss;
+  ss << "[MaplabServiceStatistics] \n";
+  ss << kSanityServiceTopic << " \t \t \t " << " called " << sanity_service_count_ << " times.\n";
+  ss << kRunMaplabConsoleCall << " \t " << " called " << run_maplab_console_call_count_ << " times.\n";
+  ss << kFetchAllMaps << " \t \t " << " called " << fetch_all_maps_count_ << " times.\n";
+  ss << kOptimizeMapsAlone << " \t " << " called " << optimize_maps_alone_count_ << " times.\n";
+  ss << kOptimizeMapsTogether << " \t " << " called " << optimize_maps_together_count_ << " times.\n";
+  return ss.str();
 }
-
-/*
-bool MaplabServiceInterfaceNode::onServiceCall
-    (maplab_service_interface::maplab_service::Request &req,
-     maplab_service_interface::maplab_service::Response &resp) {
-  const ServiceType service_type = static_cast<ServiceType>(req.type);
-  resp.success = ServiceHandler::handleServiceCall(service_type);
-  return resp.success;
-}
-*/
 
 bool MaplabServiceInterfaceNode::onSanityServiceCall(
     std_srvs::Empty::Request&,
     std_srvs::Empty::Response&) {
-  VLOG(1) << "sanity called";
+  VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
+          << " the sanity service.";
+  ++sanity_service_count_;
+  return true;
+}
+
+bool MaplabServiceInterfaceNode::onRunMaplabConsoleCall
+    (std_srvs::Empty::Request&,
+     std_srvs::Empty::Response&) {
+  VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
+          << " the run maplab service.";
+  return true;
+}
+
+bool MaplabServiceInterfaceNode::onFetchAllMaps
+    (std_srvs::Empty::Request&,
+     std_srvs::Empty::Response&) {
+  VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
+          << " the fetch all maps service.";
+  return true;
+}
+
+bool MaplabServiceInterfaceNode::onOptimizeMapsAlone
+    (std_srvs::Empty::Request&,
+     std_srvs::Empty::Response&) {
+  VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
+          << " the optimize maps alone service.";
+
+  return true;
+}
+
+bool MaplabServiceInterfaceNode::onOptimizeMapsTogether
+    (std_srvs::Empty::Request&,
+     std_srvs::Empty::Response&) {
+  VLOG(3) << "[MaplabServiceInterfaceNode] Received service call for"
+          << " the optimize maps together service.";
+
   return true;
 }
 

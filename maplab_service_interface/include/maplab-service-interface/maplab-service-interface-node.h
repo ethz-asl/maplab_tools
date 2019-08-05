@@ -59,6 +59,12 @@ class MaplabServiceInterfaceNode {
     const std::string kFetchAllMaps = "maplab_service_fetch_all_maps";
     const std::string kOptimizeMapsAlone = "maplab_service_optimize_maps_alone";
     const std::string kOptimizeMapsTogether = "maplab_service_optimize_maps_together";
+
+    std::size_t sanity_service_count_ = 0u;
+    std::size_t run_maplab_console_call_count_ = 0u;
+    std::size_t fetch_all_maps_count_ = 0u;
+    std::size_t optimize_maps_alone_count_ = 0u;
+    std::size_t optimize_maps_together_count_ = 0u;
 };
 
 template <typename FuncType>

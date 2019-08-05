@@ -3,6 +3,6 @@
 REST=$@
 
 rosrun maplab_service_interface maplab_service_interface \
-  --v=1 \
+  --v=3 \
   --alsologtostderr \
   $REST
