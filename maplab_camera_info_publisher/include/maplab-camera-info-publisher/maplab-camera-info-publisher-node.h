@@ -39,13 +39,13 @@ class MaplabCameraInfoPublisher {
     std::unique_ptr<vi_map::SensorManager> sensor_manager_;
     bool should_publish_ = false;
     aslam::NCamera::Ptr ncamera_rig_;
-    ros::Publisher info_pub_;
+    std::vector<ros::Publisher> info_pubs_;
 
     const std::string kStartServiceTopic = "/aprilTag_startDetector";
     const std::string kStopServiceTopic = "/aprilTag_stopDetector";
 
-    bool initialize_services_and_subscribers();
-    bool initialize_ncamera();
+    bool initializeServicesAndSubscribers();
+    bool initializeNCamera();
     void imageCallback(const sensor_msgs::ImageConstPtr &image, 
         std::size_t camera_idx);
     bool startPublishing(std_srvs::Empty::Request&, 
@@ -55,9 +55,9 @@ class MaplabCameraInfoPublisher {
     bool retrieveCameraIntrinsics(const aslam::Camera& camera, 
         double* fu, double* fv, double* cu, double *cv) const;
     bool retrieveDistortionParameters(const aslam::Camera& camera, 
-        double* k1, double* k2, double* k3, double *k4) const;
-
-    void createAndPublishCameraInfo(const aslam::Camera& camera, 
+        double* k1, double* k2, double* k3, double *k4, 
+        std::string* type) const;
+    void createAndPublishCameraInfo(const std::size_t idx,
         const sensor_msgs::ImageConstPtr &image) const;
 };
 
