@@ -9,7 +9,6 @@
 #include <boost/bind.hpp>
 #include <sstream>
 
-
 DEFINE_string(
    sensor_calibration_file, "",
    "Yaml file with all the sensor calibrations. Determines which sensors are "
@@ -18,7 +17,6 @@ DEFINE_string(
 DEFINE_string(
    cam_info_topic_suffix, "/camera_info",
    "Defines the topic suffix used to publish the camera info.");
-
 
 namespace maplab {
 
@@ -141,12 +139,14 @@ void MaplabCameraInfoPublisher::imageCallback(
 
 bool MaplabCameraInfoPublisher::startPublishing(
     std_srvs::Empty::Request&, std_srvs::Empty::Response&) {
+  LOG(INFO) << "Publisher started...";
   should_publish_ = true;
   return true;
 }
 
 bool MaplabCameraInfoPublisher::stopPublishing(
     std_srvs::Empty::Request&, std_srvs::Empty::Response&) {
+  LOG(INFO) << "Publisher stopped...";
   should_publish_ = false;
   return true;
 }
