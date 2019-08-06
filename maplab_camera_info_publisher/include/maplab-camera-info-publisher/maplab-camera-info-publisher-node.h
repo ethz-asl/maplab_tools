@@ -39,6 +39,7 @@ class MaplabCameraInfoPublisher {
     std::unique_ptr<vi_map::SensorManager> sensor_manager_;
     bool should_publish_ = false;
     aslam::NCamera::Ptr ncamera_rig_;
+    ros::Publisher info_pub_;
 
     const std::string kStartServiceTopic = "/aprilTag_startDetector";
     const std::string kStopServiceTopic = "/aprilTag_stopDetector";
@@ -52,9 +53,12 @@ class MaplabCameraInfoPublisher {
     bool stopPublishing(std_srvs::Empty::Request&, 
       std_srvs::Empty::Response&);
     bool retrieveCameraIntrinsics(const aslam::Camera& camera, 
-        double* fu, double* fv, double* cu, double *cv);
+        double* fu, double* fv, double* cu, double *cv) const;
     bool retrieveDistortionParameters(const aslam::Camera& camera, 
-        double* k1, double* k2, double* k3, double *k4);
+        double* k1, double* k2, double* k3, double *k4) const;
+
+    void createAndPublishCameraInfo(const aslam::Camera& camera, 
+        const sensor_msgs::ImageConstPtr &image) const;
 };
 
 } // namespace maplab

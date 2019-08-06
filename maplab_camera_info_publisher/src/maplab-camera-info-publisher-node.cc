@@ -4,6 +4,7 @@
 #include <aslam/cameras/camera.h>
 #include <aslam/cameras/camera-pinhole.h>
 
+#include <sensor_msgs/CameraInfo.h>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
 #include <sstream>
@@ -89,6 +90,11 @@ bool MaplabCameraInfoPublisher::initialize_services_and_subscribers() {
             << " is subscribed to topic: '" << topic_camidx.first << "'";
   }
 
+  // Setup info publisher. 
+  constexpr size_t kRosPublisherQueueSize = 100u;
+  info_pub_ = nh_.advertise<sensor_msgs::CameraInfo>(
+      "cam_info", kRosPublisherQueueSize);
+
   return true;
 }
 
@@ -132,16 +138,7 @@ void MaplabCameraInfoPublisher::imageCallback(
   VLOG(1) << "[MaplabCameraInfoPublisher] Got image from " << camera_idx;
   CHECK(ncamera_rig_);
   const aslam::Camera& camera = ncamera_rig_->getCamera(camera_idx);
-  
-  // Retrieve camera parameters.
-  double fu, fv, cu, cv; 
-  retrieveCameraIntrinsics(camera, &fu, &fv, &cu, &cv);
-  double k1, k2, k3, k4;
-  retrieveDistortionParameters(camera, &k1, &k2, &k3, &k4);
-
-  VLOG(1) << "[MaplabCameraInfoPublisher] Parameters: \n" 
-    << fu << ", "<< fv << ", "<< cv << ", "<< cu << ", "
-    << k1 << ", "<< k2 << ", "<< k3 << ", "<< k4;
+  createAndPublishCameraInfo(camera, image);
 }
 
 bool MaplabCameraInfoPublisher::startPublishing(
@@ -158,7 +155,7 @@ bool MaplabCameraInfoPublisher::stopPublishing(
 
 bool MaplabCameraInfoPublisher::retrieveCameraIntrinsics(
     const aslam::Camera& camera, 
-    double* fu, double* fv, double* cu, double *cv) {
+    double* fu, double* fv, double* cu, double *cv) const {
   CHECK(fu);
   CHECK(fv);
   CHECK(cu);
@@ -183,7 +180,7 @@ bool MaplabCameraInfoPublisher::retrieveCameraIntrinsics(
 
 bool MaplabCameraInfoPublisher::retrieveDistortionParameters(
     const aslam::Camera& camera, 
-    double* k1, double* k2, double* k3, double *k4) {
+    double* k1, double* k2, double* k3, double *k4) const {
   CHECK(k1);
   CHECK(k2);
   CHECK(k3);
@@ -204,6 +201,52 @@ bool MaplabCameraInfoPublisher::retrieveDistortionParameters(
         " The given distortion has to be of type equidistant.";
   }
   return true;
+}
+
+void MaplabCameraInfoPublisher::createAndPublishCameraInfo(
+    const aslam::Camera& camera, 
+    const sensor_msgs::ImageConstPtr &image) const {
+  // Retrieve camera parameters.
+  double fu, fv, cu, cv; 
+  retrieveCameraIntrinsics(camera, &fu, &fv, &cu, &cv);
+  double k1, k2, k3, k4;
+  retrieveDistortionParameters(camera, &k1, &k2, &k3, &k4);
+
+  VLOG(1) << "[MaplabCameraInfoPublisher] Parameters: \n" 
+    << fu << ", "<< fv << ", "<< cv << ", "<< cu << ", "
+    << k1 << ", "<< k2 << ", "<< k3 << ", "<< k4;
+
+  // Create camera info ros message.
+  sensor_msgs::CameraInfo cam_info_msg;
+  cam_info_msg.header.stamp = image->header.stamp;
+  cam_info_msg.header.frame_id = image->header.frame_id;
+  cam_info_msg.width = camera.imageWidth();
+  cam_info_msg.height = camera.imageHeight();
+
+  // We assume monocular cameras, thus the rectification 
+  // matrix is a 3x3 identity matrix. 
+  cam_info_msg.R[0] = 1.0;
+  cam_info_msg.R[4] = 1.0;
+  cam_info_msg.R[8] = 1.0;
+
+  // Set the camera intrinsics for distored images. 
+  cam_info_msg.K[0] = fu;
+  cam_info_msg.K[2] = cu;
+  cam_info_msg.K[4] = fv;
+  cam_info_msg.K[5] = cv;
+  cam_info_msg.K[8] = 1.0;
+
+  // Set the projection matrix with Tx = Ty = 0. 
+  cam_info_msg.P[0] = cam_info_msg.K[0];
+  cam_info_msg.P[2] = cam_info_msg.K[2];
+  cam_info_msg.P[4] = cam_info_msg.K[4];
+  cam_info_msg.P[5] = cam_info_msg.K[5];
+  
+  // Set the distortion model. 
+  cam_info_msg.distortion_model = "equidistant";
+  cam_info_msg.D = {k1, k2, k3, k4};
+
+  info_pub_.publish(cam_info_msg);
 }
 
 } // namespace maplab
