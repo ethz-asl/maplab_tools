@@ -35,19 +35,20 @@ class MaplabCameraInfoPublisher {
     ros::ServiceServer service_stop_;
     image_transport::ImageTransport image_transport_;
     std::vector<image_transport::Subscriber> sub_images_;
-
+    std::vector<ros::ServiceServer> services_;
     std::unique_ptr<vi_map::SensorManager> sensor_manager_;
     bool should_publish_ = false;
+
+    const std::string kStartServiceTopic = "/aprilTag_startDetector";
+    const std::string kStopServiceTopic = "/aprilTag_stopDetector";
 
     bool initialize_services_and_subscribers();
     void imageCallback(const sensor_msgs::ImageConstPtr &image, 
         std::size_t camera_idx);
-    bool start_publishing(std_srvs::Empty::Request&, 
+    bool startPublishing(std_srvs::Empty::Request&, 
       std_srvs::Empty::Response&);
-    bool stop_publishing(std_srvs::Empty::Request&, 
+    bool stopPublishing(std_srvs::Empty::Request&, 
       std_srvs::Empty::Response&);
-
-
 };
 
 } // namespace maplab

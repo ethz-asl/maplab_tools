@@ -40,6 +40,21 @@ MaplabCameraInfoPublisher::MaplabCameraInfoPublisher(ros::NodeHandle& nh,
 }
 
 bool MaplabCameraInfoPublisher::initialize_services_and_subscribers() {
+  // Setup service calls.
+  boost::function<bool(
+     std_srvs::Empty::Request&, std_srvs::Empty::Response&)> callback_start =
+     boost::bind(&MaplabCameraInfoPublisher::startPublishing, this, _1, _2);
+  services_.emplace_back(nh_.advertiseService(
+        kStartServiceTopic, callback_start));
+
+  boost::function<bool(
+     std_srvs::Empty::Request&, std_srvs::Empty::Response&)> callback_stop =
+     boost::bind(&MaplabCameraInfoPublisher::stopPublishing, this, _1, _2);
+  services_.emplace_back(nh_.advertiseService(
+        kStopServiceTopic, callback_stop));
+
+
+  // Setup image subscribers.
   vio_common::RosTopicSettings ros_topics(*sensor_manager_);
   const size_t num_cameras = ros_topics.camera_topic_cam_index_map.size();
   if (num_cameras == 0) {
@@ -92,6 +107,20 @@ void MaplabCameraInfoPublisher::imageCallback(
     const sensor_msgs::ImageConstPtr &image, 
     std::size_t camera_idx) {
   VLOG(1) << "got image from " << camera_idx;
+}
+
+bool MaplabCameraInfoPublisher::startPublishing(
+    std_srvs::Empty::Request&, std_srvs::Empty::Response&) {
+  VLOG(1) << "got service call for start publishing ";
+  should_publish_ = true;
+  return true;
+}
+
+bool MaplabCameraInfoPublisher::stopPublishing(
+    std_srvs::Empty::Request&, std_srvs::Empty::Response&) {
+  VLOG(1) << "got service call for stop publishing ";
+  should_publish_ = false;
+  return true;
 }
 
 } // namespace maplab
