@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+rosbag record /penguin/os1_node/points /penguin/mavros/imu/data_raw /darpa_frame_absolute_pose /tag_detections_image /penguin/camera_info2 /penguin/image_raw

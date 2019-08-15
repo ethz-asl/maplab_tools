@@ -1,6 +1,7 @@
 sensors:
   - id: 5d2fcf479caf7592b35518478a2fe08f
     sensor_type: IMU
+    description: "ADIS IMU"
     topic: /penguin/mavros/imu/data_raw
     sigmas:
       gyro_noise_density: 0.005
