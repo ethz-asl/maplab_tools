@@ -9,17 +9,12 @@
 
 #include <maplab-camera-info-publisher/maplab-camera-info-publisher-node.h>
 
-DEFINE_bool(
-  map_save_on_shutdown, true,
-  "Save the map on exit. If this is set to false, then the map must "
-  "be saved using a service call.");
-
 int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
   google::ParseCommandLineFlags(&argc, &argv, true);
   google::InstallFailureSignalHandler();
 
-  ros::init(argc, argv, "maplab_service_interface");
+  ros::init(argc, argv, "maplab_camera_info_publisher");
   ros::NodeHandle nh, nh_private("~");
 
   ros_common::parseGflagsFromRosParams(argv[0], nh_private);

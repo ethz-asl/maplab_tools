@@ -41,8 +41,8 @@ class MaplabCameraInfoPublisher {
     aslam::NCamera::Ptr ncamera_rig_;
     std::vector<ros::Publisher> info_pubs_;
 
-    const std::string kStartServiceTopic = "/aprilTag_startDetector";
-    const std::string kStopServiceTopic = "/aprilTag_stopDetector";
+    const std::string kStartServiceTopic = "/cam_info_start_publishing";
+    const std::string kStopServiceTopic = "/cam_info_stop_publishing";
 
     bool initializeServicesAndSubscribers();
     bool initializeNCamera();
