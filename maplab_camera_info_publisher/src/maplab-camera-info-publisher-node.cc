@@ -28,10 +28,13 @@ MaplabCameraInfoPublisher::MaplabCameraInfoPublisher(ros::NodeHandle& nh,
   if (FLAGS_sensor_calibration_file.empty()) {
     LOG(FATAL) << "No sensors YAML provided!";
   }
-  LOG(INFO) << "[MaplabCameraInfoPublisher] Initializing camera info publisher...";
+  LOG(INFO) 
+		<< "[MaplabCameraInfoPublisher] Initializing camera info publisher...";
   if (!sensor_manager_->deserializeFromFile(FLAGS_sensor_calibration_file)) {
-     LOG(FATAL) << "[MaplabCameraInfoPublisher] Failed to read the sensor calibration from '"
-                << FLAGS_sensor_calibration_file << "'!";
+     LOG(FATAL) 
+			 << "[MaplabCameraInfoPublisher] " 
+			 << "Failed to read the sensor calibration from '"
+			 << FLAGS_sensor_calibration_file << "'!";
   }
   CHECK(sensor_manager_);
   if (!initializeServicesAndSubscribers()) {

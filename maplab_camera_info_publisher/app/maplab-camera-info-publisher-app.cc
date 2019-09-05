@@ -27,7 +27,8 @@ int main(int argc, char** argv) {
    return 1;
   }
 
-  std::atomic<bool>& end_of_days_signal_received = maplab_camera_publisher.shouldExit();
+  std::atomic<bool>& end_of_days_signal_received 
+		= maplab_camera_publisher.shouldExit();
   while (ros::ok() && !end_of_days_signal_received.load()) {
    VLOG_EVERY_N(1, 10) << "\n" << maplab_camera_publisher.printStatistics();
    std::this_thread::sleep_for(std::chrono::seconds(1));
