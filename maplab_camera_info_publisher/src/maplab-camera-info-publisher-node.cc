@@ -18,6 +18,10 @@ DEFINE_string(
    cam_info_topic_suffix, "/camera_info",
    "Defines the topic suffix used to publish the camera info.");
 
+DEFINE_double(
+		image_scale_factor, 1.0, 
+		"Defines the scale of republished image.");
+
 namespace maplab {
 
 MaplabCameraInfoPublisher::MaplabCameraInfoPublisher(ros::NodeHandle& nh, 
