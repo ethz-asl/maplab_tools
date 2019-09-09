@@ -287,13 +287,8 @@ cv::Mat MaplabCameraInfoPublisher::rescaleImage(const double scale,
   }
   CHECK(cv_ptr);
 
-	const cv::Mat& old_img = cv_ptr->image.clone();
-	const int new_cols = round(old_img.cols * scale);
-	const int new_rows = round(old_img.rows * scale);
-
-	cv::Mat new_img = cv::Mat(new_cols, new_rows, old_img.type());
-	cv::Size size(new_cols, new_rows);
-	cv::resize(old_img, new_img, size);
+	cv::Mat new_img;
+	cv::resize(cv_ptr->image, new_img, cv::Size(0,0), scale, scale);
 	return new_img;
 }
 
@@ -302,7 +297,7 @@ void MaplabCameraInfoPublisher::publishRescaled(const cv::Mat& img,
 		const sensor_msgs::ImageConstPtr &orig_img) const {
 	sensor_msgs::ImagePtr img_msg 
 		= cv_bridge::CvImage(
-				orig_img->header, "mono8", img).toImageMsg();
+				orig_img->header, "bgr8", img).toImageMsg();
 
   CHECK_LT(camera_idx, scaled_pubs_.size());
   scaled_pubs_[camera_idx].publish(img_msg);
