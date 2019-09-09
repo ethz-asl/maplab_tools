@@ -32,7 +32,8 @@ MaplabCameraInfoPublisher::MaplabCameraInfoPublisher(ros::NodeHandle& nh,
     const ros::NodeHandle& nh_private) : nh_(nh), nh_private_(nh_private), 
     spinner_(1), should_exit_(false), 
     image_transport_(nh),
-    sensor_manager_(new vi_map::SensorManager()) {
+    sensor_manager_(new vi_map::SensorManager()),
+		processed_counter_(0u) {
   if (FLAGS_sensor_calibration_file.empty()) {
     LOG(FATAL) << "No sensors YAML provided!";
   }
@@ -117,7 +118,6 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
 		}
   }
 
-
   return true;
 }
 
@@ -146,6 +146,8 @@ std::atomic<bool>& MaplabCameraInfoPublisher::shouldExit() {
 std::string MaplabCameraInfoPublisher::printStatistics() const {
   std::stringstream ss;
   ss << "[MaplabCameraInfoPublisher]  Statistics \n";
+	ss << "\t processed: " << processed_counter_ << " images\n";
+	ss << "Publishing now: " << should_publish_ << "\n";
   return ss.str();
 }
 
@@ -161,6 +163,7 @@ void MaplabCameraInfoPublisher::imageCallback(
 		publishRescaled(scaled, camera_idx, image);
 	}
   createAndPublishCameraInfo(camera_idx, image);
+	++processed_counter_;
 }
 
 bool MaplabCameraInfoPublisher::startPublishing(
@@ -197,7 +200,6 @@ bool MaplabCameraInfoPublisher::retrieveCameraIntrinsics(
     default:
       LOG(FATAL) << "Unknown camera type. The given camera has to be of type "
           "Pinhole.";
-
   }
   return true;
 }

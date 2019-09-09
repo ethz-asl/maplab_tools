@@ -41,6 +41,7 @@ class MaplabCameraInfoPublisher {
     aslam::NCamera::Ptr ncamera_rig_;
     std::vector<ros::Publisher> info_pubs_;
     std::vector<image_transport::Publisher> scaled_pubs_;
+		uint32_t processed_counter_;
 
     const std::string kStartServiceTopic = "/cam_info_start_publishing";
     const std::string kStopServiceTopic = "/cam_info_stop_publishing";
