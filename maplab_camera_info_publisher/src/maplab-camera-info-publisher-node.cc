@@ -18,20 +18,32 @@ DEFINE_string(
    cam_info_topic_suffix, "/camera_info",
    "Defines the topic suffix used to publish the camera info.");
 
+DEFINE_string(
+   cam_scale_topic_suffix, "/scaled_image",
+   "Defines the topic suffix used to publish the scaled image.");
+
+DEFINE_double(
+		image_scale_factor, 1.0, 
+		"Defines the scale of republished image.");
+
 namespace maplab {
 
 MaplabCameraInfoPublisher::MaplabCameraInfoPublisher(ros::NodeHandle& nh, 
     const ros::NodeHandle& nh_private) : nh_(nh), nh_private_(nh_private), 
     spinner_(1), should_exit_(false), 
     image_transport_(nh),
-    sensor_manager_(new vi_map::SensorManager()) {
+    sensor_manager_(new vi_map::SensorManager()),
+		processed_counter_(0u) {
   if (FLAGS_sensor_calibration_file.empty()) {
     LOG(FATAL) << "No sensors YAML provided!";
   }
-  LOG(INFO) << "[MaplabCameraInfoPublisher] Initializing camera info publisher...";
+  LOG(INFO) 
+		<< "[MaplabCameraInfoPublisher] Initializing camera info publisher...";
   if (!sensor_manager_->deserializeFromFile(FLAGS_sensor_calibration_file)) {
-     LOG(FATAL) << "[MaplabCameraInfoPublisher] Failed to read the sensor calibration from '"
-                << FLAGS_sensor_calibration_file << "'!";
+     LOG(FATAL) 
+			 << "[MaplabCameraInfoPublisher] " 
+			 << "Failed to read the sensor calibration from '"
+			 << FLAGS_sensor_calibration_file << "'!";
   }
   CHECK(sensor_manager_);
   if (!initializeServicesAndSubscribers()) {
@@ -69,6 +81,9 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
   }
   sub_images_.reserve(num_cameras);
   info_pubs_.reserve(num_cameras);
+	if (FLAGS_image_scale_factor != 1.0) {
+		scaled_pubs_.reserve(num_cameras);
+	}
 
   for (const std::pair<std::string, size_t>& topic_camidx :
         ros_topics.camera_topic_cam_index_map) {
@@ -91,11 +106,17 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
     // Setup publisher.
     const aslam::Camera& camera = ncamera_rig_->getCamera(topic_camidx.second);
     constexpr size_t kRosPublisherQueueSize = 100u;
-    const std::string topic = camera.getTopic() + FLAGS_cam_info_topic_suffix;
+    const std::string info_topic = camera.getTopic() 
+			+ FLAGS_cam_info_topic_suffix;
     info_pubs_.emplace_back(nh_.advertise<sensor_msgs::CameraInfo>(
-        topic, kRosPublisherQueueSize));
-  }
+        info_topic, kRosPublisherQueueSize));
 
+		if (FLAGS_image_scale_factor != 1.0) {
+			const std::string scale_topic = camera.getTopic() 
+				+ FLAGS_cam_scale_topic_suffix;
+			scaled_pubs_.emplace_back(image_transport_.advertise(scale_topic, 1));
+		}
+  }
 
   return true;
 }
@@ -125,6 +146,8 @@ std::atomic<bool>& MaplabCameraInfoPublisher::shouldExit() {
 std::string MaplabCameraInfoPublisher::printStatistics() const {
   std::stringstream ss;
   ss << "[MaplabCameraInfoPublisher]  Statistics \n";
+	ss << "\t processed: " << processed_counter_ << " images\n";
+	ss << "Publishing now: " << should_publish_ << "\n";
   return ss.str();
 }
 
@@ -134,7 +157,13 @@ void MaplabCameraInfoPublisher::imageCallback(
   if (!should_publish_) {
     return;
   }
+	if (FLAGS_image_scale_factor != 1.0) {
+		const cv::Mat scaled = rescaleImage(FLAGS_image_scale_factor, 
+				image);
+		publishRescaled(scaled, camera_idx, image);
+	}
   createAndPublishCameraInfo(camera_idx, image);
+	++processed_counter_;
 }
 
 bool MaplabCameraInfoPublisher::startPublishing(
@@ -171,7 +200,6 @@ bool MaplabCameraInfoPublisher::retrieveCameraIntrinsics(
     default:
       LOG(FATAL) << "Unknown camera type. The given camera has to be of type "
           "Pinhole.";
-
   }
   return true;
 }
@@ -248,6 +276,33 @@ void MaplabCameraInfoPublisher::createAndPublishCameraInfo(
 
   CHECK_LT(camera_idx, info_pubs_.size());
   info_pubs_[camera_idx].publish(cam_info_msg);
+}
+
+cv::Mat MaplabCameraInfoPublisher::rescaleImage(const double scale,
+		const sensor_msgs::ImageConstPtr &image) const {
+  cv_bridge::CvImageConstPtr cv_ptr;
+	try {
+	  cv_ptr = cv_bridge::toCvShare(
+			 image, sensor_msgs::image_encodings::BGR8);
+	} catch (const cv_bridge::Exception& e) {  // NOLINT
+    LOG(FATAL) << "cv_bridge exception: " << e.what();
+  }
+  CHECK(cv_ptr);
+
+	cv::Mat new_img;
+	cv::resize(cv_ptr->image, new_img, cv::Size(0,0), scale, scale);
+	return new_img;
+}
+
+void MaplabCameraInfoPublisher::publishRescaled(const cv::Mat& img, 
+    const std::size_t camera_idx,
+		const sensor_msgs::ImageConstPtr &orig_img) const {
+	sensor_msgs::ImagePtr img_msg 
+		= cv_bridge::CvImage(
+				orig_img->header, "bgr8", img).toImageMsg();
+
+  CHECK_LT(camera_idx, scaled_pubs_.size());
+  scaled_pubs_[camera_idx].publish(img_msg);
 }
 
 } // namespace maplab

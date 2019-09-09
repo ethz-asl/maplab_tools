@@ -40,6 +40,8 @@ class MaplabCameraInfoPublisher {
     bool should_publish_ = false;
     aslam::NCamera::Ptr ncamera_rig_;
     std::vector<ros::Publisher> info_pubs_;
+    std::vector<image_transport::Publisher> scaled_pubs_;
+		uint32_t processed_counter_;
 
     const std::string kStartServiceTopic = "/cam_info_start_publishing";
     const std::string kStopServiceTopic = "/cam_info_stop_publishing";
@@ -57,8 +59,12 @@ class MaplabCameraInfoPublisher {
     bool retrieveDistortionParameters(const aslam::Camera& camera, 
         double* k1, double* k2, double* k3, double *k4, 
         std::string* type) const;
-    void createAndPublishCameraInfo(const std::size_t idx,
+    void createAndPublishCameraInfo(const std::size_t camera_idx,
         const sensor_msgs::ImageConstPtr &image) const;
+		cv::Mat rescaleImage(const double scale, 
+				const sensor_msgs::ImageConstPtr &image) const;
+		void publishRescaled(const cv::Mat& img, const std::size_t camera_idx, 
+				const sensor_msgs::ImageConstPtr &orig_img) const;
 };
 
 } // namespace maplab
