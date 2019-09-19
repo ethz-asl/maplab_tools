@@ -8,4 +8,5 @@ rosrun maplab_camera_info_publisher maplab_camera_info_publisher \
   --alsologtostderr \
   --sensor_calibration_file=$SENSOR_CALIBRATION \
   --image_scale_factor=0.5 \
+  --start_service=true \
   $REST

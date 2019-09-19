@@ -25,6 +25,9 @@ DEFINE_string(
 DEFINE_double(
 		image_scale_factor, 1.0, 
 		"Defines the scale of republished image.");
+DEFINE_bool(
+		start_service, false,
+		"Defines the initial value whether the service should publish.");
 
 namespace maplab {
 
@@ -50,6 +53,8 @@ MaplabCameraInfoPublisher::MaplabCameraInfoPublisher(ros::NodeHandle& nh,
      LOG(FATAL) << "[MaplabCameraInfoPublisher] " 
        << "Failed initialize subscribers and services.";
   }
+
+	should_publish_ = FLAGS_start_service;
 }
 
 bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
@@ -91,20 +96,32 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
     CHECK(!topic_camidx.first.empty()) << "Camera " << topic_camidx.second
                                         << " is subscribed to an empty topic!";
 
-    boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
-        boost::bind(&MaplabCameraInfoPublisher::imageCallback,
-            this, _1, topic_camidx.second);
+    const aslam::Camera& camera = ncamera_rig_->getCamera(topic_camidx.second);
+		if (camera.hasCompressedImages()) {
+			boost::function<void(const sensor_msgs::CompressedImageConstPtr&)>
+			image_callback =
+				boost::bind(
+						 &DataSourceRostopic::compressedImageCallback,
+						 this, _1, topic_camidx.second);
+			constexpr size_t kRosSubscriberQueueSizeImage = 20u;
+			ros::Subscriber image_sub = node_handle_.subscribe(
+					topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
+			ros_subs_.emplace_back(std::move(image_sub));
 
-    constexpr size_t kRosSubscriberQueueSizeImage = 20u;
-    image_transport::Subscriber image_sub = image_transport_.subscribe(
-        topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
-    sub_images_.emplace_back(image_sub);
+		} else {
+			boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
+				boost::bind(&MaplabCameraInfoPublisher::imageCallback,
+				this, _1, topic_camidx.second);
 
+			constexpr size_t kRosSubscriberQueueSizeImage = 20u;
+			image_transport::Subscriber image_sub = image_transport_.subscribe(
+					topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
+			sub_images_.emplace_back(image_sub);
+		}
     VLOG(1) << "[MaplabNode-DataSource] Camera " << topic_camidx.second
             << " is subscribed to topic: '" << topic_camidx.first << "'";
 
     // Setup publisher.
-    const aslam::Camera& camera = ncamera_rig_->getCamera(topic_camidx.second);
     constexpr size_t kRosPublisherQueueSize = 100u;
     const std::string info_topic = camera.getTopic() 
 			+ FLAGS_cam_info_topic_suffix;
@@ -147,7 +164,7 @@ std::string MaplabCameraInfoPublisher::printStatistics() const {
   std::stringstream ss;
   ss << "[MaplabCameraInfoPublisher]  Statistics \n";
 	ss << "\t processed: " << processed_counter_ << " images\n";
-	ss << "Publishing now: " << should_publish_ << "\n";
+	ss << "\t Publishing now: " << should_publish_ << "\n";
   return ss.str();
 }
 
@@ -164,6 +181,12 @@ void MaplabCameraInfoPublisher::imageCallback(
 	}
   createAndPublishCameraInfo(camera_idx, image);
 	++processed_counter_;
+}
+
+void MaplabCameraInfoPublisher::compressedImageCallback(
+		const sensor_msgs::CompressedImageConstPtr& msg,
+		size_t camera_idx) {
+
 }
 
 bool MaplabCameraInfoPublisher::startPublishing(
