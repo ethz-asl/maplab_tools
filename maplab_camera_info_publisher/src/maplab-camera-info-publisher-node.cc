@@ -9,6 +9,7 @@
 #include <glog/logging.h>
 #include <boost/bind.hpp>
 #include <sstream>
+#include <chrono>
 
 #include <opencv2/highgui/highgui.hpp>
 
@@ -174,6 +175,9 @@ std::string MaplabCameraInfoPublisher::printStatistics() const {
   ss << "[MaplabCameraInfoPublisher]  Statistics \n";
 	ss << "\t processed: " << processed_counter_ << " images\n";
 	ss << "\t Publishing now: " << std::boolalpha << should_publish_ << "\n";
+	if (processed_counter_ > 0)
+		ss << "\t Average processing time: " 
+			<< total_processing_time_ms_ / processed_counter_ << "ms \n";
   return ss.str();
 }
 
@@ -353,6 +357,7 @@ void MaplabCameraInfoPublisher::publishProcessed(const cv::Mat& img,
 }
 
 void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {
+	auto start = std::chrono::high_resolution_clock::now();
 	const double& scale = FLAGS_image_scale_factor;
 	// Rescale the image.
 	if (scale != 1.0)
@@ -371,6 +376,9 @@ void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {
 				FLAGS_image_rotation_angle_deg, 1.0);              
 	  cv::warpAffine(processed, processed, rot_mat, processed.size());  
 	}
+	auto end = std::chrono::high_resolution_clock::now();
+  total_processing_time_ms_ += 
+		std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 	++processed_counter_;
 }
 

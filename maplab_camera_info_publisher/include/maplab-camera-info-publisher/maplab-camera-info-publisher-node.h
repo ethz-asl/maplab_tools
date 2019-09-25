@@ -70,6 +70,7 @@ class MaplabCameraInfoPublisher {
     std::vector<ros::Publisher> info_pubs_;
     std::map<std::size_t, image_transport::Publisher> processed_pubs_;
 		uint32_t processed_counter_;
+		double total_processing_time_ms_;
 
     const std::string kStartServiceTopic = "/cam_info_start_publishing";
     const std::string kStopServiceTopic = "/cam_info_stop_publishing";
