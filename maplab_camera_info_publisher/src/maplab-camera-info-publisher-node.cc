@@ -1,4 +1,5 @@
 #include <maplab-camera-info-publisher/maplab-camera-info-publisher-node.h>
+#include <maplab-camera-info-publisher/helpers.h>
 #include <vio-common/rostopic-settings.h>
 #include <vi-map/sensor-utils.h>
 #include <aslam/cameras/camera.h>
@@ -11,7 +12,6 @@
 
 #include <opencv2/highgui/highgui.hpp>
 
-
 DEFINE_string(
    sensor_calibration_file, "",
    "Yaml file with all the sensor calibrations. Determines which sensors are "
@@ -22,8 +22,16 @@ DEFINE_string(
    "Defines the topic suffix used to publish the camera info.");
 
 DEFINE_string(
-   cam_scale_topic_suffix, "/scaled_image",
-   "Defines the topic suffix used to publish the scaled image.");
+   processed_topic_suffix, "/processed",
+   "Defines the topic suffix used to publish the converted compressed image.");
+
+DEFINE_bool(
+   republish_grayscale, true,
+   "Defines the topic suffix used whether to publish the " 
+	 "converted image as grayscale");
+
+DEFINE_int32(image_rotation_angle_deg, 0, 
+		"Defines the angle used for the image rotation.");
 
 DEFINE_double(
 		image_scale_factor, 1.0, 
@@ -90,9 +98,6 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
   sub_images_.reserve(num_cameras);
   info_pubs_.reserve(num_cameras);
   ros_subs_.reserve(num_cameras);
-	if (FLAGS_image_scale_factor != 1.0) {
-		scaled_pubs_.reserve(num_cameras);
-	}
 
   for (const std::pair<std::string, size_t>& topic_camidx :
         ros_topics.camera_topic_cam_index_map) {
@@ -111,11 +116,6 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
 			ros::Subscriber image_sub = nh_.subscribe(
 					topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
 			ros_subs_.emplace_back(std::move(image_sub));
-
-			const std::string compressed_topic = camera.getTopic() 
-				+ "/converted_compressed";
-			compressed_pubs_[topic_camidx.second] = 
-					image_transport_.advertise(compressed_topic, 1);
 		} else {
 			boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
 				boost::bind(&MaplabCameraInfoPublisher::imageCallback,
@@ -136,10 +136,11 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
     info_pubs_.emplace_back(nh_.advertise<sensor_msgs::CameraInfo>(
         info_topic, kRosPublisherQueueSize));
 
-		if (FLAGS_image_scale_factor != 1.0) {
-			const std::string scale_topic = camera.getTopic() 
-				+ FLAGS_cam_scale_topic_suffix;
-			scaled_pubs_.emplace_back(image_transport_.advertise(scale_topic, 1));
+		if (shouldProcess()) {
+			const std::string processed_topic = camera.getTopic() 
+				+ FLAGS_processed_topic_suffix;
+			processed_pubs_[topic_camidx.second] = 
+				image_transport_.advertise(processed_topic, 1);
 		}
   }
 
@@ -172,7 +173,7 @@ std::string MaplabCameraInfoPublisher::printStatistics() const {
   std::stringstream ss;
   ss << "[MaplabCameraInfoPublisher]  Statistics \n";
 	ss << "\t processed: " << processed_counter_ << " images\n";
-	ss << "\t Publishing now: " << should_publish_ << "\n";
+	ss << "\t Publishing now: " << std::boolalpha << should_publish_ << "\n";
   return ss.str();
 }
 
@@ -182,13 +183,11 @@ void MaplabCameraInfoPublisher::imageCallback(
   if (!should_publish_) {
     return;
   }
-	if (FLAGS_image_scale_factor != 1.0) {
-		const cv::Mat scaled = rescaleImage(FLAGS_image_scale_factor, 
-				image);
-		publishRescaled(scaled, camera_idx, image);
+	if (shouldProcess()) {
+		const cv::Mat processed = prepareImage(image);
+		publishProcessed(processed, camera_idx, image);
 	}
   createAndPublishCameraInfo(camera_idx, image);
-	++processed_counter_;
 }
 
 void MaplabCameraInfoPublisher::compressedImageCallback(
@@ -200,24 +199,16 @@ void MaplabCameraInfoPublisher::compressedImageCallback(
 	try {                                                                         
 		cv_ptr = cv_bridge::toCvCopy(msg);                     
     CHECK(cv_ptr);                                                              
-                                                                                   
-	  cv::Mat processed_image;                                                  
-	  cv::cvtColor(cv_ptr->image, processed_image, CV_BGR2GRAY);                
-	  cv::resize(processed_image, processed_image, cv::Size(0,0), 0.5, 0.5);    
-	  cv::Point2f src_center(processed_image.cols/2.0F, 
-				processed_image.rows/2.0F);
-	  cv::Mat rot_mat = getRotationMatrix2D(src_center, 180, 1.0);              
-	  cv::warpAffine(processed_image, cv_ptr->image,                 
-			 rot_mat, processed_image.size());  
+		processImage(cv_ptr->image);
 	} catch (const cv_bridge::Exception& e) {  // NOLINT                          
 		LOG(FATAL) << "cv_bridge exception: " << e.what();                          
 	}                                                                             
 	CHECK(cv_ptr);       
 
 	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
-	img_msg->encoding = "mono8";
-  CHECK_LT(camera_idx, compressed_pubs_.size());
-  compressed_pubs_.at(camera_idx).publish(img_msg);
+	img_msg->encoding = getEncoding(FLAGS_republish_grayscale);
+  CHECK_LT(camera_idx, processed_pubs_.size());
+  processed_pubs_.at(camera_idx).publish(img_msg);
 }
 
 bool MaplabCameraInfoPublisher::startPublishing(
@@ -332,8 +323,8 @@ void MaplabCameraInfoPublisher::createAndPublishCameraInfo(
   info_pubs_[camera_idx].publish(cam_info_msg);
 }
 
-cv::Mat MaplabCameraInfoPublisher::rescaleImage(const double scale,
-		const sensor_msgs::ImageConstPtr &image) const {
+cv::Mat MaplabCameraInfoPublisher::prepareImage(
+		const sensor_msgs::ImageConstPtr &image) {
   cv_bridge::CvImageConstPtr cv_ptr;
 	try {
 	  cv_ptr = cv_bridge::toCvShare(
@@ -343,20 +334,51 @@ cv::Mat MaplabCameraInfoPublisher::rescaleImage(const double scale,
   }
   CHECK(cv_ptr);
 
-	cv::Mat new_img;
-	cv::resize(cv_ptr->image, new_img, cv::Size(0,0), scale, scale);
+	cv::Mat new_img = cv_ptr->image.clone();
+	processImage(new_img);
 	return new_img;
 }
 
-void MaplabCameraInfoPublisher::publishRescaled(const cv::Mat& img, 
+void MaplabCameraInfoPublisher::publishProcessed(const cv::Mat& img, 
     const std::size_t camera_idx,
 		const sensor_msgs::ImageConstPtr &orig_img) const {
 	sensor_msgs::ImagePtr img_msg 
 		= cv_bridge::CvImage(
-				orig_img->header, "bgr8", img).toImageMsg();
+				orig_img->header,
+				getEncoding(FLAGS_republish_grayscale),
+				img).toImageMsg();
 
-  CHECK_LT(camera_idx, scaled_pubs_.size());
-  scaled_pubs_[camera_idx].publish(img_msg);
+  CHECK_LT(camera_idx, processed_pubs_.size());
+  processed_pubs_.at(camera_idx).publish(img_msg);
+}
+
+void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {
+	const double& scale = FLAGS_image_scale_factor;
+	// Rescale the image.
+	if (scale != 1.0)
+		cv::resize(processed, processed, cv::Size(0,0), scale, scale);
+	
+	// Convert to grayscale.
+	if (FLAGS_republish_grayscale)
+		cv::cvtColor(processed, processed, CV_BGR2GRAY);                
+
+	// Rotation.
+	if (FLAGS_image_rotation_angle_deg != 0 && 
+			FLAGS_image_rotation_angle_deg != 360) {
+	  const cv::Point2f src_center(processed.cols/2.0F, 
+				processed.rows/2.0F);
+	  const cv::Mat rot_mat = cv::getRotationMatrix2D(src_center,
+				FLAGS_image_rotation_angle_deg, 1.0);              
+	  cv::warpAffine(processed, processed, rot_mat, processed.size());  
+	}
+	++processed_counter_;
+}
+
+bool MaplabCameraInfoPublisher::shouldProcess() const {
+	return FLAGS_image_scale_factor != 1.0 ||
+				 FLAGS_republish_grayscale ||
+				 FLAGS_image_rotation_angle_deg != 0 || 
+				 FLAGS_image_rotation_angle_deg != 360;
 }
 
 } // namespace maplab

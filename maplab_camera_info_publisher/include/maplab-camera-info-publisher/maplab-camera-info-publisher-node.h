@@ -25,19 +25,21 @@ class MaplabCameraInfoPublisher {
     std::atomic<bool>& shouldExit();
     std::string printStatistics() const;
 
-
   private:
     bool initializeServicesAndSubscribers();
     bool initializeNCamera();
+
     void imageCallback(const sensor_msgs::ImageConstPtr &image, 
         std::size_t camera_idx);
 	  void compressedImageCallback(
 				const sensor_msgs::CompressedImageConstPtr& msg,
         size_t camera_idx);
+
     bool startPublishing(std_srvs::Empty::Request&, 
       std_srvs::Empty::Response&);
     bool stopPublishing(std_srvs::Empty::Request&, 
       std_srvs::Empty::Response&);
+
     bool retrieveCameraIntrinsics(const aslam::Camera& camera, 
         double* fu, double* fv, double* cu, double *cv) const;
     bool retrieveDistortionParameters(const aslam::Camera& camera, 
@@ -45,10 +47,12 @@ class MaplabCameraInfoPublisher {
         std::string* type) const;
     void createAndPublishCameraInfo(const std::size_t camera_idx,
         const sensor_msgs::ImageConstPtr &image) const;
-		cv::Mat rescaleImage(const double scale, 
-				const sensor_msgs::ImageConstPtr &image) const;
-		void publishRescaled(const cv::Mat& img, const std::size_t camera_idx, 
+
+		cv::Mat prepareImage(const sensor_msgs::ImageConstPtr &image);
+		void publishProcessed(const cv::Mat& img, const std::size_t camera_idx, 
 				const sensor_msgs::ImageConstPtr &orig_img) const;
+		void processImage(cv::Mat& processed);
+		bool shouldProcess() const;
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
@@ -64,8 +68,7 @@ class MaplabCameraInfoPublisher {
     bool should_publish_ = false;
     aslam::NCamera::Ptr ncamera_rig_;
     std::vector<ros::Publisher> info_pubs_;
-    std::vector<image_transport::Publisher> scaled_pubs_;
-    std::map<std::size_t, image_transport::Publisher> compressed_pubs_;
+    std::map<std::size_t, image_transport::Publisher> processed_pubs_;
 		uint32_t processed_counter_;
 
     const std::string kStartServiceTopic = "/cam_info_start_publishing";

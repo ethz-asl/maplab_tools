@@ -7,7 +7,7 @@ rosrun maplab_camera_info_publisher maplab_camera_info_publisher \
   --v=3 \
   --alsologtostderr \
   --sensor_calibration_file=$SENSOR_CALIBRATION \
-  --image_scale_factor=0.5 \
+  --image_scale_factor=1.0 \
   --start_service=true \
 	--vio_camera_topic_suffix="" \
   $REST

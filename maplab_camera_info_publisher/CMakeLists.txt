@@ -11,6 +11,7 @@ catkin_simple(ALL_DEPS_REQUIRED)
 #############
 cs_add_library(${PROJECT_NAME}_lib
   src/maplab-camera-info-publisher-node.cc
+  src/helpers.cc
 )
 
 
