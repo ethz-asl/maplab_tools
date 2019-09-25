@@ -9,6 +9,9 @@
 #include <boost/bind.hpp>
 #include <sstream>
 
+#include <opencv2/highgui/highgui.hpp>
+
+
 DEFINE_string(
    sensor_calibration_file, "",
    "Yaml file with all the sensor calibrations. Determines which sensors are "
@@ -86,6 +89,7 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
   }
   sub_images_.reserve(num_cameras);
   info_pubs_.reserve(num_cameras);
+  ros_subs_.reserve(num_cameras);
 	if (FLAGS_image_scale_factor != 1.0) {
 		scaled_pubs_.reserve(num_cameras);
 	}
@@ -101,13 +105,17 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
 			boost::function<void(const sensor_msgs::CompressedImageConstPtr&)>
 			image_callback =
 				boost::bind(
-						 &DataSourceRostopic::compressedImageCallback,
+						 &MaplabCameraInfoPublisher::compressedImageCallback,
 						 this, _1, topic_camidx.second);
 			constexpr size_t kRosSubscriberQueueSizeImage = 20u;
-			ros::Subscriber image_sub = node_handle_.subscribe(
+			ros::Subscriber image_sub = nh_.subscribe(
 					topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
 			ros_subs_.emplace_back(std::move(image_sub));
 
+			const std::string compressed_topic = camera.getTopic() 
+				+ "/converted_compressed";
+			compressed_pubs_[topic_camidx.second] = 
+					image_transport_.advertise(compressed_topic, 1);
 		} else {
 			boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
 				boost::bind(&MaplabCameraInfoPublisher::imageCallback,
@@ -186,7 +194,30 @@ void MaplabCameraInfoPublisher::imageCallback(
 void MaplabCameraInfoPublisher::compressedImageCallback(
 		const sensor_msgs::CompressedImageConstPtr& msg,
 		size_t camera_idx) {
+	CHECK(msg);                                              
+	cv_bridge::CvImagePtr cv_ptr;    
+	
+	try {                                                                         
+		cv_ptr = cv_bridge::toCvCopy(msg);                     
+    CHECK(cv_ptr);                                                              
+                                                                                   
+	  cv::Mat processed_image;                                                  
+	  cv::cvtColor(cv_ptr->image, processed_image, CV_BGR2GRAY);                
+	  cv::resize(processed_image, processed_image, cv::Size(0,0), 0.5, 0.5);    
+	  cv::Point2f src_center(processed_image.cols/2.0F, 
+				processed_image.rows/2.0F);
+	  cv::Mat rot_mat = getRotationMatrix2D(src_center, 180, 1.0);              
+	  cv::warpAffine(processed_image, cv_ptr->image,                 
+			 rot_mat, processed_image.size());  
+	} catch (const cv_bridge::Exception& e) {  // NOLINT                          
+		LOG(FATAL) << "cv_bridge exception: " << e.what();                          
+	}                                                                             
+	CHECK(cv_ptr);       
 
+	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
+	img_msg->encoding = "mono8";
+  CHECK_LT(camera_idx, compressed_pubs_.size());
+  compressed_pubs_.at(camera_idx).publish(img_msg);
 }
 
 bool MaplabCameraInfoPublisher::startPublishing(

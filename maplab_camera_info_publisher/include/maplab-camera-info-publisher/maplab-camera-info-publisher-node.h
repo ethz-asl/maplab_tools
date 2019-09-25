@@ -7,9 +7,9 @@
 #include <vi-map/sensor-manager.h>
 #include <image_transport/image_transport.h>
 
-
 #include <vector>
 #include <atomic>
+#include <map>
 #include <functional>
 #include <memory>
 
@@ -65,6 +65,7 @@ class MaplabCameraInfoPublisher {
     aslam::NCamera::Ptr ncamera_rig_;
     std::vector<ros::Publisher> info_pubs_;
     std::vector<image_transport::Publisher> scaled_pubs_;
+    std::map<std::size_t, image_transport::Publisher> compressed_pubs_;
 		uint32_t processed_counter_;
 
     const std::string kStartServiceTopic = "/cam_info_start_publishing";
