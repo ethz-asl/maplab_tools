@@ -52,6 +52,8 @@ class MaplabCameraInfoPublisher {
 		void publishProcessed(const cv::Mat& img, const std::size_t camera_idx, 
 				const sensor_msgs::ImageConstPtr &orig_img) const;
 		void processImage(cv::Mat& processed);
+		void applyHistogramEqualization(
+			 const cv::Mat& input_image, cv::Mat* output_image) const;
 		bool shouldProcess() const;
 
     ros::NodeHandle nh_;

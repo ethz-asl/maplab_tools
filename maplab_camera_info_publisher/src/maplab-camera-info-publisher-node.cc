@@ -40,6 +40,15 @@ DEFINE_double(
 DEFINE_bool(
 		start_service, false,
 		"Defines the initial value whether the service should publish.");
+DEFINE_bool(
+	image_apply_clahe_histogram_equalization, false,
+	"Apply CLAHE histogram equalization to image.");
+DEFINE_int32(
+	image_clahe_clip_limit, 2,
+	"CLAHE histogram equalization parameter: clip limit.");
+DEFINE_int32(
+	image_clahe_grid_size, 8,
+	"CLAHE histogram equalization parameter: grid size.");
 
 namespace maplab {
 
@@ -211,6 +220,7 @@ void MaplabCameraInfoPublisher::compressedImageCallback(
 
 	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
 	img_msg->encoding = getEncoding(FLAGS_republish_grayscale);
+	img_msg->header.stamp = msg->header.stamp;
   CHECK_LT(camera_idx, processed_pubs_.size());
   processed_pubs_.at(camera_idx).publish(img_msg);
 }
@@ -343,6 +353,7 @@ cv::Mat MaplabCameraInfoPublisher::prepareImage(
 	return new_img;
 }
 
+
 void MaplabCameraInfoPublisher::publishProcessed(const cv::Mat& img, 
     const std::size_t camera_idx,
 		const sensor_msgs::ImageConstPtr &orig_img) const {
@@ -376,6 +387,14 @@ void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {
 				FLAGS_image_rotation_angle_deg, 1.0);              
 	  cv::warpAffine(processed, processed, rot_mat, processed.size());  
 	}
+
+	// CLAHE
+	if (FLAGS_image_apply_clahe_histogram_equalization) {
+		if (processed.channels() == 3)                                             
+       cv::cvtColor(processed, processed, CV_BGR2GRAY); 
+		applyHistogramEqualization(processed, &processed);
+	}
+
 	auto end = std::chrono::high_resolution_clock::now();
   total_processing_time_ms_ += 
 		std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
@@ -386,7 +405,19 @@ bool MaplabCameraInfoPublisher::shouldProcess() const {
 	return FLAGS_image_scale_factor != 1.0 ||
 				 FLAGS_republish_grayscale ||
 				 FLAGS_image_rotation_angle_deg != 0 || 
-				 FLAGS_image_rotation_angle_deg != 360;
+				 FLAGS_image_rotation_angle_deg != 360 || 
+				 FLAGS_image_apply_clahe_histogram_equalization;
+}
+
+void MaplabCameraInfoPublisher::applyHistogramEqualization(
+	 const cv::Mat& input_image, cv::Mat* output_image) const {
+ CHECK_NOTNULL(output_image);
+ CHECK(!input_image.empty());
+
+ static cv::Ptr<cv::CLAHE> clahe = cv::createCLAHE(
+		FLAGS_image_clahe_clip_limit,
+		cv::Size(FLAGS_image_clahe_grid_size, FLAGS_image_clahe_grid_size));
+ clahe->apply(input_image, *output_image);
 }
 
 } // namespace maplab
