@@ -150,7 +150,8 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
 			const std::string processed_topic = camera.getTopic() 
 				+ FLAGS_processed_topic_suffix;
 			processed_pubs_[topic_camidx.second] = 
-				image_transport_.advertise(processed_topic, 1);
+				//image_transport_.advertise(processed_topic, 1);
+				nh_.advertise<sensor_msgs::Image>(processed_topic, 1);
 		}
   }
 
@@ -339,9 +340,9 @@ void MaplabCameraInfoPublisher::createAndPublishCameraInfo(
 
 cv::Mat MaplabCameraInfoPublisher::prepareImage(
 		const sensor_msgs::ImageConstPtr &image) {
-  cv_bridge::CvImageConstPtr cv_ptr;
+  cv_bridge::CvImagePtr cv_ptr;
 	try {
-	  cv_ptr = cv_bridge::toCvShare(
+	  cv_ptr = cv_bridge::toCvCopy(
 			 image, sensor_msgs::image_encodings::BGR8);
 	} catch (const cv_bridge::Exception& e) {  // NOLINT
     LOG(FATAL) << "cv_bridge exception: " << e.what();
@@ -350,6 +351,13 @@ cv::Mat MaplabCameraInfoPublisher::prepareImage(
 
 	cv::Mat new_img = cv_ptr->image.clone();
 	processImage(new_img);
+	cv_ptr->image = new_img;
+
+	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
+	img_msg->encoding = "mono8";
+	img_msg->header.stamp = image->header.stamp;
+
+  processed_pubs_.at(0).publish(img_msg);
 	return new_img;
 }
 
@@ -363,8 +371,8 @@ void MaplabCameraInfoPublisher::publishProcessed(const cv::Mat& img,
 				getEncoding(FLAGS_republish_grayscale),
 				img).toImageMsg();
 
-  CHECK_LT(camera_idx, processed_pubs_.size());
-  processed_pubs_.at(camera_idx).publish(img_msg);
+  //CHECK_LT(camera_idx, processed_pubs_.size());
+  //processed_pubs_.at(camera_idx).publish(img_msg);
 }
 
 void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {

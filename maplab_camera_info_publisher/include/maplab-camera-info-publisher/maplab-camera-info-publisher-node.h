@@ -70,7 +70,8 @@ class MaplabCameraInfoPublisher {
     bool should_publish_ = false;
     aslam::NCamera::Ptr ncamera_rig_;
     std::vector<ros::Publisher> info_pubs_;
-    std::map<std::size_t, image_transport::Publisher> processed_pubs_;
+    //std::map<std::size_t, image_transport::Publisher> processed_pubs_;
+    std::map<std::size_t, ros::Publisher> processed_pubs_;
 		uint32_t processed_counter_;
 		double total_processing_time_ms_;
 
