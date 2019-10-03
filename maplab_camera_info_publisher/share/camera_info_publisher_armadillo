@@ -10,7 +10,7 @@ rosrun maplab_camera_info_publisher maplab_camera_info_publisher \
   --image_scale_factor=0.5 \
   --start_service=true \
 	--vio_camera_topic_suffix="" \
-	--image_rotation_angle_deg=180 \
-	--republish_grayscale=true \
-	--image_apply_clahe_histogram_equalization=true \
+	--image_rotation_angle_deg=0 \
+	--republish_grayscale=false \
+	--image_apply_clahe_histogram_equalization=false \
   $REST
