@@ -116,6 +116,7 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
 
     const aslam::Camera& camera = ncamera_rig_->getCamera(topic_camidx.second);
 		if (camera.hasCompressedImages()) {
+      // Handle compressed images.
 			boost::function<void(const sensor_msgs::CompressedImageConstPtr&)>
 			image_callback =
 				boost::bind(
@@ -126,6 +127,7 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
 					topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
 			ros_subs_.emplace_back(std::move(image_sub));
 		} else {
+      // Handle normal images.
 			boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
 				boost::bind(&MaplabCameraInfoPublisher::imageCallback,
 				this, _1, topic_camidx.second);
@@ -149,7 +151,6 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
 			const std::string processed_topic = camera.getTopic() 
 				+ FLAGS_processed_topic_suffix;
 			processed_pubs_[topic_camidx.second] = 
-				//image_transport_.advertise(processed_topic, 1);
 				nh_.advertise<sensor_msgs::Image>(processed_topic, 1);
 		}
   }
@@ -172,7 +173,7 @@ bool MaplabCameraInfoPublisher::run() {
 }
 
 void MaplabCameraInfoPublisher::shutdown(){
-
+  // noop
 }
 
 std::atomic<bool>& MaplabCameraInfoPublisher::shouldExit() {
@@ -210,8 +211,6 @@ void MaplabCameraInfoPublisher::compressedImageCallback(
 	cv_bridge::CvImagePtr cv_ptr;    
 	
 	try {                                                                         
-		//cv_ptr = cv_bridge::toCvCopy(msg);                     
-
     if (FLAGS_compressed_image_encoding 
         == sensor_msgs::image_encodings::BGR8) {
       cv_ptr = cv_bridge::toCvCopy(
@@ -229,6 +228,7 @@ void MaplabCameraInfoPublisher::compressedImageCallback(
 	CHECK(cv_ptr);       
   processImage(cv_ptr->image);
 
+  // Publish message.
 	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
 	img_msg->encoding = getEncoding(is_greyscale_);
 	img_msg->header.stamp = msg->header.stamp;
