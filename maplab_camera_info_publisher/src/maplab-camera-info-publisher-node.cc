@@ -1,39 +1,35 @@
-#include <maplab-camera-info-publisher/maplab-camera-info-publisher-node.h>
-#include <maplab-camera-info-publisher/helpers.h>
+#include "maplab-camera-info-publisher/maplab-camera-info-publisher-node.h"
+#include "maplab-camera-info-publisher/helpers.h"
+
 #include <vio-common/rostopic-settings.h>
 #include <vi-map/sensor-utils.h>
 #include <aslam/cameras/camera.h>
 #include <aslam/cameras/camera-pinhole.h>
 
 #include <sensor_msgs/CameraInfo.h>
+#include <opencv2/highgui/highgui.hpp>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
+
 #include <sstream>
 #include <chrono>
-
-#include <opencv2/highgui/highgui.hpp>
 
 DEFINE_string(
    sensor_calibration_file, "",
    "Yaml file with all the sensor calibrations. Determines which sensors are "
    "used by camera info publisher.");
-
 DEFINE_string(
    cam_info_topic_suffix, "/camera_info",
    "Defines the topic suffix used to publish the camera info.");
-
 DEFINE_string(
    processed_topic_suffix, "/processed",
    "Defines the topic suffix used to publish the converted compressed image.");
-
 DEFINE_bool(
-   republish_grayscale, true,
+   republish_grayscale, false,
    "Defines the topic suffix used whether to publish the " 
 	 "converted image as grayscale");
-
 DEFINE_int32(image_rotation_angle_deg, 0, 
 		"Defines the angle used for the image rotation.");
-
 DEFINE_double(
 		image_scale_factor, 1.0, 
 		"Defines the scale of republished image.");
@@ -49,6 +45,9 @@ DEFINE_int32(
 DEFINE_int32(
 	image_clahe_grid_size, 8,
 	"CLAHE histogram equalization parameter: grid size.");
+DEFINE_string(
+    compressed_image_encoding, "bgr8",
+    "Sets the encoding of the compressed images.");
 
 namespace maplab {
 
@@ -211,16 +210,27 @@ void MaplabCameraInfoPublisher::compressedImageCallback(
 	cv_bridge::CvImagePtr cv_ptr;    
 	
 	try {                                                                         
-		cv_ptr = cv_bridge::toCvCopy(msg);                     
-    CHECK(cv_ptr);                                                              
-		processImage(cv_ptr->image);
-	} catch (const cv_bridge::Exception& e) {  // NOLINT                          
+		//cv_ptr = cv_bridge::toCvCopy(msg);                     
+
+    if (FLAGS_compressed_image_encoding 
+        == sensor_msgs::image_encodings::BGR8) {
+      cv_ptr = cv_bridge::toCvCopy(
+         msg, sensor_msgs::image_encodings::BGR8);
+    } else if (FLAGS_compressed_image_encoding 
+        == sensor_msgs::image_encodings::MONO8) {
+      cv_ptr = cv_bridge::toCvCopy(
+         msg, sensor_msgs::image_encodings::MONO8);
+      is_greyscale_ = true;
+    }
+	}
+  catch (const cv_bridge::Exception& e) {  // NOLINT                          
 		LOG(FATAL) << "cv_bridge exception: " << e.what();                          
 	}                                                                             
 	CHECK(cv_ptr);       
+  processImage(cv_ptr->image);
 
 	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
-	img_msg->encoding = getEncoding(FLAGS_republish_grayscale);
+	img_msg->encoding = getEncoding(is_greyscale_);
 	img_msg->header.stamp = msg->header.stamp;
   CHECK_LT(camera_idx, processed_pubs_.size());
   processed_pubs_.at(camera_idx).publish(img_msg);
@@ -342,8 +352,14 @@ cv::Mat MaplabCameraInfoPublisher::prepareImage(
 		const sensor_msgs::ImageConstPtr &image) {
   cv_bridge::CvImagePtr cv_ptr;
 	try {
-	  cv_ptr = cv_bridge::toCvCopy(
-			 image, sensor_msgs::image_encodings::BGR8);
+    if (image->encoding == sensor_msgs::image_encodings::BGR8) {
+      cv_ptr = cv_bridge::toCvCopy(
+         image, sensor_msgs::image_encodings::BGR8);
+    } else if (image->encoding == sensor_msgs::image_encodings::MONO8) {
+      cv_ptr = cv_bridge::toCvCopy(
+         image, sensor_msgs::image_encodings::MONO8);
+      is_greyscale_ = true;
+    }
 	} catch (const cv_bridge::Exception& e) {  // NOLINT
     LOG(FATAL) << "cv_bridge exception: " << e.what();
   }
@@ -354,13 +370,12 @@ cv::Mat MaplabCameraInfoPublisher::prepareImage(
 	cv_ptr->image = new_img;
 
 	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
-	img_msg->encoding = "mono8";
+	img_msg->encoding = getEncoding(is_greyscale_);
 	img_msg->header.stamp = image->header.stamp;
 
   processed_pubs_.at(0).publish(img_msg);
 	return new_img;
 }
-
 
 void MaplabCameraInfoPublisher::publishProcessed(const cv::Mat& img, 
     const std::size_t camera_idx,
@@ -368,11 +383,11 @@ void MaplabCameraInfoPublisher::publishProcessed(const cv::Mat& img,
 	sensor_msgs::ImagePtr img_msg 
 		= cv_bridge::CvImage(
 				orig_img->header,
-				getEncoding(FLAGS_republish_grayscale),
+				getEncoding(is_greyscale_),
 				img).toImageMsg();
 
-  //CHECK_LT(camera_idx, processed_pubs_.size());
-  //processed_pubs_.at(camera_idx).publish(img_msg);
+  CHECK_LT(camera_idx, processed_pubs_.size());
+  processed_pubs_.at(camera_idx).publish(img_msg);
 }
 
 void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {
@@ -383,8 +398,10 @@ void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {
 		cv::resize(processed, processed, cv::Size(0,0), scale, scale);
 	
 	// Convert to grayscale.
-	if (FLAGS_republish_grayscale)
+	if (FLAGS_republish_grayscale) {
 		cv::cvtColor(processed, processed, CV_BGR2GRAY);                
+    is_greyscale_ = true;
+  }
 
 	// Rotation.
 	if (FLAGS_image_rotation_angle_deg != 0 && 
@@ -396,7 +413,7 @@ void MaplabCameraInfoPublisher::processImage(cv::Mat& processed) {
 	  cv::warpAffine(processed, processed, rot_mat, processed.size());  
 	}
 
-	// CLAHE
+	// CLAHE.
 	if (FLAGS_image_apply_clahe_histogram_equalization) {
 		if (processed.channels() == 3)                                             
        cv::cvtColor(processed, processed, CV_BGR2GRAY); 

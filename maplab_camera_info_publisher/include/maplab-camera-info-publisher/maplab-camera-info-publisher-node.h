@@ -62,18 +62,21 @@ class MaplabCameraInfoPublisher {
     std::atomic<bool> should_exit_;
     ros::ServiceServer service_start_;
     ros::ServiceServer service_stop_;
+
     image_transport::ImageTransport image_transport_;
     std::vector<image_transport::Subscriber> sub_images_;
     std::vector<ros::Subscriber> ros_subs_;
     std::vector<ros::ServiceServer> services_;
+    std::map<std::size_t, ros::Publisher> processed_pubs_;
+
     std::unique_ptr<vi_map::SensorManager> sensor_manager_;
-    bool should_publish_ = false;
     aslam::NCamera::Ptr ncamera_rig_;
     std::vector<ros::Publisher> info_pubs_;
-    //std::map<std::size_t, image_transport::Publisher> processed_pubs_;
-    std::map<std::size_t, ros::Publisher> processed_pubs_;
-		uint32_t processed_counter_;
+		double processed_counter_;
 		double total_processing_time_ms_;
+
+    bool is_greyscale_ = false;
+    bool should_publish_ = false;
 
     const std::string kStartServiceTopic = "/cam_info_start_publishing";
     const std::string kStopServiceTopic = "/cam_info_stop_publishing";
