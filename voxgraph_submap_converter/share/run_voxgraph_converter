@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+REST=$@
+
+rosrun voxgraph_submap_converter voxgraph_submap_converter \
+  --v=3 \
+  --alsologtostderr \
+	--submap_topic="/penguin/voxgraph_mapper/submap_surface_pointclouds" \
+  $REST
