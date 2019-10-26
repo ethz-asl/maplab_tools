@@ -1,6 +1,8 @@
 #ifndef VOXGRAPH_CONVERTER_NODE_H_
 #define VOXGRAPH_CONVERTER_NODE_H_
 
+#include <voxgraph_msgs/MapSurface.h>
+
 #include <ros/ros.h>
 #include <glog/logging.h>
 #include <std_srvs/Empty.h>
@@ -21,10 +23,13 @@ class VoxgraphConverterNode {
     std::atomic<bool>& shouldExit();
     std::string printStatistics() const;
   private:
+    void submapCallback(const voxgraph_msgs::MapSurfaceConstPtr& msg);
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
     ros::AsyncSpinner spinner_;
+    ros::Subscriber submap_sub_;
+
 
     std::atomic<bool> should_exit_;
 };

@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
   google::ParseCommandLineFlags(&argc, &argv, true);
   google::InstallFailureSignalHandler();
 
-  ros::init(argc, argv, "voxgraph-converter");
+  ros::init(argc, argv, "voxgraph_submap_converter");
   ros::NodeHandle nh, nh_private("~");
 
   ros_common::parseGflagsFromRosParams(argv[0], nh_private);
@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
   maplab::VoxgraphConverterNode voxgraph_converter(nh, nh_private);
 
   if (!voxgraph_converter.run()) {
-   ROS_FATAL("Failed to start running the maplab node!");
+   ROS_FATAL("Failed to start running the converter node!");
    ros::shutdown();
    return 1;
   }
