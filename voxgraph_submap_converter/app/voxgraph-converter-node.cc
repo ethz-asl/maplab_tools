@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 
   std::atomic<bool>& end_of_days_signal_received = voxgraph_converter.shouldExit();
   while (ros::ok() && !end_of_days_signal_received.load()) {
-   VLOG_EVERY_N(1, 10) << "\n" << voxgraph_converter.printStatistics();
+   VLOG_EVERY_N(1, 30) << "\n" << voxgraph_converter.printStatistics();
    std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 

@@ -6,6 +6,9 @@
 DEFINE_string(submap_topic, "/voxgraph_mapper/submap_surface_pointclouds",
     "Defines the topic for the voxgraph submaps.");
 
+DEFINE_string(republish_topic, "/submap",
+    "Defines the topic used for republishing the converted submaps.");
+
 namespace maplab {
 
 VoxgraphConverterNode::VoxgraphConverterNode(ros::NodeHandle& nh, 
@@ -19,6 +22,9 @@ VoxgraphConverterNode::VoxgraphConverterNode(ros::NodeHandle& nh,
         this, _1);
   submap_sub_ = nh.subscribe<voxgraph_msgs::MapSurface>(
       FLAGS_submap_topic, 1, submap_callback);
+
+  // Initialize the submap republish.
+  pcl_pub_ = nh.advertise<sensor_msgs::PointCloud2>(FLAGS_republish_topic, 1);
 }
 
 bool VoxgraphConverterNode::run() {
@@ -43,7 +49,10 @@ std::string VoxgraphConverterNode::printStatistics() const {
 
 void VoxgraphConverterNode::submapCallback(
     const voxgraph_msgs::MapSurfaceConstPtr& msg){
-  VLOG(1) << "received submap";  
+  sensor_msgs::PointCloud2 pc = msg->pointcloud;
+  pc.header.frame_id = "map";
+  pcl_pub_.publish(pc);
+  VLOG(1) << "published submap";  
 }
 
 } // namespace maplab

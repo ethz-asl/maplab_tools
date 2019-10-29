@@ -24,12 +24,13 @@ class VoxgraphConverterNode {
     std::string printStatistics() const;
   private:
     void submapCallback(const voxgraph_msgs::MapSurfaceConstPtr& msg);
+    //void republishSubmap(const )
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
     ros::AsyncSpinner spinner_;
     ros::Subscriber submap_sub_;
-
+    ros::Publisher pcl_pub_;
 
     std::atomic<bool> should_exit_;
 };
