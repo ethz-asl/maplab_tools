@@ -24,7 +24,8 @@ class VoxgraphConverterNode {
     std::string printStatistics() const;
   private:
     void submapCallback(const voxgraph_msgs::MapSurfaceConstPtr& msg);
-    //void republishSubmap(const )
+    void saveSubmapAsPLY(const sensor_msgs::PointCloud2& msg);
+    std::string normalizedDirectoryPath(const uint32_t nr);
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;

@@ -1,4 +1,5 @@
 #include "voxgraph-converter/voxgraph-converter-node.h"
+#include <map-resources/resource-conversion.h>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
 #include <sstream>
@@ -8,6 +9,9 @@ DEFINE_string(submap_topic, "/voxgraph_mapper/submap_surface_pointclouds",
 
 DEFINE_string(republish_topic, "/submap",
     "Defines the topic used for republishing the converted submaps.");
+
+DEFINE_string(PLY_directory, "",
+    "If set will store the extracted submap as PLY to the given path.");
 
 namespace maplab {
 
@@ -44,16 +48,40 @@ std::atomic<bool>& VoxgraphConverterNode::shouldExit() {
 std::string VoxgraphConverterNode::printStatistics() const {
   std::stringstream ss;
   ss << "[VoxgraphConverter] \n";
-  ss << " Processed " << processed_submaps_ << " so far.";
+  ss << " \t Processed " << processed_submaps_ << " so far. \n";
+  ss << " \t Export: " << std::boolalpha 
+    << !FLAGS_PLY_directory.empty() << "\n";
   return ss.str();
 }
 
 void VoxgraphConverterNode::submapCallback(
     const voxgraph_msgs::MapSurfaceConstPtr& msg){
+  VLOG(1) << "received pc";
   sensor_msgs::PointCloud2 pc = msg->pointcloud;
   pc.header.frame_id = "map";
   pcl_pub_.publish(pc);
+
+  if (!FLAGS_PLY_directory.empty()) {
+    saveSubmapAsPLY(pc);
+  }
   ++processed_submaps_;
+}
+
+void VoxgraphConverterNode::saveSubmapAsPLY(
+    const sensor_msgs::PointCloud2& msg) {
+  resources::PointCloud maplab_pointcloud;
+  backend::convertPointCloudType(msg, &maplab_pointcloud);
+  VLOG(1) << "converted points: " << maplab_pointcloud.xyz.size();
+
+  VLOG(1) << "exporting to " << normalizedDirectoryPath(processed_submaps_);
+  maplab_pointcloud.writeToFile(normalizedDirectoryPath(processed_submaps_));
+}
+
+std::string VoxgraphConverterNode::normalizedDirectoryPath(const uint32_t nr) {
+  std::string directory = FLAGS_PLY_directory;
+  directory.erase(directory.find_last_not_of("/") + 1);
+
+  return directory + "/" + std::to_string(nr) + ".ply";
 }
 
 } // namespace maplab

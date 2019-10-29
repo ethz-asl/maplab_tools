@@ -6,5 +6,5 @@ rosrun voxgraph_submap_converter voxgraph_submap_converter \
   --v=3 \
   --alsologtostderr \
   --submap_topic="/penguin/voxgraph_mapper/submap_surface_pointclouds" \
-  --PLY_directory="" \
+  --PLY_directory="/home/berlukas/Documents/" \
   $REST
