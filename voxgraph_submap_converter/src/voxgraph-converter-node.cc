@@ -56,7 +56,7 @@ std::string VoxgraphConverterNode::printStatistics() const {
 
 void VoxgraphConverterNode::submapCallback(
     const voxgraph_msgs::MapSurfaceConstPtr& msg){
-  VLOG(1) << "received pc";
+  VLOG(3) << "Received new submap.";
   sensor_msgs::PointCloud2 pc = msg->pointcloud;
   pc.header.frame_id = "map";
   pcl_pub_.publish(pc);
@@ -71,9 +71,10 @@ void VoxgraphConverterNode::saveSubmapAsPLY(
     const sensor_msgs::PointCloud2& msg) {
   resources::PointCloud maplab_pointcloud;
   backend::convertPointCloudType(msg, &maplab_pointcloud);
-  VLOG(1) << "converted points: " << maplab_pointcloud.xyz.size();
+  VLOG(3) << "Converted maplab_pcl points: " << maplab_pointcloud.xyz.size();
 
-  VLOG(1) << "exporting to " << normalizedDirectoryPath(processed_submaps_);
+  VLOG(2) << "Exporting to PLY to: " 
+    << normalizedDirectoryPath(processed_submaps_);
   maplab_pointcloud.writeToFile(normalizedDirectoryPath(processed_submaps_));
 }
 
