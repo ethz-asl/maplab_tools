@@ -33,6 +33,7 @@ class VoxgraphConverterNode {
     ros::Publisher pcl_pub_;
 
     std::atomic<bool> should_exit_;
+    uint32_t processed_submaps_;
 };
 
 } // namespace maplab

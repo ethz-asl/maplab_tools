@@ -13,7 +13,7 @@ namespace maplab {
 
 VoxgraphConverterNode::VoxgraphConverterNode(ros::NodeHandle& nh, 
     const ros::NodeHandle& nh_private) : nh_(nh), nh_private_(nh_private), 
-    spinner_(1), should_exit_(false) {
+    spinner_(1), should_exit_(false), processed_submaps_(0) {
   LOG(INFO) << "[VoxgraphConverter] Initializing converter...";
   
   // Initialize submap callback.
@@ -44,6 +44,7 @@ std::atomic<bool>& VoxgraphConverterNode::shouldExit() {
 std::string VoxgraphConverterNode::printStatistics() const {
   std::stringstream ss;
   ss << "[VoxgraphConverter] \n";
+  ss << " Processed " << processed_submaps_ << " so far.";
   return ss.str();
 }
 
@@ -52,7 +53,7 @@ void VoxgraphConverterNode::submapCallback(
   sensor_msgs::PointCloud2 pc = msg->pointcloud;
   pc.header.frame_id = "map";
   pcl_pub_.publish(pc);
-  VLOG(1) << "published submap";  
+  ++processed_submaps_;
 }
 
 } // namespace maplab
