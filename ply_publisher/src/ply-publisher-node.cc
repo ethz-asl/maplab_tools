@@ -1,12 +1,11 @@
 #include "ply-publisher/ply-publisher-node.h"
 #include <map-resources/resource-conversion.h>
 
-#include <pcl/io/ply_io.h>
+#include <visualization/common-rviz-visualization.h>
 #include <boost/filesystem.hpp>                                                 
 #include <glog/logging.h>
 #include <sensor_msgs/PointCloud2.h>
 
-#include <boost/bind.hpp>
 #include <sstream>
 
 DEFINE_string(publish_topic, "/ply",
@@ -55,7 +54,7 @@ std::string PlyPublisher::printStatistics() const {
 }
 
 void PlyPublisher::readDirectory(const std::string& directory,
-     std::vector<std::string>* files) {
+     std::vector<std::string>* files) const {
    boost::filesystem::path p(directory);
     boost::filesystem::directory_iterator start(p);
     boost::filesystem::directory_iterator end;
@@ -65,7 +64,7 @@ void PlyPublisher::readDirectory(const std::string& directory,
     });
 }
 
-void PlyPublisher::readPointclouds(const std::string& dir) {
+void PlyPublisher::readPointclouds(const std::string& dir) const {
   CHECK(!dir.empty());
 
   VLOG(1) << "Retrieving PLY files from " << dir;
@@ -80,8 +79,22 @@ void PlyPublisher::readPointclouds(const std::string& dir) {
     resources::PointCloud maplab_pointcloud;
     maplab_pointcloud.loadFromFile(full_path);
     VLOG(1) << "point cloud size: " << maplab_pointcloud.xyz.size();
+    if (maplab_pointcloud.xyz.empty()) {
+      LOG(WARNING) << "Empty point cloud. Skipping";
+      continue;
+    }
+    publishPointcloud(maplab_pointcloud);
+    //sleep(5);
   }
 
+}
+
+void PlyPublisher::publishPointcloud(const resources::PointCloud& pc) const {
+  sensor_msgs::PointCloud2 ros_point_cloud;
+  backend::convertPointCloudType(pc, &ros_point_cloud);
+  ros_point_cloud.header.frame_id = "map";
+  visualization::RVizVisualizationSink::publish(
+      publish_topic_, ros_point_cloud);             
 }
 
 } // namespace maplab

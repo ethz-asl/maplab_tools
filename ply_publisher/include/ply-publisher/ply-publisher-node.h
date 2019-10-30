@@ -1,6 +1,8 @@
 #ifndef PLY_PUBLISHER_NODE_H_
 #define PLY_PUBLISHER_NODE_H_
 
+#include <resources-common/point-cloud.h>
+
 #include <ros/ros.h>
 #include <glog/logging.h>
 
@@ -20,10 +22,10 @@ class PlyPublisher {
     std::atomic<bool>& shouldExit();
     std::string printStatistics() const;
   private:
-    void readPointclouds(const std::string& dir);
+    void readPointclouds(const std::string& dir) const;
     void readDirectory(const std::string& directory,
-      std::vector<std::string>* files);
-    //void publishPointcloud()
+      std::vector<std::string>* files) const;
+    void publishPointcloud(const resources::PointCloud& pc) const;
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
