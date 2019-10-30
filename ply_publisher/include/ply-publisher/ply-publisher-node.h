@@ -22,7 +22,7 @@ class PlyPublisher {
     std::atomic<bool>& shouldExit();
     std::string printStatistics() const;
   private:
-    void readPointclouds(const std::string& dir) const;
+    void readPointclouds(const std::string& dir);
     void readDirectory(const std::string& directory,
       std::vector<std::string>* files) const;
     void publishPointcloud(const resources::PointCloud& pc) const;

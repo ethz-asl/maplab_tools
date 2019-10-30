@@ -24,7 +24,7 @@ PlyPublisher::PlyPublisher(ros::NodeHandle& nh,
 
   // Normalize input.
   ply_directory_.erase(ply_directory_.find_last_not_of("/") + 1);
-  publish_topic_.erase(0, publish_topic_.find_first_not_of("/"));
+  ply_directory_ += "/";
 
 
   // Initialize the submap republish.
@@ -34,7 +34,7 @@ PlyPublisher::PlyPublisher(ros::NodeHandle& nh,
 bool PlyPublisher::run() {
   LOG(INFO) << "[PlyPublisher] Starting...";
   spinner_.start();
-  readPointclouds(FLAGS_PLY_directory);
+  readPointclouds(ply_directory_);
   return true;
 }
 
@@ -64,7 +64,7 @@ void PlyPublisher::readDirectory(const std::string& directory,
     });
 }
 
-void PlyPublisher::readPointclouds(const std::string& dir) const {
+void PlyPublisher::readPointclouds(const std::string& dir) {
   CHECK(!dir.empty());
 
   VLOG(1) << "Retrieving PLY files from " << dir;
@@ -85,6 +85,7 @@ void PlyPublisher::readPointclouds(const std::string& dir) const {
     }
     publishPointcloud(maplab_pointcloud);
     //sleep(5);
+    ++processed_plys_;
   }
 
 }
