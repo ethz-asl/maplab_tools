@@ -20,6 +20,10 @@ class PlyPublisher {
     std::atomic<bool>& shouldExit();
     std::string printStatistics() const;
   private:
+    void readPointclouds(const std::string& dir);
+    void readDirectory(const std::string& directory,
+      std::vector<std::string>* files);
+    //void publishPointcloud()
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
@@ -27,7 +31,9 @@ class PlyPublisher {
     ros::Publisher ply_pub_;
 
     std::atomic<bool> should_exit_;
-    uint32_t processed_submaps_;
+    uint32_t processed_plys_;
+    std::string ply_directory_;
+    std::string publish_topic_;
 };
 
 } // namespace maplab

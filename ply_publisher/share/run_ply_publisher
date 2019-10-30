@@ -2,9 +2,9 @@
 
 REST=$@
 
-rosrun voxgraph_submap_converter voxgraph_submap_converter \
+rosrun ply_publisher ply_publisher \
   --v=3 \
   --alsologtostderr \
-  --submap_topic="/penguin/voxgraph_mapper/submap_surface_pointclouds" \
-  --PLY_directory="" \
+  --publish_topic="/ply_point_cloud" \
+  --PLY_directory="/home/berlukas/Documents/submaps/" \
   $REST
