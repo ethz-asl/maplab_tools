@@ -72,6 +72,7 @@ void VoxgraphConverterNode::saveSubmapAsPLY(
   resources::PointCloud maplab_pointcloud;
   backend::convertPointCloudType(msg, &maplab_pointcloud);
   VLOG(3) << "Converted maplab_pcl points: " << maplab_pointcloud.xyz.size();
+  VLOG(3) << "Converted maplab_pcl points: " << maplab_pointcloud.scalars.size();
 
   VLOG(2) << "Exporting to PLY to: " 
     << normalizedDirectoryPath(processed_submaps_);

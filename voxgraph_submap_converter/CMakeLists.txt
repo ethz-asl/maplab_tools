@@ -16,7 +16,7 @@ cs_add_library(${PROJECT_NAME}_lib
 # APP #
 #######
 cs_add_executable(${PROJECT_NAME}
-  app/voxgraph-converter-node.cc
+  app/voxgraph-converter-app.cc
 )
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
 
