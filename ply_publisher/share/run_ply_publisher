@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+REST=$@
+
+rosrun ply_publisher ply_publisher \
+  --v=3 \
+  --alsologtostderr \
+  --publish_topic="/ply_point_cloud" \
+  --PLY_directory="/home/berlukas/Documents/results/arche/" \
+  $REST
