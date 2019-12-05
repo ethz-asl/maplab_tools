@@ -119,6 +119,12 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
   }
   CHECK(lidar_found) << "Unable to retrieve LiDAR using the provided id.";
 
+  message_sync_.registerCallback([this] (
+    const sensor_msgs::ImageConstPtr& image, 
+    const sensor_msgs::PointCloud2ConstPtr& cloud) {
+      syncedCallback(image, cloud);
+    });
+
   return true;
 }
 
@@ -154,12 +160,17 @@ std::string LidarImageProjection::printStatistics() const {
 
 void LidarImageProjection::imageCallback(
     const sensor_msgs::ImageConstPtr& image) {
-  VLOG(1) << "received image";
+  message_sync_.callback1(image);
 }
 
 void LidarImageProjection::lidarMeasurementCallback(
-    const sensor_msgs::PointCloud2ConstPtr& msg) {
-  VLOG(1) << "received lidar";
+    const sensor_msgs::PointCloud2ConstPtr& cloud) {
+  message_sync_.callback2(cloud);
+}
+
+void LidarImageProjection::syncedCallback(const sensor_msgs::ImageConstPtr& image, 
+    const sensor_msgs::PointCloud2ConstPtr& cloud) {
+  VLOG(1) << "received synced callback!";
 }
 
 } // namespace maplab

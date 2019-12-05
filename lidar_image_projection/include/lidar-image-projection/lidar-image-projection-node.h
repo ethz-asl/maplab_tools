@@ -31,11 +31,13 @@ class LidarImageProjection {
     bool initializeServicesAndSubscribers();
     bool initializeNCamera();
 
-    void imageCallback(const sensor_msgs::ImageConstPtr &image, 
-        std::size_t camera_idx);
+    void imageCallback(const sensor_msgs::ImageConstPtr& image);
 
     void lidarMeasurementCallback(
-       const sensor_msgs::PointCloud2ConstPtr& msg);
+       const sensor_msgs::PointCloud2ConstPtr& cloud);
+
+    void syncedCallback(const sensor_msgs::ImageConstPtr& image, 
+        const sensor_msgs::PointCloud2ConstPtr& cloud);
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;

@@ -12,15 +12,15 @@
 namespace maplab {
 
 template<typename T>
-struct DefaultTimestampExtractor {
+struct ROSTimestampExtractor {
   int64_t operator()(const T& data) {
-    return data->header.stamp;
+    return data->header.stamp.toNSec();
   }
 };
 
 template <typename FlowA, typename FlowB,
-          typename TimestampExtractorA = DefaultTimestampExtractor<FlowA>,
-          typename TimestampExtractorB = DefaultTimestampExtractor<FlowB>>
+          typename TimestampExtractorA = ROSTimestampExtractor<FlowA>,
+          typename TimestampExtractorB = ROSTimestampExtractor<FlowB>>
 class MessageSync {
   public:
      typedef std::function<void(const FlowA&, const FlowB&)>
