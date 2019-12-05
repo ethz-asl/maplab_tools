@@ -83,8 +83,7 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
     if (camera_id != camera.getId()) continue;
 
     boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
-      boost::bind(&LidarImageProjection::imageCallback,
-      this, _1, topic_camidx.second);
+      boost::bind(&LidarImageProjection::imageCallback, this, _1);
 
     constexpr size_t kRosSubscriberQueueSizeImage = 20u;
     sub_images_ = image_transport_.subscribe(
@@ -154,8 +153,7 @@ std::string LidarImageProjection::printStatistics() const {
 }
 
 void LidarImageProjection::imageCallback(
-    const sensor_msgs::ImageConstPtr &image, 
-    std::size_t camera_idx) {
+    const sensor_msgs::ImageConstPtr& image) {
   VLOG(1) << "received image";
 }
 

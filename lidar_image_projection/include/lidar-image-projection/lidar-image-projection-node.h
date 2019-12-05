@@ -1,6 +1,8 @@
 #ifndef MAPLAB_LIDAR_IMAGE_PROJECTION_NODE_H_
 #define MAPLAB_LIDAR_IMAGE_PROJECTION_NODE_H_
 
+#include "lidar-image-projection/message-sync.h"
+
 #include <ros/ros.h>
 #include <glog/logging.h>
 #include <std_srvs/Empty.h>
@@ -48,6 +50,8 @@ class LidarImageProjection {
     aslam::NCamera::Ptr ncamera_rig_;
 		double processed_counter_;
 		double total_processing_time_ms_;
+    maplab::MessageSync<const sensor_msgs::ImageConstPtr, 
+      const sensor_msgs::PointCloud2ConstPtr&> message_sync_;
 };
 
 } // namespace maplab
