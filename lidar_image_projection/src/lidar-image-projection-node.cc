@@ -20,6 +20,9 @@ DEFINE_string(
 DEFINE_string(
    selected_camera_id, "",
    "Defines the used camera id.");
+DEFINE_string(
+   selected_lidar_id, "",
+   "Defines the used lidar id.");
 
 namespace maplab {
 
@@ -33,7 +36,7 @@ LidarImageProjection::LidarImageProjection(ros::NodeHandle& nh,
     LOG(FATAL) << "[LidarImageProjection] No sensors YAML provided!";
   }
   LOG(INFO) 
-		<< "[LidarImageProjection] Initializing camera info publisher...";
+		<< "[LidarImageProjection] Initializing...";
   if (!sensor_manager_->deserializeFromFile(FLAGS_sensor_calibration_file)) {
      LOG(FATAL) 
 			 << "[LidarImageProjection] " 
@@ -55,17 +58,21 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
   }
   CHECK(ncamera_rig_);
 
-  // Setup image subscribers and info publishers.
+  // Setup image subscriber.
   vio_common::RosTopicSettings ros_topics(*sensor_manager_);
   const uint8_t num_cameras = ros_topics.camera_topic_cam_index_map.size();
   if (num_cameras == 0) {
     return false;
   }
 
-  aslam::SensorId id;
-  id.fromHexString(FLAGS_selected_camera_id);
-  CHECK(id.isValid());
+  aslam::SensorId camera_id, lidar_id;
+  camera_id.fromHexString(FLAGS_selected_camera_id);
+  lidar_id.fromHexString(FLAGS_selected_lidar_id);
 
+  CHECK(camera_id.isValid());
+  CHECK(lidar_id.isValid());
+
+  bool camera_found = false;
   for (const std::pair<std::string, uint8_t>& topic_camidx :
         ros_topics.camera_topic_cam_index_map) {
     // Setup subscriber.
@@ -73,7 +80,7 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
                                        << " is subscribed to an empty topic!";
 
     const aslam::Camera& camera = ncamera_rig_->getCamera(topic_camidx.second);
-    if (id == camera.getId()) continue;
+    if (camera_id != camera.getId()) continue;
 
     boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
       boost::bind(&LidarImageProjection::imageCallback,
@@ -84,7 +91,34 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
         topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
     VLOG(1) << "[LidarImageProjection] Camera " << topic_camidx.second
             << " is subscribed to topic: '" << topic_camidx.first << "'";
+    camera_found = true;
+    break;
   }
+  CHECK(camera_found) << "Unable to retrieve camera using the provided id.";
+
+  // Setup LiDAR subscriber
+  bool lidar_found = false;
+  for (const std::pair<const std::string, aslam::SensorId>& topic_sensorid :    
+          ros_topics.lidar_topic_sensor_id_map) {     
+     CHECK(topic_sensorid.second.isValid())
+           << "The ROS-topic to Lidar sensor id association contains an invalid "
+           << "sensor id! topic: " << topic_sensorid.first;
+     CHECK(!topic_sensorid.first.empty())
+         << "Lidar(" << topic_sensorid.second
+         << ") is subscribed to an empty topic!";
+
+    if (lidar_id != topic_sensorid.second) continue;
+     
+     boost::function<void(const sensor_msgs::PointCloud2ConstPtr&)>
+           lidar_callback = boost::bind(
+               &LidarImageProjection::lidarMeasurementCallback, this, _1);
+     constexpr size_t kRosSubscriberQueueSizeLidar = 20u;
+     ros_subs_ = nh_.subscribe(topic_sensorid.first,
+         kRosSubscriberQueueSizeLidar, lidar_callback);
+     lidar_found = true;
+     break;
+  }
+  CHECK(lidar_found) << "Unable to retrieve LiDAR using the provided id.";
 
   return true;
 }
@@ -123,6 +157,11 @@ void LidarImageProjection::imageCallback(
     const sensor_msgs::ImageConstPtr &image, 
     std::size_t camera_idx) {
   VLOG(1) << "received image";
+}
+
+void LidarImageProjection::lidarMeasurementCallback(
+    const sensor_msgs::PointCloud2ConstPtr& msg) {
+  VLOG(1) << "received lidar";
 }
 
 } // namespace maplab

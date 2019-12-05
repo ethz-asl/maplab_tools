@@ -32,6 +32,9 @@ class LidarImageProjection {
     void imageCallback(const sensor_msgs::ImageConstPtr &image, 
         std::size_t camera_idx);
 
+    void lidarMeasurementCallback(
+       const sensor_msgs::PointCloud2ConstPtr& msg);
+
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
     ros::AsyncSpinner spinner_;
