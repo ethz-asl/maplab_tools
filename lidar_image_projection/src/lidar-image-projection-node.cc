@@ -213,7 +213,6 @@ void LidarImageProjection::syncedCallback(
     }
   }
  
-
   // Show the projection.
   cv::imshow("Projection", image);  
   cv::waitKey(10);
