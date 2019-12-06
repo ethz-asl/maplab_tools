@@ -12,8 +12,9 @@
 #include <boost/bind.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <pcl/registration/transforms.h>
-#include <pcl/filters/passthrough.h>
-
+#include <pcl/filters/extract_indices.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 #include <sstream>
 #include <chrono>
@@ -53,6 +54,7 @@ LidarImageProjection::LidarImageProjection(ros::NodeHandle& nh,
      LOG(FATAL) << "[MaplabCameraInfoPublisher] " 
        << "Failed initialize subscribers and services.";
   }
+  cv::namedWindow("Projection", cv::WINDOW_AUTOSIZE);
 }
 
 bool LidarImageProjection::initializeServicesAndSubscribers() {
@@ -188,22 +190,26 @@ void LidarImageProjection::syncedCallback(
 
     pcl::fromROSMsg (*cloudMsg, *cloud);
   } catch(std::exception& e) {
-       LOG(FATAL) << "conversion exception: " << e.what();                          
+    LOG(ERROR) << "conversion exception: " << e.what();                          
+    return;
   }
 
   VLOG(1) << "received synced callback!";
   pcl::transformPointCloud(*cloud, *cloud, T_C_L_.getTransformationMatrix());
   
   VLOG(1) << "points received before pass: " << cloud->size();
-  // Create the filtering object
-  pcl::PassThrough<pcl::PointXYZ> pass;
-  pass.setInputCloud(cloud);
-  pass.setFilterFieldName("z");
-  pass.setFilterLimits(0.0, 60.0);
-  pass.filter(*cloud);
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(
+      new pcl::PointCloud<pcl::PointXYZ>());
+  for (uint16_t i = 0; i < cloud->size(); ++i) {
+    if (cloud->points[i].z > 0) {
+      cloud_filtered->points.push_back(cloud->points[i]);
+    }
+  }
 
-  VLOG(1) << "points received after pass: " << cloud->size();
-  
+
+  VLOG(1) << "points received after pass: " << cloud_filtered->size();
+  cv::imshow("Projection", image);  
+  cv::waitKey(0);
 }
 
 } // namespace maplab
