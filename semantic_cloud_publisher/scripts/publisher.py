@@ -7,6 +7,7 @@ import yaml
 import rospy
 from sensor_msgs.msg import PointCloud2, PointField
 import numpy as np
+from time import sleep
 
 class LaserScan(object):
     EXTENSIONS_SCAN = ['.bin']
@@ -357,6 +358,7 @@ if __name__ == '__main__':
     rospy.init_node('semantic_cloud_publisher')
     pub = rospy.Publisher('semantic_cloud', PointCloud2, queue_size=10)
     n_scans = len(scan_names)
+    n_scans = 5
     for i in range(0, n_scans):
         scan.open_scan(scan_names[i])
         scan.open_label(label_names[i])
@@ -374,7 +376,7 @@ if __name__ == '__main__':
             PointField('x', 0, PointField.FLOAT32, 1),
             PointField('y', 4, PointField.FLOAT32, 1),
             PointField('z', 8, PointField.FLOAT32, 1),
-            PointField('i', 12, PointField.UINT32, 1)]
+            PointField('semantic', 12, PointField.FLOAT32, 1)]
 
         msg.is_bigendian = False
         msg.point_step = 16
@@ -383,3 +385,4 @@ if __name__ == '__main__':
         msg.data = np.asarray(xyzs, np.float32).tostring()
 
         pub.publish(msg)
+        sleep(0.01)
