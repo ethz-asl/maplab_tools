@@ -2,7 +2,6 @@
 
 #include <vio-common/rostopic-settings.h>
 #include <vi-map/sensor-utils.h>
-#include <aslam/cameras/camera.h>
 #include <aslam/cameras/camera-pinhole.h>
 
 #include <pcl/point_cloud.h>
@@ -13,8 +12,8 @@
 #include <cv_bridge/cv_bridge.h>
 #include <pcl/registration/transforms.h>
 #include <pcl/filters/extract_indices.h>
-#include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <Eigen/Dense>
 
 #include <sstream>
 #include <chrono>
@@ -37,7 +36,8 @@ LidarImageProjection::LidarImageProjection(ros::NodeHandle& nh,
     spinner_(1), should_exit_(false), 
     image_transport_(nh),                                                       
     sensor_manager_(new vi_map::SensorManager()),
-		processed_counter_(0u) {
+		processed_counter_(0u), 
+    message_sync_() {
   if (FLAGS_sensor_calibration_file.empty()) {
     LOG(FATAL) << "[LidarImageProjection] No sensors YAML provided!";
   }
@@ -85,8 +85,8 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
     // Setup subscriber.
     CHECK(!topic_camidx.first.empty()) << "Camera " << topic_camidx.second
                                        << " is subscribed to an empty topic!";
-
-    const aslam::Camera& camera = ncamera_rig_->getCamera(topic_camidx.second);
+    camera_idx_ = topic_camidx.second;
+    const aslam::Camera& camera = ncamera_rig_->getCamera(camera_idx_);
     if (camera_id != camera.getId()) continue;
 
     boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
@@ -183,33 +183,58 @@ void LidarImageProjection::syncedCallback(
     const sensor_msgs::ImageConstPtr& imageMsg, 
     const sensor_msgs::PointCloud2ConstPtr& cloudMsg) {
   cv::Mat image;
-  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (
-      new pcl::PointCloud<pcl::PointXYZ>());
+  pcl::PointCloud<pcl::PointXYZI>::Ptr cloud (
+      new pcl::PointCloud<pcl::PointXYZI>());
   try {
     image = cv_bridge::toCvShare(imageMsg)->image;
-
-    pcl::fromROSMsg (*cloudMsg, *cloud);
+    pcl::fromROSMsg(*cloudMsg, *cloud);
   } catch(std::exception& e) {
     LOG(ERROR) << "conversion exception: " << e.what();                          
     return;
   }
 
-  VLOG(1) << "received synced callback!";
+  // Project the cloud.
+  cv::Vec3b pcl_color(100, 100, 100);
   pcl::transformPointCloud(*cloud, *cloud, T_C_L_.getTransformationMatrix());
-  
-  VLOG(1) << "points received before pass: " << cloud->size();
-  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(
-      new pcl::PointCloud<pcl::PointXYZ>());
-  for (uint16_t i = 0; i < cloud->size(); ++i) {
-    if (cloud->points[i].z > 0) {
-      cloud_filtered->points.push_back(cloud->points[i]);
+  const aslam::Camera& camera = ncamera_rig_->getCamera(camera_idx_);
+  const uint16_t n_points = cloud->size();
+  for (uint16_t i = 0; i < n_points; ++i) {
+    Eigen::Vector2d keypoint;
+    pcl::PointXYZI cur_point = cloud->points[i];
+    Eigen::Vector3d point_3d(cur_point.x, cur_point.y, cur_point.z);
+    aslam::ProjectionResult ret = camera.project3(point_3d, &keypoint);
+    if(ret.getDetailedStatus() 
+        == aslam::ProjectionResult::Status::KEYPOINT_VISIBLE) {
+      float dist = std::sqrt(cur_point.x*cur_point.x + cur_point.y*cur_point.y
+        + cur_point.z*cur_point.z);
+      //float gray = std::fmod(cur_point.intensity, 80.0f) / 80.0f;
+      float gray = std::fmod(dist, 10.0f) / 10.0f;
+      image.at<cv::Vec3b>(keypoint(1), keypoint(0)) = intensityToRGB(gray);
     }
   }
+ 
 
-
-  VLOG(1) << "points received after pass: " << cloud_filtered->size();
+  // Show the projection.
   cv::imshow("Projection", image);  
-  cv::waitKey(0);
+  cv::waitKey(10);
+}
+
+double LidarImageProjection::interpolate(double val, double y0, double x0,
+    double y1, double x1) const {
+    return (val-x0)*(y1-y0)/(x1-x0) + y0;
+}
+
+double LidarImageProjection::base(double val) const {
+    if ( val <= -0.75 ) return 0;
+    else if ( val <= -0.25 ) return interpolate( val, 0.0, -0.75, 1.0, -0.25 );
+    else if ( val <= 0.25 ) return 1.0;
+    else if ( val <= 0.75 ) return interpolate( val, 1.0, 0.25, 0.0, 0.75 );
+    else return 0.0;
+}
+
+cv::Vec3f LidarImageProjection::intensityToRGB(float intensity) const {
+  return cv::Vec3f(base(intensity - 0.5) * 255.0f,
+      base(intensity) * 255.0f, base(intensity + 0.5) * 255.0f);
 }
 
 } // namespace maplab

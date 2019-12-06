@@ -19,5 +19,6 @@
   <depend>aslam_cv_cameras</depend>
   <depend>pcl_catkin</depend>
   <depend>opencv3_catkin</depend>
+  <depend>eigen_catkin</depend>
 
 </package>

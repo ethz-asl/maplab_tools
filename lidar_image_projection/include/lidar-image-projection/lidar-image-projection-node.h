@@ -7,7 +7,9 @@
 #include <glog/logging.h>
 #include <std_srvs/Empty.h>
 #include <vi-map/sensor-manager.h>
+#include <aslam/cameras/camera.h>
 #include <image_transport/image_transport.h>
+#include <opencv2/core/core.hpp>
 
 #include <vector>
 #include <atomic>
@@ -34,10 +36,15 @@ class LidarImageProjection {
     void imageCallback(const sensor_msgs::ImageConstPtr& image);
 
     void lidarMeasurementCallback(
-       const sensor_msgs::PointCloud2ConstPtr& cloud);
+        const sensor_msgs::PointCloud2ConstPtr& cloud);
 
     void syncedCallback(const sensor_msgs::ImageConstPtr& image, 
         const sensor_msgs::PointCloud2ConstPtr& cloud);
+
+    cv::Vec3f intensityToRGB(float intensity) const;
+    double base(double val) const;
+    double interpolate(double val, double y0, double x0,
+        double y1, double x1) const;
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
@@ -55,6 +62,7 @@ class LidarImageProjection {
     aslam::Transformation T_B_C_;
     aslam::Transformation T_B_L_;
     aslam::Transformation T_C_L_;
+    uint8_t camera_idx_;
     maplab::MessageSync<const sensor_msgs::ImageConstPtr, 
       const sensor_msgs::PointCloud2ConstPtr&> message_sync_;
 };

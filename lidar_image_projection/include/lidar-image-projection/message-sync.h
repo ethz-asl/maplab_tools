@@ -115,7 +115,6 @@ class MessageSync {
                 return timestamp_a - flow.first <= ts_epsilon_ns_;
               }
               else {
-                //std::cout << "diff: " << flow.first - timestamp_a << std::endl;
                 return flow.first - timestamp_a <= ts_epsilon_ns_;
               }
             });
@@ -132,7 +131,16 @@ class MessageSync {
           map_b_.erase(map_b_.begin(), ++it_b);
           it_a = list_a_.erase(it_a);
           continue;
-        }  
+        } else {
+          // We can delete the oldest entry in A if there are newer entries in
+          // map B.
+          if (timestamp_a < map_b_.begin()->first) {
+            uint64_t diff = map_b_.begin()->first - timestamp_a;
+            if (diff <= ts_epsilon_ns_) continue;
+            it_a = list_a_.erase(it_a);
+            continue;
+          }
+        } 
         ++it_a;
       }
     }
