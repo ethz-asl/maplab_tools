@@ -52,6 +52,9 @@ class LidarImageProjection {
     aslam::NCamera::Ptr ncamera_rig_;
 		double processed_counter_;
 		double total_processing_time_ms_;
+    aslam::Transformation T_B_C_;
+    aslam::Transformation T_B_L_;
+    aslam::Transformation T_C_L_;
     maplab::MessageSync<const sensor_msgs::ImageConstPtr, 
       const sensor_msgs::PointCloud2ConstPtr&> message_sync_;
 };

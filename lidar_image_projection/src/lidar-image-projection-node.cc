@@ -5,10 +5,15 @@
 #include <aslam/cameras/camera.h>
 #include <aslam/cameras/camera-pinhole.h>
 
+#include <pcl/point_cloud.h>
 #include <sensor_msgs/CameraInfo.h>
 #include <opencv2/highgui/highgui.hpp>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
+#include <cv_bridge/cv_bridge.h>
+#include <pcl/registration/transforms.h>
+#include <pcl/filters/passthrough.h>
+
 
 #include <sstream>
 #include <chrono>
@@ -90,6 +95,8 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
         topic_camidx.first, kRosSubscriberQueueSizeImage, image_callback);
     VLOG(1) << "[LidarImageProjection] Camera " << topic_camidx.second
             << " is subscribed to topic: '" << topic_camidx.first << "'";
+    T_B_C_ = ncamera_rig_->get_T_C_B(topic_camidx.second).inverse();
+
     camera_found = true;
     break;
   }
@@ -99,23 +106,24 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
   bool lidar_found = false;
   for (const std::pair<const std::string, aslam::SensorId>& topic_sensorid :    
           ros_topics.lidar_topic_sensor_id_map) {     
-     CHECK(topic_sensorid.second.isValid())
-           << "The ROS-topic to Lidar sensor id association contains an invalid "
-           << "sensor id! topic: " << topic_sensorid.first;
-     CHECK(!topic_sensorid.first.empty())
-         << "Lidar(" << topic_sensorid.second
-         << ") is subscribed to an empty topic!";
+    CHECK(topic_sensorid.second.isValid())
+      << "The ROS-topic to Lidar sensor id association contains an invalid "
+      << "sensor id! topic: " << topic_sensorid.first;
+    CHECK(!topic_sensorid.first.empty())
+      << "Lidar(" << topic_sensorid.second
+      << ") is subscribed to an empty topic!";
 
     if (lidar_id != topic_sensorid.second) continue;
      
-     boost::function<void(const sensor_msgs::PointCloud2ConstPtr&)>
-           lidar_callback = boost::bind(
-               &LidarImageProjection::lidarMeasurementCallback, this, _1);
-     constexpr size_t kRosSubscriberQueueSizeLidar = 20u;
-     ros_subs_ = nh_.subscribe(topic_sensorid.first,
-         kRosSubscriberQueueSizeLidar, lidar_callback);
-     lidar_found = true;
-     break;
+    boost::function<void(const sensor_msgs::PointCloud2ConstPtr&)>
+          lidar_callback = boost::bind(
+          &LidarImageProjection::lidarMeasurementCallback, this, _1);
+    constexpr size_t kRosSubscriberQueueSizeLidar = 20u;
+    ros_subs_ = nh_.subscribe(topic_sensorid.first,
+        kRosSubscriberQueueSizeLidar, lidar_callback);
+    T_B_L_ = sensor_manager_->getSensor_T_B_S(lidar_id);
+    lidar_found = true;
+    break;
   }
   CHECK(lidar_found) << "Unable to retrieve LiDAR using the provided id.";
 
@@ -124,6 +132,7 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
     const sensor_msgs::PointCloud2ConstPtr& cloud) {
       syncedCallback(image, cloud);
     });
+  T_C_L_ = T_B_C_.inverse() * T_B_L_;
 
   return true;
 }
@@ -168,9 +177,29 @@ void LidarImageProjection::lidarMeasurementCallback(
   message_sync_.callback2(cloud);
 }
 
-void LidarImageProjection::syncedCallback(const sensor_msgs::ImageConstPtr& image, 
-    const sensor_msgs::PointCloud2ConstPtr& cloud) {
+void LidarImageProjection::syncedCallback(
+    const sensor_msgs::ImageConstPtr& imageMsg, 
+    const sensor_msgs::PointCloud2ConstPtr& cloudMsg) {
+  cv::Mat image;
+  pcl::PointCloud<pcl::PointXYZ> cloud;
+  try {
+    image = cv_bridge::toCvShare(imageMsg)->image;
+
+    pcl::fromROSMsg (*cloudMsg, cloud);
+  } catch(std::exception& e) {
+       LOG(FATAL) << "conversion exception: " << e.what();                          
+  }
+
   VLOG(1) << "received synced callback!";
+  pcl::transformPointCloud(cloud, cloud, T_C_L_.getTransformationMatrix());
+  
+  // Create the filtering object
+  pcl::PassThrough<pcl::PointXYZ> pass;
+  pass.setInputCloud (cloud);
+  pass.setFilterFieldName ("z");
+  pass.setFilterLimits (0.0, 100.0);
+  //pass.setFilterLimitsNegative (true);
+  pass.filter (*cloud);
 }
 
 } // namespace maplab
