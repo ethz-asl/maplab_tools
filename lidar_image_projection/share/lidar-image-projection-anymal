@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/maplab/applications/maplab_node/share/example_calibrations/anymal-rsl-sensor-head-vi.yaml"
+SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/darpa_subt_calib/share/anymal/anymal-rsl-bear.yaml"
 REST=$@
 
 rosrun lidar_image_projection lidar_image_projection \

@@ -128,9 +128,9 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
   CHECK(lidar_found) << "Unable to retrieve LiDAR using the provided id.";
 
   message_sync_.registerCallback([this] (
-    const sensor_msgs::ImageConstPtr& image, 
-    const sensor_msgs::PointCloud2ConstPtr& cloud) {
-      syncedCallback(image, cloud);
+    const sensor_msgs::ImageConstPtr& imageMsg, 
+    const sensor_msgs::PointCloud2ConstPtr& cloudMsg) {
+      syncedCallback(imageMsg, cloudMsg);
     });
   T_C_L_ = T_B_C_.inverse() * T_B_L_;
 
@@ -173,33 +173,37 @@ void LidarImageProjection::imageCallback(
 }
 
 void LidarImageProjection::lidarMeasurementCallback(
-    const sensor_msgs::PointCloud2ConstPtr& cloud) {
-  message_sync_.callback2(cloud);
+    const sensor_msgs::PointCloud2ConstPtr& cloudMsg) {
+  message_sync_.callback2(cloudMsg);
 }
 
 void LidarImageProjection::syncedCallback(
     const sensor_msgs::ImageConstPtr& imageMsg, 
     const sensor_msgs::PointCloud2ConstPtr& cloudMsg) {
   cv::Mat image;
-  pcl::PointCloud<pcl::PointXYZ> cloud;
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (
+      new pcl::PointCloud<pcl::PointXYZ>());
   try {
     image = cv_bridge::toCvShare(imageMsg)->image;
 
-    pcl::fromROSMsg (*cloudMsg, cloud);
+    pcl::fromROSMsg (*cloudMsg, *cloud);
   } catch(std::exception& e) {
        LOG(FATAL) << "conversion exception: " << e.what();                          
   }
 
   VLOG(1) << "received synced callback!";
-  pcl::transformPointCloud(cloud, cloud, T_C_L_.getTransformationMatrix());
+  pcl::transformPointCloud(*cloud, *cloud, T_C_L_.getTransformationMatrix());
   
+  VLOG(1) << "points received before pass: " << cloud->size();
   // Create the filtering object
   pcl::PassThrough<pcl::PointXYZ> pass;
-  pass.setInputCloud (cloud);
-  pass.setFilterFieldName ("z");
-  pass.setFilterLimits (0.0, 100.0);
-  //pass.setFilterLimitsNegative (true);
-  pass.filter (*cloud);
+  pass.setInputCloud(cloud);
+  pass.setFilterFieldName("z");
+  pass.setFilterLimits(0.0, 60.0);
+  pass.filter(*cloud);
+
+  VLOG(1) << "points received after pass: " << cloud->size();
+  
 }
 
 } // namespace maplab
