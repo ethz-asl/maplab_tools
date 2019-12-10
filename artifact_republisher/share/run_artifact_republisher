@@ -5,4 +5,7 @@ REST=$@
 rosrun artifact_republisher artifact_republisher \
   --v=3 \
   --alsologtostderr \
+  --subscriber_topic="/filtered_art_det" \
+  --publisher_topic="/artifact_msg" \
+  --robot_name="anymal" \
   $REST
