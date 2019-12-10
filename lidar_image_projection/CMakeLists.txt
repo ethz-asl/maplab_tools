@@ -10,6 +10,7 @@ catkin_simple(ALL_DEPS_REQUIRED)
 # LIBRARIES #
 #############
 cs_add_library(${PROJECT_NAME}_lib
+  src/rotation-utils.cc
   src/lidar-image-projection-node.cc
 )
 

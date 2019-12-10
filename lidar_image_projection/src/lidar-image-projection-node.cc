@@ -1,4 +1,5 @@
 #include "lidar-image-projection/lidar-image-projection-node.h"
+#include "lidar-image-projection/rotation-utils.h"
 
 #include <vio-common/rostopic-settings.h>
 #include <vi-map/sensor-utils.h>
@@ -134,10 +135,13 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
     const sensor_msgs::PointCloud2ConstPtr& cloudMsg) {
       syncedCallback(imageMsg, cloudMsg);
     });
-  T_C_L_ = T_B_C_.inverse() * T_B_L_;
+  aslam::Transformation correction(
+      RotationUtils::CreateTransformation(0.0, 0.0, 0.05));
+  T_C_L_ = T_B_C_.inverse() * (correction * T_B_L_);
 
   return true;
 }
+
 
 bool LidarImageProjection::initializeNCamera() {
   CHECK(sensor_manager_);
