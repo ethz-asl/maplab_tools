@@ -4,6 +4,7 @@
 #include <ros/ros.h>
 #include <glog/logging.h>
 #include <vi-map/sensor-manager.h>
+#include <maplab_msgs/filtered_art.h>
 
 #include <vector>
 #include <atomic>
@@ -25,12 +26,17 @@ class ArtifactRepublisher {
 
   private:
     bool initializeSubscribers();
+    void artifact_callback(const maplab_msgs::filtered_artConstPtr& artifact, 
+         const std::string& robot_name);
 
     ros::NodeHandle nh_;
     ros::NodeHandle nh_private_;
     std::atomic<bool> should_exit_;
     ros::AsyncSpinner spinner_;
 		double processed_counter_;
+
+    ros::Subscriber art_sub_;
+    ros::Publisher art_pub_;
 };
 
 } // namespace maplab
