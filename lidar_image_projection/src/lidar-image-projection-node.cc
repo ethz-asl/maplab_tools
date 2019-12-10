@@ -182,6 +182,9 @@ std::string LidarImageProjection::printStatistics() const {
 	if (processed_counter_ > 0)
 		ss << "\t Average processing time: " 
 			<< total_processing_time_ms_ / processed_counter_ << "ms \n";
+  ss << "Current transformation from lidar to imu is: \n"
+    << T_B_C_ * T_C_L_;
+ 
   return ss.str();
 }
 
@@ -210,6 +213,7 @@ void LidarImageProjection::syncedCallback(
   }
 
   // Project the cloud.
+  auto start = std::chrono::high_resolution_clock::now();
   cv::Vec3b pcl_color(100, 100, 100);
   pcl::transformPointCloud(*cloud, *cloud, T_C_L_.getTransformationMatrix());
   const aslam::Camera& camera = ncamera_rig_->getCamera(camera_idx_);
@@ -228,10 +232,15 @@ void LidarImageProjection::syncedCallback(
       image.at<cv::Vec3b>(keypoint(1), keypoint(0)) = intensityToRGB(gray);
     }
   }
- 
+  auto end = std::chrono::high_resolution_clock::now();
+  total_processing_time_ms_ +=
+      std::chrono::duration_cast<std::chrono::milliseconds>(
+          end - start).count();
+
   // Show the projection.
   cv::imshow("Projection", image);  
   cv::waitKey(10);
+  ++processed_counter_;
 }
 
 double LidarImageProjection::interpolate(double val, double y0, double x0,
