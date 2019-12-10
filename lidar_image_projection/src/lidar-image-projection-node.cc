@@ -29,6 +29,15 @@ DEFINE_string(
 DEFINE_string(
    selected_lidar_id, "",
    "Defines the used lidar id.");
+DEFINE_double(
+   correction_alpha, 0.0,
+   "Defines the correction used for the alpha angle");
+DEFINE_double(
+   correction_beta, 0.0,
+   "Defines the correction used for the beta angle");
+DEFINE_double(
+   correction_gamma, 0.0,
+   "Defines the correction used for the gamma angle");
 
 namespace maplab {
 
@@ -136,7 +145,10 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
       syncedCallback(imageMsg, cloudMsg);
     });
   aslam::Transformation correction(
-      RotationUtils::CreateTransformation(0.0, 0.0, 0.05));
+      RotationUtils::CreateTransformation(
+        FLAGS_correction_alpha,
+        FLAGS_correction_beta,
+        FLAGS_correction_gamma));
   T_C_L_ = T_B_C_.inverse() * (correction * T_B_L_);
 
   return true;
