@@ -182,8 +182,14 @@ std::string LidarImageProjection::printStatistics() const {
 	if (processed_counter_ > 0)
 		ss << "\t Average processing time: " 
 			<< total_processing_time_ms_ / processed_counter_ << "ms \n";
+  aslam::Transformation T_B_L = T_B_C_ * T_C_L_;
   ss << "Current transformation from lidar to imu is: \n"
-    << T_B_C_ * T_C_L_;
+    << T_B_L << "\n";
+  ss << "Inverse transformation: \n"
+    << T_B_L.inverse() << "\n";
+  ss << "Quaternion (w,x,y,z): \n" << T_B_L.getRotation() << "\n"
+    << "inverse Quaternion (w,x,y,z): \n" 
+    << T_B_L.getRotation().inverse() << "\n";
  
   return ss.str();
 }
