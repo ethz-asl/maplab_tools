@@ -10,6 +10,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
+#include <cv_bridge/cv_bridge.h>
 
 #include <sstream>
 #include <chrono>
