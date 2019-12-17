@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/darpa_subt_calib/share/anymal/anymal-rsl-bear.yaml"
+REST=$@
+
+rosrun maplab_camera_info_publisher maplab_camera_info_publisher \
+  --v=3 \
+  --alsologtostderr \
+  --sensor_calibration_file=$SENSOR_CALIBRATION \
+  --image_scale_factor=1.0 \
+  --start_service=true \
+	--vio_camera_topic_suffix="image_raw" \
+	--image_rotation_angle_deg=0 \
+	--republish_grayscale=true \
+	--image_apply_clahe_histogram_equalization=true \
+  $REST
