@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh                                                              
+REST=$@                                                                         
+                                                                               
+rosrun raw_to_color_image raw_to_color_image \
+   --alsologtostderr=1 \
+   --v=3 \
+   --cam_topic="/cam5/image_raw" \
+   $REST  

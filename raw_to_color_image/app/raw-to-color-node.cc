@@ -14,11 +14,14 @@ int main(int argc, char** argv) {
   google::ParseCommandLineFlags(&argc, &argv, true);
   google::InstallFailureSignalHandler();
 
-  ros::init(argc, argv, "artifact_manager_node");
+  ros::init(argc, argv, "r2c_manager_node");
   ros::NodeHandle nh, nh_private("~");
 
   r2c::parseGflagsFromRosParams(argv[0], nh_private);
   r2c::R2CManager r2c_manager(nh, nh_private);
+  if (!r2c_manager.run()) {
+    LOG(FATAL) << "Unable to start the r2c manager.";
+  }
 
   ros::waitForShutdown();
   return 0;
