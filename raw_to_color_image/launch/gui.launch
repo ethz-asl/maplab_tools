@@ -1,0 +1,6 @@
+<launch>
+  <arg name="artifact_ros_open_rqt" default="true" />
+  <group if="$(arg artifact_ros_open_rqt)">
+    <node name="artifact_rqt" pkg="rqt_gui" type="rqt_gui" args="--perspective-file $(find artifact_manager_node)/share/artifact_rqt.perspective" output="screen" clear_params="true"/>
+  </group>
+</launch>
