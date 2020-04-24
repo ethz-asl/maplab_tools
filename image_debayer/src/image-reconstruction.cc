@@ -48,6 +48,7 @@ void ImageReconstruction::imageCallback(
   CHECK_NOTNULL(image);
   cv_bridge::CvImagePtr cv_ptr;
   try {
+    // Currently the incomplete color image output is published as a mono8.
     if (image->encoding == sensor_msgs::image_encodings::MONO8) {
       cv_ptr = cv_bridge::toCvCopy(image, sensor_msgs::image_encodings::MONO8);
     } else {
