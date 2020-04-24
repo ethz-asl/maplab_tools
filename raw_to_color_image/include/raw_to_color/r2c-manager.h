@@ -7,7 +7,9 @@
 #include <string>
 #include <unordered_map>
 
+#include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
+#include <opencv2/core.hpp>
 #include <sensor_msgs/Image.h>
 
 namespace r2c {
@@ -20,13 +22,18 @@ class R2CManager {
   void imageCallback(const sensor_msgs::ImageConstPtr& image);
 
  private:
-  void setupSubscriber();
+  void setupSubAndPub();
+  void publishColorImage(
+      const cv_bridge::CvImagePtr& cv_ptr,
+      const sensor_msgs::ImageConstPtr& orig_image);
 
   ros::NodeHandle nh_;
   ros::NodeHandle nh_private_;
   ros::AsyncSpinner spinner_;
   image_transport::ImageTransport image_transport_;
-  image_transport::Subscriber sub_image_;
+
+  image_transport::Subscriber sub_raw_image_;
+  image_transport::Publisher pub_color_image_;
 };
 
 }  // namespace r2c
