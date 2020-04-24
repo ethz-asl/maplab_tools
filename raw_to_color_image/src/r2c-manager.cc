@@ -22,7 +22,6 @@ R2CManager::R2CManager(
   CHECK(!FLAGS_cam_topic.empty());
   CHECK(!FLAGS_color_topic.empty());
   setupSubAndPub();
-  // wb_ = cv::xphoto::createGrayworldWB();
 }
 
 void R2CManager::setupSubAndPub() {
@@ -83,7 +82,6 @@ void R2CManager::debayer(cv::Mat* raw_image) {
 
 void R2CManager::adjustWhiteBalance(cv::Mat* rgb_image) {
   CHECK_NOTNULL(rgb_image);
-  // wb_->balanceWhite(*rgb_image, *rgb_image);
   // credits to http://web.stanford.edu/~sujason/ColorBalancing/simplestcb.html
   constexpr float percent = 30;
   constexpr float half_percent = percent / 200.0f;
@@ -93,10 +91,9 @@ void R2CManager::adjustWhiteBalance(cv::Mat* rgb_image) {
     cv::Mat flat;
     tmpsplit[i].reshape(1, 1).copyTo(flat);
     cv::sort(flat, flat, CV_SORT_EVERY_ROW + CV_SORT_ASCENDING);
-    const uchar lowval =
-        flat.at<uchar>(cvFloor((static_cast<float>(flat.cols)) * half_percent));
-    const uchar highval =
-        flat.at<uchar>(cvCeil(((float)flat.cols) * (1.0 - half_percent)));
+    const float f_cols = static_cast<float>(flat.cols);
+    const uchar lowval = flat.at<uchar>(cvFloor(f_cols * half_percent));
+    const uchar highval = flat.at<uchar>(cvCeil(f_cols * (1.0 - half_percent)));
     tmpsplit[i].setTo(lowval, tmpsplit[i] < lowval);
     tmpsplit[i].setTo(highval, tmpsplit[i] > highval);
 

@@ -34,7 +34,6 @@ class R2CManager {
   ros::NodeHandle nh_private_;
   ros::AsyncSpinner spinner_;
   image_transport::ImageTransport image_transport_;
-  cv::Ptr<cv::xphoto::WhiteBalancer> wb_;
 
   image_transport::Subscriber sub_raw_image_;
   image_transport::Publisher pub_color_image_;
