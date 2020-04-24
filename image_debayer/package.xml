@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package format="2">
-	<name>raw_to_color_image</name>
+	<name>image_debayer</name>
 	<version>1.0.0</version>
 	<description>
     Performs a debayering and white balance on raw images.

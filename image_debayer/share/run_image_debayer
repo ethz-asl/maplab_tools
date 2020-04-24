@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+REST=$@
+
+rosrun image_debayer image_debayer \
+   --alsologtostderr=1 \
+   --v=3 \
+   --cam_topic="/alphasense_driver_ros/cam5" \
+   --color_topic="/alphasense_driver_ros/cam5/processed" \
+   $REST

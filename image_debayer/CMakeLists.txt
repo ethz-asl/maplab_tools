@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(raw_to_color_image)
+project(image_debayer)
 
 find_package(catkin_simple REQUIRED)
 catkin_simple()
@@ -9,14 +9,14 @@ catkin_simple()
 #############
 
 cs_add_library(${PROJECT_NAME}_lib
-  src/r2c-manager.cc
+  src/image-reconstruction.cc
 )
 
 #######
 # APP #
 #######
 cs_add_executable(${PROJECT_NAME}
-  app/raw-to-color-node.cc
+  app/image-debayer-node.cc
 )
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
 

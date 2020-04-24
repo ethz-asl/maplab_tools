@@ -1,4 +1,4 @@
-#include "raw_to_color/r2c-manager.h"
+#include "image_debayer/image-reconstruction.h"
 
 #include <atomic>
 #include <memory>
@@ -14,9 +14,9 @@
 DEFINE_string(cam_topic, "", "Defines the topic for the input images.");
 DEFINE_string(color_topic, "", "Defines the topic for the processed images.");
 
-namespace r2c {
+namespace debayer {
 
-R2CManager::R2CManager(
+ImageReconstruction::ImageReconstruction(
     const ros::NodeHandle& nh, const ros::NodeHandle& nh_private)
     : nh_(nh), nh_private_(nh_private), spinner_(1), image_transport_(nh) {
   CHECK(!FLAGS_cam_topic.empty());
@@ -24,10 +24,10 @@ R2CManager::R2CManager(
   setupSubAndPub();
 }
 
-void R2CManager::setupSubAndPub() {
+void ImageReconstruction::setupSubAndPub() {
   // Set up the raw image subscriber.
   boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
-      boost::bind(&R2CManager::imageCallback, this, _1);
+      boost::bind(&ImageReconstruction::imageCallback, this, _1);
   constexpr size_t kRosQueueSize = 20u;
   sub_raw_image_ = image_transport_.subscribe(
       FLAGS_cam_topic, kRosQueueSize, image_callback);
@@ -37,13 +37,14 @@ void R2CManager::setupSubAndPub() {
       image_transport_.advertise(FLAGS_color_topic, kRosQueueSize);
 }
 
-bool R2CManager::run() {
-  LOG(INFO) << "[R2CManager] Starting...";
+bool ImageReconstruction::run() {
+  LOG(INFO) << "[ImageReconstruction] Starting...";
   spinner_.start();
   return true;
 }
 
-void R2CManager::imageCallback(const sensor_msgs::ImageConstPtr& image) {
+void ImageReconstruction::imageCallback(
+    const sensor_msgs::ImageConstPtr& image) {
   CHECK_NOTNULL(image);
   cv_bridge::CvImagePtr cv_ptr;
   try {
@@ -62,7 +63,7 @@ void R2CManager::imageCallback(const sensor_msgs::ImageConstPtr& image) {
   publishColorImage(cv_ptr, image);
 }
 
-void R2CManager::publishColorImage(
+void ImageReconstruction::publishColorImage(
     const cv_bridge::CvImagePtr& cv_ptr,
     const sensor_msgs::ImageConstPtr& orig_image) {
   CHECK_NOTNULL(cv_ptr);
@@ -75,12 +76,12 @@ void R2CManager::publishColorImage(
   pub_color_image_.publish(color_img_msg);
 }
 
-void R2CManager::debayer(cv::Mat* raw_image) {
+void ImageReconstruction::debayer(cv::Mat* raw_image) {
   CHECK_NOTNULL(raw_image);
   cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGR2RGB_EA);
 }
 
-void R2CManager::adjustWhiteBalance(cv::Mat* rgb_image) {
+void ImageReconstruction::adjustWhiteBalance(cv::Mat* rgb_image) {
   CHECK_NOTNULL(rgb_image);
   // credits to http://web.stanford.edu/~sujason/ColorBalancing/simplestcb.html
   constexpr float percent = 30;
@@ -102,4 +103,4 @@ void R2CManager::adjustWhiteBalance(cv::Mat* rgb_image) {
   cv::merge(tmpsplit, *rgb_image);
 }
 
-}  // namespace r2c
+}  // namespace debayer

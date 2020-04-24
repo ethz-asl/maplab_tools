@@ -6,19 +6,19 @@
 #include <glog/logging.h>
 #include <ros/ros.h>
 
-#include "raw_to_color/r2c-manager.h"
+#include "image_debayer/image-reconstruction.h"
 
 int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
   google::ParseCommandLineFlags(&argc, &argv, true);
   google::InstallFailureSignalHandler();
 
-  ros::init(argc, argv, "r2c_manager_node");
+  ros::init(argc, argv, "image_debayer_node");
   ros::NodeHandle nh, nh_private("~");
 
-  r2c::R2CManager r2c_manager(nh, nh_private);
-  if (!r2c_manager.run()) {
-    LOG(FATAL) << "Unable to start the r2c manager.";
+  debayer::ImageReconstruction recon(nh, nh_private);
+  if (!recon.run()) {
+    LOG(FATAL) << "Unable to start the image reconstruction.";
   }
 
   ros::waitForShutdown();

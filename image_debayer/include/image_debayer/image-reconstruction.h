@@ -1,5 +1,5 @@
-#ifndef RAW_TO_COLOR_R2C_MANAGER_H_
-#define RAW_TO_COLOR_R2C_MANAGER_H_
+#ifndef IMAGE_DEBAYER_IMAGE_RECONSTRUCTION_H_
+#define IMAGE_DEBAYER_IMAGE_RECONSTRUCTION_H_
 
 #include <atomic>
 #include <memory>
@@ -12,11 +12,12 @@
 #include <opencv2/core.hpp>
 #include <sensor_msgs/Image.h>
 
-namespace r2c {
+namespace debayer {
 
-class R2CManager {
+class ImageReconstruction {
  public:
-  R2CManager(const ros::NodeHandle& nh, const ros::NodeHandle& nh_private);
+  ImageReconstruction(
+      const ros::NodeHandle& nh, const ros::NodeHandle& nh_private);
 
   bool run();
   void imageCallback(const sensor_msgs::ImageConstPtr& image);
@@ -38,6 +39,6 @@ class R2CManager {
   image_transport::Publisher pub_color_image_;
 };
 
-}  // namespace r2c
+}  // namespace debayer
 
-#endif  // RAW_TO_COLOR_R2C_MANAGER_H_
+#endif  // IMAGE_DEBAYER_IMAGE_RECONSTRUCTION_H_
