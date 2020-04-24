@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <thread>
+#include <vector>
 
 #include <glog/logging.h>
 #include <opencv2/highgui.hpp>
@@ -21,7 +22,7 @@ R2CManager::R2CManager(
   CHECK(!FLAGS_cam_topic.empty());
   CHECK(!FLAGS_color_topic.empty());
   setupSubAndPub();
-  wb_ = cv::xphoto::createGrayworldWB();
+  // wb_ = cv::xphoto::createGrayworldWB();
 }
 
 void R2CManager::setupSubAndPub() {
@@ -82,8 +83,26 @@ void R2CManager::debayer(cv::Mat* raw_image) {
 
 void R2CManager::adjustWhiteBalance(cv::Mat* rgb_image) {
   CHECK_NOTNULL(rgb_image);
-  CHECK_NOTNULL(wb_);
-  wb_->balanceWhite(*rgb_image, *rgb_image);
+  // wb_->balanceWhite(*rgb_image, *rgb_image);
+  // credits to http://web.stanford.edu/~sujason/ColorBalancing/simplestcb.html
+  constexpr float percent = 30;
+  constexpr float half_percent = percent / 200.0f;
+  std::vector<cv::Mat> tmpsplit(3);
+  cv::split(*rgb_image, tmpsplit);
+  for (std::size_t i = 0u; i < 3; ++i) {
+    cv::Mat flat;
+    tmpsplit[i].reshape(1, 1).copyTo(flat);
+    cv::sort(flat, flat, CV_SORT_EVERY_ROW + CV_SORT_ASCENDING);
+    const uchar lowval =
+        flat.at<uchar>(cvFloor((static_cast<float>(flat.cols)) * half_percent));
+    const uchar highval =
+        flat.at<uchar>(cvCeil(((float)flat.cols) * (1.0 - half_percent)));
+    tmpsplit[i].setTo(lowval, tmpsplit[i] < lowval);
+    tmpsplit[i].setTo(highval, tmpsplit[i] > highval);
+
+    cv::normalize(tmpsplit[i], tmpsplit[i], 0, 255, cv::NORM_MINMAX);
+  }
+  cv::merge(tmpsplit, *rgb_image);
 }
 
 }  // namespace r2c
