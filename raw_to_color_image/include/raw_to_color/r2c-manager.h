@@ -10,7 +10,6 @@
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
 #include <opencv2/core.hpp>
-#include <opencv2/xphoto/white_balance.hpp>
 #include <sensor_msgs/Image.h>
 
 namespace r2c {

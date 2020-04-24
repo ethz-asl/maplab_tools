@@ -7,7 +7,6 @@
 #include <ros/ros.h>
 
 #include "raw_to_color/r2c-manager.h"
-#include "raw_to_color/ros-utils.h"
 
 int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
@@ -17,7 +16,6 @@ int main(int argc, char** argv) {
   ros::init(argc, argv, "r2c_manager_node");
   ros::NodeHandle nh, nh_private("~");
 
-  r2c::parseGflagsFromRosParams(argv[0], nh_private);
   r2c::R2CManager r2c_manager(nh, nh_private);
   if (!r2c_manager.run()) {
     LOG(FATAL) << "Unable to start the r2c manager.";

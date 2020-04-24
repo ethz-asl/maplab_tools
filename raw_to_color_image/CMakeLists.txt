@@ -10,7 +10,6 @@ catkin_simple()
 
 cs_add_library(${PROJECT_NAME}_lib
   src/r2c-manager.cc
-  src/ros-utils.cc
 )
 
 #######

@@ -77,7 +77,7 @@ void R2CManager::publishColorImage(
 
 void R2CManager::debayer(cv::Mat* raw_image) {
   CHECK_NOTNULL(raw_image);
-  cv::cvtColor(*raw_image, *raw_image, CV_BayerGR2RGB);
+  cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGR2RGB_EA);
 }
 
 void R2CManager::adjustWhiteBalance(cv::Mat* rgb_image) {
