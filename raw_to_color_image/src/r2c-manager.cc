@@ -21,6 +21,7 @@ R2CManager::R2CManager(
   CHECK(!FLAGS_cam_topic.empty());
   CHECK(!FLAGS_color_topic.empty());
   setupSubAndPub();
+  wb_ = cv::xphoto::createGrayworldWB();
 }
 
 void R2CManager::setupSubAndPub() {
@@ -43,7 +44,7 @@ bool R2CManager::run() {
 }
 
 void R2CManager::imageCallback(const sensor_msgs::ImageConstPtr& image) {
-  VLOG(1) << "received image";
+  CHECK_NOTNULL(image);
   cv_bridge::CvImagePtr cv_ptr;
   try {
     if (image->encoding == sensor_msgs::image_encodings::MONO8) {
@@ -54,8 +55,9 @@ void R2CManager::imageCallback(const sensor_msgs::ImageConstPtr& image) {
   } catch (const cv_bridge::Exception& e) {  // NOLINT
     LOG(FATAL) << "cv_bridge exception: " << e.what();
   }
-  CHECK(cv_ptr);
-  // cv::Mat new_img = cv_ptr->image.clone();
+  CHECK_NOTNULL(cv_ptr);
+  debayer(&cv_ptr->image);
+  adjustWhiteBalance(&cv_ptr->image);
 
   publishColorImage(cv_ptr, image);
 }
@@ -63,10 +65,25 @@ void R2CManager::imageCallback(const sensor_msgs::ImageConstPtr& image) {
 void R2CManager::publishColorImage(
     const cv_bridge::CvImagePtr& cv_ptr,
     const sensor_msgs::ImageConstPtr& orig_image) {
-  sensor_msgs::ImagePtr color_img_msg = cv_ptr->toImageMsg();
-  color_img_msg->encoding = sensor_msgs::image_encodings::BGR8;
+  CHECK_NOTNULL(cv_ptr);
+  CHECK_NOTNULL(orig_image);
+  const sensor_msgs::ImagePtr color_img_msg = cv_ptr->toImageMsg();
+  CHECK_NOTNULL(color_img_msg);
+
+  color_img_msg->encoding = sensor_msgs::image_encodings::RGB8;
   color_img_msg->header.stamp = orig_image->header.stamp;
   pub_color_image_.publish(color_img_msg);
+}
+
+void R2CManager::debayer(cv::Mat* raw_image) {
+  CHECK_NOTNULL(raw_image);
+  cv::cvtColor(*raw_image, *raw_image, CV_BayerGR2RGB);
+}
+
+void R2CManager::adjustWhiteBalance(cv::Mat* rgb_image) {
+  CHECK_NOTNULL(rgb_image);
+  CHECK_NOTNULL(wb_);
+  wb_->balanceWhite(*rgb_image, *rgb_image);
 }
 
 }  // namespace r2c

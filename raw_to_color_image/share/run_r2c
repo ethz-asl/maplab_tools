@@ -5,4 +5,5 @@ rosrun raw_to_color_image raw_to_color_image \
    --alsologtostderr=1 \
    --v=3 \
    --cam_topic="/alphasense_driver_ros/cam5" \
+   --color_topic="/alphasense_driver_ros/cam5/processed" \
    $REST  
