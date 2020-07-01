@@ -13,6 +13,7 @@
 
 DEFINE_string(cam_topic, "", "Defines the topic for the input images.");
 DEFINE_string(color_topic, "", "Defines the topic for the processed images.");
+DEFINE_string(bayer_pattern, "GR2RGB", "Defines the bayer pattern used in debayering.");
 
 namespace debayer {
 
@@ -79,13 +80,30 @@ void ImageReconstruction::publishColorImage(
 
 void ImageReconstruction::debayer(cv::Mat* raw_image) {
   CHECK_NOTNULL(raw_image);
-  cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGR2RGB_EA);
+  if (FLAGS_bayer_pattern == "GR2RGB")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGR2RGB_EA);
+  else if (FLAGS_bayer_pattern == "RG2RGB")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerRG2RGB_EA);
+  else if (FLAGS_bayer_pattern == "GB2RGB")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGB2RGB_EA);
+  else if (FLAGS_bayer_pattern == "BG2RGB")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerBG2RGB_EA);
+  else if (FLAGS_bayer_pattern == "GR2BGR")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGR2BGR_EA);
+  else if (FLAGS_bayer_pattern == "RG2BGR")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerRG2BGR_EA);
+  else if (FLAGS_bayer_pattern == "GB2BGR")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGB2BGR_EA);
+  else if (FLAGS_bayer_pattern == "BG2BGR")
+    cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerBG2BGR_EA);
+  else 
+    CHECK(false);
 }
 
 void ImageReconstruction::adjustWhiteBalance(cv::Mat* rgb_image) {
   CHECK_NOTNULL(rgb_image);
   // credits to http://web.stanford.edu/~sujason/ColorBalancing/simplestcb.html
-  constexpr float percent = 30;
+  constexpr float percent = 10;
   constexpr float half_percent = percent / 200.0f;
   std::vector<cv::Mat> tmpsplit(3);
   cv::split(*rgb_image, tmpsplit);
