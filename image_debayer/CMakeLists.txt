@@ -4,6 +4,9 @@ project(image_debayer)
 find_package(catkin_simple REQUIRED)
 catkin_simple()
 
+set(CMAKE_CXX_STANDARD 14)
+
+
 #############
 # LIBRARIES #
 #############
