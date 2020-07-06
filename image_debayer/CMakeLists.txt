@@ -5,7 +5,7 @@ find_package(catkin_simple REQUIRED)
 catkin_simple()
 
 set(CMAKE_CXX_STANDARD 14)
-
+set(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Wextra -O3 -DNDEBUG")
 
 #############
 # LIBRARIES #
