@@ -27,7 +27,7 @@ class ImageReconstruction {
   void publishColorImage(
       const cv_bridge::CvImagePtr& cv_ptr,
       const sensor_msgs::ImageConstPtr& orig_image);
-  void debayer(cv::Mat* raw_image);
+  void debayer(cv::Mat* raw_image, const std::string& pattern);
   void adjustWhiteBalance(cv::Mat* rgb_image);
 
   ros::NodeHandle nh_;

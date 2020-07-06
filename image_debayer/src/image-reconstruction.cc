@@ -13,10 +13,13 @@
 
 DEFINE_string(cam_topic, "", "Defines the topic for the input images.");
 DEFINE_string(color_topic, "", "Defines the topic for the processed images.");
-DEFINE_string(bayer_pattern, "GR2RGB", "Defines the bayer pattern used in debayering.");
+DEFINE_string(
+    bayer_pattern, "GR2RGB", "Defines the Bayer pattern used in debayering.");
+DEFINE_double(
+    simple_wb_saturation_percentage, 10.0,
+    "Defines the percentage of the bright/dark pixel saturation.");
 
 namespace debayer {
-
 ImageReconstruction::ImageReconstruction(
     const ros::NodeHandle& nh, const ros::NodeHandle& nh_private)
     : nh_(nh), nh_private_(nh_private), spinner_(1), image_transport_(nh) {
@@ -59,7 +62,7 @@ void ImageReconstruction::imageCallback(
     LOG(FATAL) << "cv_bridge exception: " << e.what();
   }
   CHECK_NOTNULL(cv_ptr);
-  debayer(&cv_ptr->image);
+  debayer(&cv_ptr->image, FLAGS_bayer_pattern);
   adjustWhiteBalance(&cv_ptr->image);
 
   publishColorImage(cv_ptr, image);
@@ -78,33 +81,35 @@ void ImageReconstruction::publishColorImage(
   pub_color_image_.publish(color_img_msg);
 }
 
-void ImageReconstruction::debayer(cv::Mat* raw_image) {
+void ImageReconstruction::debayer(
+    cv::Mat* raw_image, const std::string& pattern) {
   CHECK_NOTNULL(raw_image);
-  if (FLAGS_bayer_pattern == "GR2RGB")
+  if (pattern == "GR2RGB")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGR2RGB_EA);
-  else if (FLAGS_bayer_pattern == "RG2RGB")
+  else if (pattern == "RG2RGB")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerRG2RGB_EA);
-  else if (FLAGS_bayer_pattern == "GB2RGB")
+  else if (pattern == "GB2RGB")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGB2RGB_EA);
-  else if (FLAGS_bayer_pattern == "BG2RGB")
+  else if (pattern == "BG2RGB")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerBG2RGB_EA);
-  else if (FLAGS_bayer_pattern == "GR2BGR")
+  else if (pattern == "GR2BGR")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGR2BGR_EA);
-  else if (FLAGS_bayer_pattern == "RG2BGR")
+  else if (pattern == "RG2BGR")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerRG2BGR_EA);
-  else if (FLAGS_bayer_pattern == "GB2BGR")
+  else if (pattern == "GB2BGR")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerGB2BGR_EA);
-  else if (FLAGS_bayer_pattern == "BG2BGR")
+  else if (pattern == "BG2BGR")
     cv::cvtColor(*raw_image, *raw_image, cv::COLOR_BayerBG2BGR_EA);
-  else 
-    CHECK(false);
+  else
+    LOG(ERROR) << "Unknown pattern given: " << pattern;
 }
 
 void ImageReconstruction::adjustWhiteBalance(cv::Mat* rgb_image) {
   CHECK_NOTNULL(rgb_image);
-  // credits to http://web.stanford.edu/~sujason/ColorBalancing/simplestcb.html
-  constexpr float percent = 10;
-  constexpr float half_percent = percent / 200.0f;
+  // credits to
+  // http://web.stanford.edu/~sujason/ColorBalancing/simplestcb.html
+  const float percent = FLAGS_simple_wb_saturation_percentage;
+  const float half_percent = percent / 200.0f;
   std::vector<cv::Mat> tmpsplit(3);
   cv::split(*rgb_image, tmpsplit);
   for (std::size_t i = 0u; i < 3; ++i) {
