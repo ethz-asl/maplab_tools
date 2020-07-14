@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/maplab/maplab-launch/config/lidarmace/calib/lidarmace-sensors.yaml"
+REST=$@
+
+rosrun lidar_image_projection lidar_image_projection \
+  --v=7 \
+  --alsologtostderr \
+  --sensor_calibration_file=$SENSOR_CALIBRATION \
+  --selected_camera_id="9ce7b5000f15adb3c0da8ac6b729ee05" \
+  --selected_lidar_id="abf123479caf7592b35518478a2fe08d" \
+  --vio_camera_topic_suffix="" \
+  $REST

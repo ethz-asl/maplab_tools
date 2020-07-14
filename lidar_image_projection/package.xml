@@ -17,7 +17,6 @@
   <depend>vi_map</depend>
   <depend>vio_common</depend>
   <depend>aslam_cv_cameras</depend>
-  <depend>pcl_catkin</depend>
   <depend>opencv3_catkin</depend>
   <depend>eigen_catkin</depend>
 
