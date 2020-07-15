@@ -1,5 +1,5 @@
 #include "lidar-image-projection/lidar-image-projection-node.h"
-#include "lidar-image-projection/rotation-utils.h"
+#include "lidar-image-projection/transformation-utils.h"
 
 #include <aslam/cameras/camera-pinhole.h>
 #include <vi-map/sensor-utils.h>
@@ -30,6 +30,9 @@ DEFINE_double(
     correction_beta, 0.0, "Defines the correction used for the beta angle");
 DEFINE_double(
     correction_gamma, 0.0, "Defines the correction used for the gamma angle");
+DEFINE_double(correction_x, 0.0, "Defines the correction used for the x");
+DEFINE_double(correction_y, 0.0, "Defines the correction used for the y");
+DEFINE_double(correction_z, 0.0, "Defines the correction used for the z");
 
 namespace maplab {
 
@@ -142,7 +145,7 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
           const sensor_msgs::PointCloud2ConstPtr& cloudMsg) {
         syncedCallback(imageMsg, cloudMsg);
       });
-  aslam::Transformation correction(RotationUtils::CreateTransformation(
+  aslam::Transformation correction(TransformationUtils::CreateTransformation(
       FLAGS_correction_alpha, FLAGS_correction_beta, FLAGS_correction_gamma));
   T_C_L_ = T_B_C_.inverse() * (correction * T_B_L_);
 

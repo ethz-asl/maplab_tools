@@ -1,15 +1,15 @@
-#include "lidar-image-projection/rotation-utils.h"
+#include "lidar-image-projection/transformation-utils.h"
 
 namespace maplab {
 
-Eigen::Matrix4d RotationUtils::CreateTransformation(const double alpha_rad, 
-    const double beta_rad, const double gamma_rad) {
-  return CreateTransformationAroundZ(gamma_rad) 
-    * CreateTransformationAroundY(beta_rad)
-    * CreateTransformationAroundX(alpha_rad);
+Eigen::Matrix4d TransformationUtils::CreateTransformation(
+    const double alpha_rad, const double beta_rad, const double gamma_rad) {
+  return CreateTransformationAroundZ(gamma_rad) *
+         CreateTransformationAroundY(beta_rad) *
+         CreateTransformationAroundX(alpha_rad);
 }
 
-Eigen::Matrix4d RotationUtils::CreateTransformationAroundX(
+Eigen::Matrix4d TransformationUtils::CreateTransformationAroundX(
     const double alpha_rad) {
   Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
   T(1, 1) = std::cos(alpha_rad);
@@ -20,7 +20,7 @@ Eigen::Matrix4d RotationUtils::CreateTransformationAroundX(
   return T;
 }
 
-Eigen::Matrix4d RotationUtils::CreateTransformationAroundY(
+Eigen::Matrix4d TransformationUtils::CreateTransformationAroundY(
     const double beta_rad) {
   Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
   T(0, 0) = std::cos(beta_rad);
@@ -31,7 +31,7 @@ Eigen::Matrix4d RotationUtils::CreateTransformationAroundY(
   return T;
 }
 
-Eigen::Matrix4d RotationUtils::CreateTransformationAroundZ(
+Eigen::Matrix4d TransformationUtils::CreateTransformationAroundZ(
     const double gamma_rad) {
   Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
   T(0, 0) = std::cos(gamma_rad);
@@ -42,4 +42,4 @@ Eigen::Matrix4d RotationUtils::CreateTransformationAroundZ(
   return T;
 }
 
-}  // maplab
+}  // namespace maplab
