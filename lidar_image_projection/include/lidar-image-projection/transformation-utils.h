@@ -10,7 +10,8 @@ class TransformationUtils {
   TransformationUtils() = delete;
 
   static Eigen::Matrix4d CreateTransformation(
-      const double alpha_rad, const double beta_rad, const double gamma_rad);
+      const double alpha_rad, const double beta_rad, const double gamma_rad,
+      const double x, const double y, const double z);
 
   static Eigen::Matrix4d CreateTransformationAroundX(const double alpha_rad);
   static Eigen::Matrix4d CreateTransformationAroundY(const double beta_rad);

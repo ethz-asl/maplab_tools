@@ -3,10 +3,15 @@
 namespace maplab {
 
 Eigen::Matrix4d TransformationUtils::CreateTransformation(
-    const double alpha_rad, const double beta_rad, const double gamma_rad) {
-  return CreateTransformationAroundZ(gamma_rad) *
-         CreateTransformationAroundY(beta_rad) *
-         CreateTransformationAroundX(alpha_rad);
+    const double alpha_rad, const double beta_rad, const double gamma_rad,
+    const double x, const double y, const double z) {
+  Eigen::Matrix4d T = CreateTransformationAroundZ(gamma_rad) *
+                      CreateTransformationAroundY(beta_rad) *
+                      CreateTransformationAroundX(alpha_rad);
+  T(0, 3) = x;
+  T(1, 3) = y;
+  T(2, 3) = z;
+  return T;
 }
 
 Eigen::Matrix4d TransformationUtils::CreateTransformationAroundX(

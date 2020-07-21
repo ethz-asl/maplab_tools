@@ -146,7 +146,8 @@ bool LidarImageProjection::initializeServicesAndSubscribers() {
         syncedCallback(imageMsg, cloudMsg);
       });
   aslam::Transformation correction(TransformationUtils::CreateTransformation(
-      FLAGS_correction_alpha, FLAGS_correction_beta, FLAGS_correction_gamma));
+      FLAGS_correction_alpha, FLAGS_correction_beta, FLAGS_correction_gamma,
+      FLAGS_correction_x, FLAGS_correction_y, FLAGS_correction_z));
   T_C_L_ = T_B_C_.inverse() * (correction * T_B_L_);
 
   return true;

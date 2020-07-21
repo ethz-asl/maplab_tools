@@ -10,4 +10,10 @@ rosrun lidar_image_projection lidar_image_projection \
   --selected_camera_id="9ce7b5000f15adb3c0da8ac6b729ee05" \
   --selected_lidar_id="abf123479caf7592b35518478a2fe08d" \
   --vio_camera_topic_suffix="" \
+  --correction_alpha=0.00 \
+  --correction_beta=-0.000 \
+  --correction_gamma=0.00 \
+  --correction_x=0.00 \
+  --correction_y=0.0 \
+  --correction_z=0.0 \
   $REST
