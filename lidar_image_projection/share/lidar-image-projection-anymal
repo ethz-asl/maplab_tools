@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/darpa_subt_calib/share/anymal/anymal-rsl-bear.yaml"
+REST=$@
+
+rosrun lidar_image_projection lidar_image_projection \
+  --v=3 \
+  --alsologtostderr \
+  --sensor_calibration_file=$SENSOR_CALIBRATION \
+  --selected_camera_id="a3100000000000000000000000000000" \
+  --selected_lidar_id="abf123479caf7592b35518478a2fe09f" \
+  $REST
