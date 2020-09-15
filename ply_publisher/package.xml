@@ -15,7 +15,6 @@
   <depend>glog_catkin</depend>
   <depend>maplab_ros_common</depend>
   <depend>resources_common</depend>
-  <depend>voxgraph_msgs</depend>
   <depend>map_resources</depend>
   <depend>visualization</depend>
 </package>
