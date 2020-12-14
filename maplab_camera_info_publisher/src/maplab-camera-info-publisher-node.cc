@@ -119,6 +119,7 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
     const aslam::Camera& camera = ncamera_rig_->getCamera(topic_camidx.second);
     if (camera.hasCompressedImages()) {
       // Handle compressed images.
+      VLOG(1) << "Setting up subscriber for compressed images.";
       boost::function<void(const sensor_msgs::CompressedImageConstPtr&)>
           image_callback = boost::bind(
               &MaplabCameraInfoPublisher::compressedImageCallback, this, _1,
@@ -129,6 +130,7 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
       ros_subs_.emplace_back(std::move(image_sub));
     } else {
       // Handle normal images.
+      VLOG(1) << "Setting up subscriber for images.";
       boost::function<void(const sensor_msgs::ImageConstPtr&)> image_callback =
           boost::bind(
               &MaplabCameraInfoPublisher::imageCallback, this, _1,
@@ -150,9 +152,8 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
         info_topic, kRosPublisherQueueSize));
 
     if (shouldProcess()) {
-      // const std::string processed_topic = camera.getTopic()
-      //+ FLAGS_processed_topic_suffix;
-      const std::string processed_topic = "versavis/cam0/small";
+      const std::string processed_topic =
+          camera.getTopic() + FLAGS_processed_topic_suffix;
       processed_pubs_[topic_camidx.second] =
           nh_.advertise<sensor_msgs::Image>(processed_topic, 1);
     }
@@ -361,6 +362,7 @@ cv::Mat MaplabCameraInfoPublisher::prepareImage(
 
   cv::Mat new_img = cv_ptr->image.clone();
   processImage(new_img);
+  /*
   cv_ptr->image = new_img;
 
   sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
@@ -368,6 +370,7 @@ cv::Mat MaplabCameraInfoPublisher::prepareImage(
   img_msg->header.stamp = image->header.stamp;
 
   processed_pubs_.at(0).publish(img_msg);
+  */
   return new_img;
 }
 

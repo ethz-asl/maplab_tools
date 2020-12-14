@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/maplab/src/maplab_private/applications/maplab_node/share/example_calibrations/mav-alpha-sensors.yaml"
+SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/darpa_subt_calib/share/mav-arl-alpha-sensors.yaml"
 REST=$@
 
 rosrun maplab_camera_info_publisher maplab_camera_info_publisher \
@@ -9,7 +9,10 @@ rosrun maplab_camera_info_publisher maplab_camera_info_publisher \
   --sensor_calibration_file=$SENSOR_CALIBRATION \
   --image_scale_factor=0.5 \
   --start_service=true \
-	--vio_camera_topic_suffix="" \
+	--vio_camera_topic_suffix="image_raw" \
+	--image_rotation_angle_deg=0 \
 	--republish_grayscale=true \
 	--image_apply_clahe_histogram_equalization=true \
+  --processed_topic_suffix="/image_decimated" \
+  --cam_info_topic_suffix="/cam_info" \
   $REST
