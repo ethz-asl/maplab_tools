@@ -152,13 +152,12 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
         info_topic, kRosPublisherQueueSize));
 
     if (shouldProcess()) {
-      std::string processed_topic = "";
-      if (topic_camidx.second == 1) {
-        processed_topic = "/alphasense_driver_ros/cam2";
-      } else
-        processed_topic = "/alphasense_driver_ros/cam1";
-      // const std::string processed_topic =
-      // camera.getTopic() + FLAGS_processed_topic_suffix;
+      std::string processed_topic =
+          camera.getTopic() + FLAGS_processed_topic_suffix;
+      VLOG(1) << "processed topic: " << processed_topic;
+      std::string to_erase = "compressed/";
+      std::size_t pos = processed_topic.find("compressed");
+      processed_topic.erase(pos, to_erase.length());
       processed_pubs_[topic_camidx.second] =
           nh_.advertise<sensor_msgs::Image>(processed_topic, 1);
     }
