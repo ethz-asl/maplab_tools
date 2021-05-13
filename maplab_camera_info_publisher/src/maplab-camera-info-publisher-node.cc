@@ -160,6 +160,7 @@ bool MaplabCameraInfoPublisher::initializeServicesAndSubscribers() {
       processed_topic.erase(pos, to_erase.length());
       processed_pubs_[topic_camidx.second] =
           nh_.advertise<sensor_msgs::Image>(processed_topic, 1);
+      VLOG(1) << "Publishing to " << processed_topic;
     }
   }
 
