@@ -37,6 +37,7 @@ class ImageReconstruction {
 
   image_transport::Subscriber sub_raw_image_;
   image_transport::Publisher pub_color_image_;
+  std::size_t image_counter_ = 0u;
 };
 
 }  // namespace debayer

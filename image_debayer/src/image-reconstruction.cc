@@ -2,6 +2,7 @@
 
 #include <atomic>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <thread>
 #include <vector>
@@ -18,6 +19,10 @@ DEFINE_string(
 DEFINE_double(
     simple_wb_saturation_percentage, 10.0,
     "Defines the percentage of the bright/dark pixel saturation.");
+DEFINE_int32(
+    image_rotation_angle_deg, 0,
+    "Defines the angle used for the image rotation.");
+DEFINE_string(export_image_path, "", "Where to store the processed images.");
 
 namespace debayer {
 ImageReconstruction::ImageReconstruction(
@@ -63,9 +68,27 @@ void ImageReconstruction::imageCallback(
   }
   CHECK_NOTNULL(cv_ptr);
   debayer(&cv_ptr->image, FLAGS_bayer_pattern);
-  adjustWhiteBalance(&cv_ptr->image);
+  // adjustWhiteBalance(&cv_ptr->image);
+
+  // Rotation
+  if (FLAGS_image_rotation_angle_deg != 0 &&
+      FLAGS_image_rotation_angle_deg != 360) {
+    const cv::Point2f src_center(
+        cv_ptr->image.cols / 2.0F, cv_ptr->image.rows / 2.0F);
+    const cv::Mat rot_mat = cv::getRotationMatrix2D(
+        src_center, FLAGS_image_rotation_angle_deg, 1.0);
+    cv::warpAffine(cv_ptr->image, cv_ptr->image, rot_mat, cv_ptr->image.size());
+  }
+
+  if (!FLAGS_export_image_path.empty()) {
+    std::stringstream ss;
+    ss << FLAGS_export_image_path << "img" << std::setfill('0') << std::setw(5)
+       << std::to_string(image_counter_) << ".png";
+    cv::imwrite(ss.str(), cv_ptr->image);
+  }
 
   publishColorImage(cv_ptr, image);
+  ++image_counter_;
 }
 
 void ImageReconstruction::publishColorImage(
