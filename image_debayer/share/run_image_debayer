@@ -9,4 +9,5 @@ rosrun image_debayer image_debayer \
    --simple_wb_saturation_percentage=40.0 \
    --image_rotation_angle_deg=180 \
    --export_image_path="/tmp/debayered/" \
+   --bayer_pattern="GR2BGR" \
    $REST
