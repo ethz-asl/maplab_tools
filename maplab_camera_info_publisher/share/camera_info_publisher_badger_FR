@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/darpa_subt_calib/share/anymal-rsl-cerberus-compressed.yaml"
+SENSOR_CALIBRATION="/home/berlukas/Documents/workspace/darpa_2/src/darpa_subt_mapping/darpa_subt_calib/share/anymal-rsl-cerberus-compressed.yaml"
 REST=$@
 
 rosrun maplab_camera_info_publisher maplab_camera_info_publisher \
