@@ -10,6 +10,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <glog/logging.h>
 #include <boost/bind.hpp>
+#include <cv_bridge/cv_bridge.h>
 
 #include <sstream>
 #include <chrono>
@@ -367,13 +368,6 @@ cv::Mat MaplabCameraInfoPublisher::prepareImage(
 
 	cv::Mat new_img = cv_ptr->image.clone();
 	processImage(new_img);
-	cv_ptr->image = new_img;
-
-	sensor_msgs::ImagePtr img_msg = cv_ptr->toImageMsg();
-	img_msg->encoding = getEncoding(is_greyscale_);
-	img_msg->header.stamp = image->header.stamp;
-
-  processed_pubs_.at(0).publish(img_msg);
 	return new_img;
 }
 

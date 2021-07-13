@@ -6,6 +6,8 @@
 #include <std_srvs/Empty.h>
 #include <vi-map/sensor-manager.h>
 #include <image_transport/image_transport.h>
+#include <sensor_msgs/CompressedImage.h>
+#include <opencv2/opencv.hpp>
 
 #include <vector>
 #include <atomic>
