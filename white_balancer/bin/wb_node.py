@@ -1,10 +1,9 @@
 #! /usr/bin/env python2
 
 import rospy
-from multiprocessing import Lock
 import numpy as np
 import cv2
-from cv_bridge import CvBridge,CvBridgeError
+from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 from WBsRGB import WBsRGB
 from skimage import exposure
