@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+REST=$@
+
+rosrun image_debayer image_debayer \
+   --alsologtostderr=1 \
+   --v=3 \
+   --cam_topic="/alphasense_driver_ros/cam4" \
+   --color_topic="/alphasense_driver_ros/cam4/processed" \
+   --simple_wb_saturation_percentage=40.0 \
+   --image_rotation_angle_deg=180 \
+   --export_image_path="/tmp/debayered/" \
+   --bayer_pattern="GR2BGR" \
+   $REST
