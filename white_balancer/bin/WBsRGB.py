@@ -36,7 +36,7 @@ class WBsRGB:
       self.encoderBias = np.load(path_to_models + '/encoderBias.npy')  # PCA bias
       self.K = 25  # K value for nearest neighbor searching
 
-    self.sigma = 0.33  # fall-off factor for KNN blending
+    self.sigma = 0.29  # fall-off factor for KNN blending
     self.h = 60  # histogram bin width
     # our results reported with gamut_mapping=2, however gamut_mapping=1
     # gives more compelling results with over-saturated examples.
