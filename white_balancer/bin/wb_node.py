@@ -24,6 +24,8 @@ class WhiteBalancerNode(object):
         self.path_to_models = rospy.get_param("~path_to_models")
         self.debayer_img = rospy.get_param("~debayer_img")
         self.resize_img = rospy.get_param("~resize_img")
+        self.perform_input_CLAHE = rospy.get_param("~perform_input_CLAHE")
+        self.perform_output_log = rospy.get_param("~perform_output_log")
         self.look_up_table = self.compute_lookup_table(gamma=0.75)
         self.wbModel = WBsRGB(self.path_to_models, gamut_mapping=1, upgraded=1)
 
@@ -52,7 +54,8 @@ class WhiteBalancerNode(object):
         rospy.logwarn("Image is badly overexposed. A marvelous sheep is trying to fix it.")
         if self.resize_img:
             img = self.resize_with_aspect_ratio(img, 416, 416)
-        # img = exposure.equalize_adapthist(img, clip_limit=0.006, nbins=150)
+        if self.perform_input_CLAHE:
+            img = exposure.equalize_adapthist(img, clip_limit=0.006, nbins=150)
 
         if self.debayer_img:
             img = cv2.cvtColor(img, cv2.COLOR_BAYER_GR2BGR)
@@ -69,7 +72,8 @@ class WhiteBalancerNode(object):
         assert self.out_pub != None
         # img = self.gamma_correction(img)
         # img = exposure.adjust_gamma(img, 0.75)
-        img = exposure.adjust_log(img, 0.95)
+        if self.perform_output_log:
+            img = exposure.adjust_log(img, 0.95)
         msg = self.cv_bridge.cv2_to_imgmsg(img, encoding="rgb8")
         self.out_pub.publish(msg)
 
