@@ -1,2 +1,3 @@
 input_topic:         /alphasense_driver_ros/cam4/debayered
 output_topic_suffix: /balanced
+white_balancer:      'wb_srgb'
