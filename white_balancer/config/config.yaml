@@ -1,3 +1,5 @@
-input_topic:         /alphasense_driver_ros/cam4/debayered
+input_topic:         /alphasense_driver_ros/cam4/debayered_throttled
+debayer_img:         False
 output_topic_suffix: /balanced
-white_balancer:      'wb_srgb'
+white_balancer:      "wb_srgb"
+path_to_models:      '/home/berlukas/Documents/workspace/fgsp_ws/src/maplab_tools/white_balancer/models'
