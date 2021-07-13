@@ -3,3 +3,4 @@ debayer_img:         False
 output_topic_suffix: /balanced
 white_balancer:      "wb_srgb"
 path_to_models:      '/home/berlukas/Documents/workspace/fgsp_ws/src/maplab_tools/white_balancer/models'
+resize_img:          True
