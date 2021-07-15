@@ -53,8 +53,8 @@ class WhiteBalancerNode(object):
 
     def is_overexposed(self, img, threshold=20):
         intensity = self.get_intensity(img)
-        p1, p50, p98 = np.percentile(intensity, (1, 50, 90))
-        return p98 > 250
+        p1, p50, p90 = np.percentile(intensity, (1, 50, 90))
+        return p90 > 250
 
     def run_white_balancer(self, msg):
         img = self.cv_bridge.imgmsg_to_cv2(msg)
@@ -72,7 +72,7 @@ class WhiteBalancerNode(object):
             img = cv2.cvtColor(img, cv2.COLOR_BAYER_GR2BGR)
             img = cv2.rotate(img, cv2.ROTATE_180)
         if self.white_balancer == 'wb_srgb':
-            img = self.run_WB_sRGB(img)
+            img = self.wbModel.correctImage(img)
             return cv2.normalize(src=img, dst=None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
         elif self.white_balancer == 'retinex':
             return retinex(img)
@@ -93,9 +93,6 @@ class WhiteBalancerNode(object):
             rospy.logerr("[WhiteBalancerNode] Unknown method specified: " + self.white_balancer)
         rospy.logerr("[WhiteBalancerNode] Method  " + self.white_balancer + " is broken.")
 
-    def run_WB_sRGB(self, img):
-        return self.wbModel.correctImage(img)
-
     def clahe(self, img):
         lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
         lab_planes = cv2.split(lab)
@@ -106,11 +103,6 @@ class WhiteBalancerNode(object):
 
     def publish_img(self, img):
         assert self.out_pub != None
-        # img = self.gamma_correction(img)
-        # img = exposure.adjust_gamma(img, 1.1)
-        # img = exposure.equalize_hist(img)
-        # img = exposure.adjust_log(img, 1.0)
-        # img = self.clahe(img)
         if self.perform_output_log:
             img = exposure.adjust_log(img, 0.95)
         msg = self.cv_bridge.cv2_to_imgmsg(img, encoding="rgb8")

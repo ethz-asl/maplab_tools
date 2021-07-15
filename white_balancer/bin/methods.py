@@ -119,35 +119,11 @@ def color_balance(img):
 
 
 def color_correction_of_image_analysis(img):
-    def detection(img):
-        img_lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
-        l, a, b = cv2.split(img_lab)
-        d_a, d_b, M_a, M_b = 0, 0, 0, 0
-        for i in range(m):
-            for j in range(n):
-                d_a = d_a + a[i][j]
-                d_b = d_b + b[i][j]
-        d_a, d_b = (d_a / (m * n)) - 128, (d_b / (n * m)) - 128
-        D = np.sqrt((np.square(d_a) + np.square(d_b)))
-
-        for i in range(m):
-            for j in range(n):
-                M_a = np.abs(a[i][j] - d_a - 128) + M_a
-                M_b = np.abs(b[i][j] - d_b - 128) + M_b
-
-        M_a, M_b = M_a / (m * n), M_b / (m * n)
-        M = np.sqrt((np.square(M_a) + np.square(M_b)))
-        k = D / M
-        return
-
     r, g, b = cv2.split(img)
     m, n = b.shape
 
-    I_r_2 = np.zeros(r.shape)
-    I_b_2 = np.zeros(b.shape)
-
-    I_r_2 = (r.astype(np.float32) ** 2).astype(np.float32)
-    I_b_2 = (b.astype(np.float32) ** 2).astype(np.float32)
+    I_r_2 = (r.astype(np.float32) ** 2)
+    I_b_2 = (b.astype(np.float32) ** 2)
     sum_I_r_2 = I_r_2.sum()
     sum_I_b_2 = I_b_2.sum()
     sum_I_g = g.sum()
@@ -163,14 +139,12 @@ def color_correction_of_image_analysis(img):
     [u_b, v_b] = np.matmul(np.linalg.inv([[sum_I_b_2, sum_I_b], [max_I_b_2, max_I_b]]), [sum_I_g, max_I_g])
     [u_r, v_r] = np.matmul(np.linalg.inv([[sum_I_r_2, sum_I_r], [max_I_r_2, max_I_r]]), [sum_I_g, max_I_g])
 
-    b_point = u_b * (b.astype(np.float32) ** 2) + v_b * b.astype(np.float32)
-    r_point = u_r * (r.astype(np.float32) ** 2) + v_r * r.astype(np.float32)
+    b_point = u_b * I_b_2 + v_b * b.astype(np.float32)
+    r_point = u_r * I_r_2 + v_r * r.astype(np.float32)
 
     b = np.clip(b_point, 0, 255).astype(np.uint8)
     r = np.clip(r_point, 0, 255).astype(np.uint8)
-
     return cv2.merge([b, g, r])
-
 
 def perfect_reflective_white_balance(img):
     img = img[..., ::-1]  # convert from BGR to RGB

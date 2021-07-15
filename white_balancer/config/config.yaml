@@ -1,6 +1,6 @@
 input_topic:                   /alphasense_driver_ros/cam4/debayered
 debayer_img:                   False
-resize_img:                    True
+resize_img:                    False
 white_balancer:                'image_analysis'
 perform_input_CLAHE:           False
 perform_output_log:            False
