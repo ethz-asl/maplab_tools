@@ -60,9 +60,9 @@ class WhiteBalancerNode(object):
         # if not exposure.is_low_contrast(img, fraction_threshold=0.51,lower_percentile=10, upper_percentile=50):
             # self.out_pub.publish(msg)
             # return None
-        if not self.is_overexposed(img, 61):
-            self.out_pub.publish(msg)
-            return None
+        # if not self.is_overexposed(img, 61):
+            # self.out_pub.publish(msg)
+            # return None
 
         rospy.logwarn("Image is badly overexposed. A marvelous sheep is trying to fix it.")
         if self.resize_img:

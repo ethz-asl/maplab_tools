@@ -1,4 +1,5 @@
-input_topic:          /alphasense_driver_ros/cam4/debayered_throttled
+#input_topic:         /alphasense_driver_ros/cam4/debayered_throttled
+input_topic:          /alphasense_driver_ros/cam1/processed
 debayer_img:          False
 resize_img:           True
 white_balancer:       'image_analysis'

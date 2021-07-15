@@ -6,7 +6,6 @@ def stretch_pre(nimg):
     """
     from 'Applicability Of White-Balancing Algorithms to Restoring Faded Colour Slides: An Empirical Evaluation'
     """
-    nimg = nimg[..., ::-1]  # convert from BGR to RGB
     nimg = nimg.transpose(2, 0, 1)
     nimg[0] = np.maximum(nimg[0]-nimg[0].min(),0)
     nimg[1] = np.maximum(nimg[1]-nimg[1].min(),0)
@@ -23,6 +22,7 @@ def retinex(nimg):
 
 
 def max_white(nimg):
+    nimg = nimg[..., ::-1]  # convert from BGR to RGB
     if nimg.dtype==np.uint8:
         brightest=float(2**8)
     elif nimg.dtype==np.uint16:
