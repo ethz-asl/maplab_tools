@@ -1,7 +1,7 @@
 input_topic:          /alphasense_driver_ros/cam4/debayered_throttled
 debayer_img:          False
 resize_img:           True
-white_balancer:       'wb_srgb'
+white_balancer:       'image_analysis'
 perform_input_CLAHE:  False
 perform_output_log:   False
 
