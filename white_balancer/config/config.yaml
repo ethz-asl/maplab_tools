@@ -1,10 +1,10 @@
-#input_topic:         /alphasense_driver_ros/cam4/debayered_throttled
-input_topic:          /alphasense_driver_ros/cam1/processed
-debayer_img:          False
-resize_img:           True
-white_balancer:       'image_analysis'
-perform_input_CLAHE:  False
-perform_output_log:   False
+input_topic:                   /alphasense_driver_ros/cam4/debayered
+debayer_img:                   False
+resize_img:                    True
+white_balancer:                'image_analysis'
+perform_input_CLAHE:           False
+perform_output_log:            False
+trigger_only_when_overexposed: True
 
-output_topic_suffix:  /balanced
-path_to_models:       '/home/berlukas/Documents/workspace/fgsp_ws/src/maplab_tools/white_balancer/models'
+output_topic_suffix:           /balanced
+path_to_models:                '/home/berlukas/Documents/workspace/fgsp_ws/src/maplab_tools/white_balancer/models'

@@ -27,6 +27,7 @@ class WhiteBalancerNode(object):
         self.perform_output_log = rospy.get_param("~perform_output_log")
         self.look_up_table = self.compute_lookup_table(gamma=0.75)
         self.wbModel = WBsRGB(self.path_to_models, gamut_mapping=1, upgraded=1)
+        self.trigger_only_when_overexposed = rospy.get_param("~trigger_only_when_overexposed")
 
         self.is_initialized = True
         rospy.loginfo('[WhiteBalancerNode] Initialized.')
@@ -57,23 +58,19 @@ class WhiteBalancerNode(object):
 
     def run_white_balancer(self, msg):
         img = self.cv_bridge.imgmsg_to_cv2(msg)
-        # if not exposure.is_low_contrast(img, fraction_threshold=0.51,lower_percentile=10, upper_percentile=50):
-            # self.out_pub.publish(msg)
-            # return None
-        # if not self.is_overexposed(img, 61):
-            # self.out_pub.publish(msg)
-            # return None
+
+        if self.trigger_only_when_overexposed and not self.is_overexposed(img, 61):
+            self.out_pub.publish(msg)
+            return None
 
         rospy.logwarn("Image is badly overexposed. A marvelous sheep is trying to fix it.")
         if self.resize_img:
             img = self.resize_with_aspect_ratio(img, 416, 416)
         if self.perform_input_CLAHE:
             img = exposure.equalize_adapthist(img, clip_limit=0.006, nbins=150)
-
         if self.debayer_img:
             img = cv2.cvtColor(img, cv2.COLOR_BAYER_GR2BGR)
             img = cv2.rotate(img, cv2.ROTATE_180)
-
         if self.white_balancer == 'wb_srgb':
             img = self.run_WB_sRGB(img)
             return cv2.normalize(src=img, dst=None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
@@ -94,6 +91,7 @@ class WhiteBalancerNode(object):
             return img
         else:
             rospy.logerr("[WhiteBalancerNode] Unknown method specified: " + self.white_balancer)
+        rospy.logerr("[WhiteBalancerNode] Method  " + self.white_balancer + " is broken.")
 
     def run_WB_sRGB(self, img):
         return self.wbModel.correctImage(img)
