@@ -1,6 +1,7 @@
 #! /usr/bin/env python2
 
 import rospy
+import time
 import numpy as np
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
@@ -71,9 +72,11 @@ class WhiteBalancerNode(object):
         if self.debayer_img:
             img = cv2.cvtColor(img, cv2.COLOR_BAYER_GR2BGR)
             img = cv2.rotate(img, cv2.ROTATE_180)
+
+        start_time = time.time()
         if self.white_balancer == 'wb_srgb':
             img = self.wbModel.correctImage(img)
-            return cv2.normalize(src=img, dst=None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+            img = cv2.normalize(src=img, dst=None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
         elif self.white_balancer == 'retinex':
             return retinex(img)
         elif self.white_balancer == 'retinex_with_adjust':
@@ -85,13 +88,13 @@ class WhiteBalancerNode(object):
         elif self.white_balancer == 'simplest_cb':
             img = simplest_cb2(img, 60)
             img = stretch(img)
-            return gamma_trans(img)
+            img = gamma_trans(img)
         elif self.white_balancer == 'image_analysis':
             img = color_correction_of_image_analysis(img)
-            return img
         else:
             rospy.logerr("[WhiteBalancerNode] Unknown method specified: " + self.white_balancer)
-        rospy.logerr("[WhiteBalancerNode] Method  " + self.white_balancer + " is broken.")
+        print("--- Took %s seconds ---" % (time.time() - start_time))
+        return img
 
     def clahe(self, img):
         lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
