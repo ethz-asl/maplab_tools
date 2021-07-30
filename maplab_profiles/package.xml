@@ -12,6 +12,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>catkin_simple</buildtool_depend>
+  <buildtool_depend>std_srvs</buildtool_depend>
 
   <depend>rospy</depend>
 </package>
