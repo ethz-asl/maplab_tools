@@ -4,6 +4,7 @@ import rospy
 import time
 import yaml
 import numpy as np
+from os.path import exists
 from std_srvs.srv import Empty
 
 
@@ -35,9 +36,25 @@ class ProfilerNode(object):
 
     def set_profile(self, profile):
         if profile not in self.profiles:
-            rospy.logerr('Profile %s not found in configured profiles.' % profile)
+            rospy.logerr('Profile {profile} not found in configured profiles.'.format(profile=profile))
             return
+
+        profile_path = self.config_root + profile + '.yaml'
+        if not exists(profile_path):
+            rospy.logerr('Profile {profile} does not exist in {path}.'.format(profile=profile, path=self.config_root))
+            return
+
         rospy.loginfo('[MaplabProfilerNode] Setting profile: %s' % profile)
+        try:
+            self.load_and_set_profile(profile_path)
+        except Exception as e:
+            rospy.logerr('Unable to load profile {profile} from {path}'.format(profile=profile, path=profile_path))
+            return
+
+    def load_and_set_profile(self, profile_path):
+        with open(profile_path) as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+            print(data)
 
 
 
