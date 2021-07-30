@@ -49,7 +49,9 @@ class ProfilerNode(object):
             self.load_and_set_profile(profile_path)
         except Exception as e:
             rospy.logerr('Unable to load profile {profile} from {path}'.format(profile=profile, path=profile_path))
+            rospy.logerr(str(e))
             return
+        res = self.maplab_reinit_service()
 
     def load_and_set_profile(self, profile_path):
         with open(profile_path) as f:
