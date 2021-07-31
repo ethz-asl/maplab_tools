@@ -61,10 +61,17 @@ class ProfilerNode(object):
     def load_and_set_profile(self, profile_path):
         with open(profile_path) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
-            print(data)
             for key, value in data.items():
-                print('for {key} we have {value}'.format(key=key, value=value))
+                self.try_set_param(key, value)
 
+    def try_set_param(self, key, value):
+        service_topic = self.maplab_server_prefix + key
+        try:
+            rospy.set_param(service_topic, value)
+            rospy.loginfo('Setting parameter {param} with value {value}'.format(param=service_topic, value=value))
+        except Exception as e:
+            rospy.logerr('Could not set parameter {param} with value {value}'.format(param=service_topic, value=value))
+            return
 
 
 if __name__ == '__main__':
