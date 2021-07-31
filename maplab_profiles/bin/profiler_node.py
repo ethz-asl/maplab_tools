@@ -16,8 +16,8 @@ class ProfilerNode(object):
         self.default_profile = rospy.Service('~maplab_default_profile', Empty, self.default_profile_callback)
 
         self.maplab_server_prefix = rospy.get_param("~maplab_server_prefix")
-        reinit_service = rospy.get_param("~maplab_server_reinit_sevice")
-        self.maplab_reinit_service = rospy.ServiceProxy(reinit_service, Empty)
+        self.reinit_service_topic = rospy.get_param("~maplab_server_reinit_sevice")
+        self.maplab_reinit_service = rospy.ServiceProxy(self.reinit_service_topic, Empty)
 
         self.init_profile = rospy.get_param("~init_profile")
         self.config_root = rospy.get_param("~config_root")
@@ -51,12 +51,19 @@ class ProfilerNode(object):
             rospy.logerr('Unable to load profile {profile} from {path}'.format(profile=profile, path=profile_path))
             rospy.logerr(str(e))
             return
-        res = self.maplab_reinit_service()
+
+        try:
+            res = self.maplab_reinit_service()
+        except Exception as e:
+            rospy.logerr('Service at {topic} is not available'.format(topic=self.reinit_service_topic))
+            return
 
     def load_and_set_profile(self, profile_path):
         with open(profile_path) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             print(data)
+            for key, value in data.items():
+                print('for {key} we have {value}'.format(key=key, value=value))
 
 
 
