@@ -1,1 +1,74 @@
-dense_depth_integrator_enable_sigint_breaker: false
+
+# VISUAL LANDMARKS
+#################
+vi_map_landmark_quality_min_observers:                          2   # Default 4
+vi_map_landmark_quality_max_distance_from_closest_observer:     50  # Default 40m
+vi_map_landmark_quality_min_distance_from_closest_observer:     0.02 # Default 0.05m
+vi_map_landmark_quality_min_observation_angle_deg:              2  # Default 5deg
+
+
+# OPTIMIZATION
+##############
+ba_num_iterations:                                              7
+ba_max_time_seconds:                                            150
+ba_enable_signal_handler:                                       false
+ba_hide_iterations_console_output:                              true
+ba_include_visual:                                              true
+ba_include_inertial:                                            true
+ba_include_loop_closure_edges:                                  true
+ba_include_absolute_pose_constraints:                           true
+ba_include_6dof_odometry:                                       true
+
+
+# LiDAR Registrations
+#####################
+maplab_server_enable_lidar_loop_closure:                        true
+maplab_server_dense_map_resource_type:                          25
+maplab_server_perform_global_admc_every_nth:                    1
+
+dm_candidate_search_enable_intra_mission_consecutive:           true # Default true
+dm_candidate_search_consecutive_max_delta_time_s:               25 # Default 20.0
+dm_candidate_search_consecutive_max_delta_position_m:           6.0 # Default 5.0
+dm_candidate_search_consecutive_max_delta_rotation_deg:         270 # Default 180
+dm_candidate_search_enable_intra_mission_proximity:             true # Default true
+dm_candidate_search_enable_inter_mission_proximity:             true # Default true
+dm_candidate_search_proximity_max_delta_position_m:             6.0 # Default 2.0
+dm_candidate_search_proximity_max_delta_rotation_deg:           270.0 # Default 180.0
+dm_candidate_search_proximity_min_distance_along_graph_m:       1 # Default 1.0
+dm_candidate_search_proximity_take_closest_n_candidates:        20 # Default 3
+dm_candidate_search_enable_intra_mission_global:                false # Default true
+dm_candidate_search_enable_inter_mission_global:                false # Default true
+dm_candidate_selection_recompute_all_constraints:               false # Default false
+dm_candidate_selection_recompute_invalid_constraints:           true # Default true
+dm_candidate_selection_min_switch_variable_value:               0.4 # Default 0.5
+dm_candidate_selection_max_number_of_candidates:                150
+
+dm_candidate_alignment_max_delta_position_to_initial_guess_m:   3.5  # Default 0.5
+dm_candidate_alignment_max_delta_rotation_to_initial_guess_deg: 20 # Default 10
+dm_candidate_alignment_type:                                    "PclGIcp"
+
+regbox_lpm_icp_match_residual_error_threshold_m:                0.1
+regbox_pcl_downsample_leaf_size_m:                              0.05
+regbox_pcl_fitness_max_considered_distance_m:                   1
+regbox_pcl_max_fitness_score_m:                                 0.55
+regbox_pcl_max_iterations:                                      50
+
+# VISUAL LOOP CLOSURE
+#####################
+lc_filter_underconstrained_landmarks:                           true # Default true
+lc_ransac_pixel_sigma:                                          2.0 # Default 2.0
+lc_min_inlier_count:                                            20 # Default 10
+lc_min_inlier_ratio:                                            0.6 # Default 0.2
+lc_num_ransac_iters:                                            100 # Default 100
+lc_nonlinear_refinement_p3p:                                    true # Default false
+lc_insert_lc_edge_instead_of_merging:                           false # Default false
+lc_switch_variable_variance:                                    1e-8 # Default 1e-8
+lc_edge_covariance_scaler:                                      1e-7 # Default 1e-7
+lc_edge_min_distance_meters:                                    1.0 # Default 1.0
+lc_edge_min_inlier_ratio:                                       0.5 # Default 0.5
+lc_edge_min_inlier_count:                                       20 # Default 20
+
+# DENSE MAP
+###########
+vis_pointcloud_filter_leaf_size_m:                              0.5
+vis_pointcloud_visualize_every_nth:                             7
