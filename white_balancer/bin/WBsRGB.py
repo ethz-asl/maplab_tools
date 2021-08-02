@@ -28,7 +28,7 @@ class WBsRGB:
       self.mappingFuncs = np.load(path_to_models + '/mappingFuncs+.npy')  # correct funcs
       self.encoderWeights = np.load(path_to_models + '/encoderWeights+.npy')  # PCA matrix
       self.encoderBias = np.load(path_to_models + '/encoderBias+.npy')  # PCA bias
-      self.K = 101  # K value for NN searching
+      self.K = 111  # K value for NN searching
     else:
       self.features = np.load(path_to_models + '/features.npy')  # encoded features
       self.mappingFuncs = np.load(path_to_models + '/mappingFuncs.npy')  # correction funcs
@@ -36,7 +36,7 @@ class WBsRGB:
       self.encoderBias = np.load(path_to_models + '/encoderBias.npy')  # PCA bias
       self.K = 25  # K value for nearest neighbor searching
 
-    self.sigma = 0.29  # fall-off factor for KNN blending
+    self.sigma = 0.33  # fall-off factor for KNN blending
     self.h = 60  # histogram bin width
     # our results reported with gamut_mapping=2, however gamut_mapping=1
     # gives more compelling results with over-saturated examples.
@@ -66,7 +66,7 @@ class WBsRGB:
       newW = int(np.floor(sz[1] * factor))
       I = cv2.resize(I, (newW, newH), interpolation=cv2.INTER_NEAREST)
     I_reshaped = I[(I > 0).all(axis=2)]
-    eps = 6.4 / self.h
+    eps = 9.4 / self.h
     hist = np.zeros((self.h, self.h, 3))  # histogram will be stored here
     Iy = np.linalg.norm(I_reshaped, axis=1)  # intensity vector
     for i in range(3):  # for each histogram layer, do
