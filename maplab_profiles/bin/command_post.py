@@ -37,18 +37,24 @@ class CommandPost(object):
             rospy.logerr(str(e))
             return False
 
-        try:
-            res = self.maplab_reinit_service()
-        except Exception as e:
-            rospy.logerr('[CommandPost] Service at {topic} is not available'.format(topic=self.config.reinit_service_topic))
-            return False
-        return True
+        return self.send_reinit_request()
 
     def load_and_set_profile(self, profile_path):
         with open(profile_path) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
-            for key, value in data.items():
-                self.try_set_param(key, value)
+            self.set_params_from_dict(data)
+
+    def set_params_from_dict(self, params_dict):
+        for key, value in params_dict.items():
+            self.try_set_param(key, value)
+
+    def send_reinit_request(self):
+        try:
+            res = self.maplab_reinit_service()
+            return True
+        except Exception as e:
+            rospy.logerr('[CommandPost] Service at {topic} is not available'.format(topic=self.config.reinit_service_topic))
+            return False
 
     def try_set_param(self, key, value):
         service_topic = self.config.maplab_server_prefix + key

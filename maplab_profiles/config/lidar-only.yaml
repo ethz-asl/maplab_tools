@@ -13,7 +13,7 @@ ba_num_iterations:                                              7
 ba_max_time_seconds:                                            60
 ba_enable_signal_handler:                                       false
 ba_hide_iterations_console_output:                              true
-ba_include_visual:                                              true
+ba_include_visual:                                              false
 ba_include_inertial:                                            true
 ba_include_loop_closure_edges:                                  true
 ba_include_absolute_pose_constraints:                           true

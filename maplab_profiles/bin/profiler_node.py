@@ -21,10 +21,12 @@ class ProfilerNode(object):
         if self.config.mode == 'profiler':
             self.profiler = Profiler(self.config, self.commander)
             self.profiler.start_profiling()
-        else:
+        elif self.config.mode == 'commander':
             self.commander.set_profile(self.config.init_profile)
             rospy.loginfo('[MaplabProfilerNode] Initialized. Defined profiles are: ')
             rospy.loginfo('[MaplabProfilerNode] ' + str(self.config.profiles))
+        else:
+            rospy.logfatal('[MaplabProfilerNode] Unknown mode {mode}'.format(mode=self.config.mode))
 
         self.is_initialized = True
 

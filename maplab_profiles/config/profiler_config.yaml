@@ -9,14 +9,18 @@ profiles:
   - 'default'
   - 'high_performance'
   - 'low_performance'
+  - 'lidar-only'
 
 # Profiler configs
 ##################
-profiling_submap_folder:           ''
+profiling_submap_folder:           '/home/berlukas/Documents/results/hagerbach_july/'
 profiling_robots:
-  - 'anymal_1'
+  - 'mission_05_anymal_2'
 profiling_mode:                    parallel
 profiling_delays:
   - 0
 profiling_rate:                    0.1
-profiling_completion_sleep_time_s: 80
+profiling_completion_sleep_time_s: 20
+profiling_merged_map_path:         '/tmp/maplab_server/merged_map/'
+profiling_ground_truth_path:       '/home/berlukas/Documents/results/hagerbach_july/mission_05_opt/'
+profiling_grid_search_params_file: 'debug_grid_search'

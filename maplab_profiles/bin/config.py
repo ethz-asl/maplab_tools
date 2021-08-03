@@ -17,13 +17,14 @@ class ProfilerConfig(BaseConfig):
         self.config_root = ''
         self.profiles = ['default']
 
-        self.profiling_notification_topic = 'transfolder_receiver/folder_received'
+        self.profiling_notification_topic = '/maplab_server/map_update_notification'
         self.profiling_submap_folder = ''
         self.profiling_robots = []
         self.profiling_mode = 'parallel'
         self.profiling_delays = []
         self.profiling_rate = 0.1
         self.profiling_completion_sleep_time_s = 60
+        self.profiling_grid_search_params_file = 'grid_search'
 
     def init_from_config(self):
         # general config
@@ -42,3 +43,4 @@ class ProfilerConfig(BaseConfig):
         self.profiling_delays = self.try_get_param("~profiling_delays", self.profiling_delays)
         self.profiling_rate = self.try_get_param("~profiling_rate", self.profiling_rate)
         self.profiling_completion_sleep_time_s = self.try_get_param("~profiling_completion_sleep_time_s", self.profiling_completion_sleep_time_s)
+        self.profiling_grid_search_params_file = self.try_get_param("~profiling_grid_search_params_file", self.profiling_grid_search_params_file)
