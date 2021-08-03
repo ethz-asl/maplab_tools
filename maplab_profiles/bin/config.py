@@ -9,6 +9,7 @@ class BaseConfig(object):
 class ProfilerConfig(BaseConfig):
     def __init__(self):
         # general config
+        self.mode = 'commander'
         self.maplab_server_prefix = '/maplab_server/maplab_server_node/'
         self.reinit_service_topic = '/maplab_server/reinit_gflags'
 
@@ -18,6 +19,7 @@ class ProfilerConfig(BaseConfig):
 
     def init_from_config(self):
         # general config
+        self.mode = self.try_get_param("~mode", self.mode)
         self.maplab_server_prefix = self.try_get_param("~maplab_server_prefix", self.maplab_server_prefix)
         self.reinit_service_topic = self.try_get_param("~maplab_server_reinit_sevice", self.reinit_service_topic)
 

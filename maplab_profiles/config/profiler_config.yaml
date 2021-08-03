@@ -1,3 +1,5 @@
+mode:                        'profiler'
+
 maplab_server_prefix:        '/maplab_server/maplab_server_node/'
 maplab_server_reinit_sevice: '/maplab_server/reinit_gflags'
 
