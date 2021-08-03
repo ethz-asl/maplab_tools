@@ -1,9 +1,6 @@
 #! /usr/bin/env python2
 
 import rospy
-import time
-import yaml
-import numpy as np
 
 from os.path import exists
 from std_srvs.srv import Empty
@@ -23,6 +20,7 @@ class ProfilerNode(object):
 
         if self.config.mode == 'profiler':
             self.profiler = Profiler(self.config, self.commander)
+            self.profiler.start_profiling()
         else:
             self.commander.set_profile(self.config.init_profile)
             rospy.loginfo('[MaplabProfilerNode] Initialized. Defined profiles are: ')

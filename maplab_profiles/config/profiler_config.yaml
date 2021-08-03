@@ -1,11 +1,22 @@
-mode:                        'profiler'
+mode:                              'profiler'
 
-maplab_server_prefix:        '/maplab_server/maplab_server_node/'
-maplab_server_reinit_sevice: '/maplab_server/reinit_gflags'
+maplab_server_prefix:              '/maplab_server/maplab_server_node/'
+maplab_server_reinit_sevice:       '/maplab_server/reinit_gflags'
 
-init_profile:                'default'
-config_root:                 '/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/maplab/dependencies/internal/maplab_tools/maplab_profiles/config/'
+init_profile:                      'default'
+config_root:                       '/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/maplab/dependencies/internal/maplab_tools/maplab_profiles/config/'
 profiles:
   - 'default'
   - 'high_performance'
   - 'low_performance'
+
+# Profiler configs
+##################
+profiling_submap_folder:           ''
+profiling_robots:
+  - 'anymal_1'
+profiling_mode:                    parallel
+profiling_delays:
+  - 0
+profiling_rate:                    0.1
+profiling_completion_sleep_time_s: 80
