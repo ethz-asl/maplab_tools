@@ -33,18 +33,19 @@ def training_function(config):
     commander = CommandPost(profiler_config)
     ds = Datasource(profiler_config)
 
-    if not commander.set_profile('default'):
+    if not commander.set_profile(profiler_config.init_profile):
         tune.track.log(mean_loss=100)
     commander.set_params_from_dict(config)
     commander.send_reinit_request()
 
-    if not ds.start_publishing_submaps():
-        tune.track.log(mean_loss=200)
+    # if not ds.start_publishing_submaps():
+        # tune.track.log(mean_loss=200)
 
     time.sleep(10)
     # tune.report(mean_loss = self.check_result()) only for python3
-    tune.track.log(mean_loss=compute_loss(profiler_config))
-    # tune.track.log(mean_loss=3)
+    # tune.track.log(mean_loss=compute_loss(profiler_config))
+    tune.track.log(mean_loss=3)
+    commander.send_global_map_reset()
 
 class Profiler(object):
     def __init__(self, config, commander):
