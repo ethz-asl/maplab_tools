@@ -66,7 +66,6 @@ def training_function(config):
     # time.sleep(60)
     # rospy.signal_shutdown('done profiling.')
     # global_locker.mutex.release()
-    print('---------------------------- end --------------------------------')
 
 class Profiler(object):
     def __init__(self, config):
@@ -83,7 +82,6 @@ class Profiler(object):
         rospy.loginfo(tune_config)
         # analysis = tune.run(training_function, config)
         # train_func = partial(Profiler.profiling_function, self=self)
-        ray.init(local_mode=False, address='10.6.144.158:6379', redis_password='5241590000000000')
         analysis = tune.run(
             training_function,
             stop={
@@ -93,7 +91,6 @@ class Profiler(object):
             config = tune_config,
             resources_per_trial={'cpu': 1},
             num_samples = 1)
-        ray.shutdown()
 
         print("Best config: ", analysis.get_best_config(metric="mean_loss", mode="min"))
 
