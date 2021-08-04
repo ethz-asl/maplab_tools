@@ -13,7 +13,7 @@ class ProfilerNode(object):
     def __init__(self):
         self.is_initialized = False
         self.config = ProfilerConfig()
-        self.config.init_from_config()
+        self.config.init_from_rosparams()
 
         # Initialize with the default profile.
         self.commander = CommandPost(self.config)

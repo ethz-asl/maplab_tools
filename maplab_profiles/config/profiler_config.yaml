@@ -2,6 +2,7 @@ mode:                              'profiler'
 
 maplab_server_prefix:              '/maplab_server/maplab_server_node/'
 maplab_server_reinit_sevice:       '/maplab_server/reinit_gflags'
+maplab_reset_global_map:           '/maplab_server/delete_all_robot_missions'
 
 init_profile:                      'default'
 config_root:                       '/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/maplab/dependencies/internal/maplab_tools/maplab_profiles/config/'
@@ -14,8 +15,9 @@ profiles:
 # Profiler configs
 ##################
 profiling_submap_folder:           '/home/berlukas/Documents/results/hagerbach_july/'
+profiling_send_n_submaps:          25
 profiling_robots:
-  - 'mission_05_anymal_2'
+  - 'mission_05_anymal_5'
 profiling_mode:                    parallel
 profiling_delays:
   - 0

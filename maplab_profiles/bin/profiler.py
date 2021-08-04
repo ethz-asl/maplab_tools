@@ -24,22 +24,26 @@ def compute_loss(config):
     return eval.compute_ape()
 
 def training_function(config):
+    rospy.init_node('profiler_function', disable_signals=True)
     profiler_config = ProfilerConfig()
-    profiler_config.init_from_config()
+    profiler_config.init_from_rosparams()
+    print('profiler config mode: {mode}'.format(mode=profiler_config.mode))
+    # print('profiler config mode: {mode}'.format(mode=rospy.get_param('')))
     commander = CommandPost(profiler_config)
     ds = Datasource(profiler_config)
 
     if not commander.set_profile('default'):
-        tune.track.log(mean_loss=1)
+        tune.track.log(mean_loss=100)
     commander.set_params_from_dict(config)
     commander.send_reinit_request()
 
     if not ds.start_publishing_submaps():
-        tune.track.log(mean_loss=2)
+        tune.track.log(mean_loss=200)
 
     time.sleep(10)
     # tune.report(mean_loss = self.check_result()) only for python3
     tune.track.log(mean_loss=compute_loss(config))
+    # tune.track.log(mean_loss=3)
 
 class Profiler(object):
     def __init__(self, config, commander):
@@ -62,6 +66,7 @@ class Profiler(object):
             stop={
                 "training_iteration": 1,
             },
+            verbose=1,
             config = tune_config,
             num_samples = 1)
 

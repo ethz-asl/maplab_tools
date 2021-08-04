@@ -12,6 +12,7 @@ class CommandPost(object):
         # Publishers and subscribers.
         self.default_profile = rospy.Service('~maplab_default_profile', Empty, self.default_profile_callback)
         self.maplab_reinit_service = rospy.ServiceProxy(self.config.reinit_service_topic, Empty)
+        self.maplab_reset_global_map_service = rospy.ServiceProxy(self.config.reset_global_map, Empty)
 
     def default_profile_callback(self, req):
         if self.is_initialized is False:
@@ -21,20 +22,20 @@ class CommandPost(object):
 
     def set_profile(self, profile):
         if profile not in self.config.profiles:
-            rospy.logerr('[CommandPost] Profile {profile} not found in configured profiles.'.format(profile=profile))
+            # rospy.logerr('[CommandPost] Profile {profile} not found in configured profiles.'.format(profile=profile))
             return False
 
         profile_path = self.config.config_root + profile + '.yaml'
         if not exists(profile_path):
-            rospy.logerr('[CommandPost] Profile {profile} does not exist in {path}.'.format(profile=profile, path=self.config.config_root))
+            # rospy.logerr('[CommandPost] Profile {profile} does not exist in {path}.'.format(profile=profile, path=self.config.config_root))
             return False
 
-        rospy.loginfo('[CommandPost] Setting profile: %s' % profile)
+        # rospy.loginfo('[CommandPost] Setting profile: %s' % profile)
         try:
             self.load_and_set_profile(profile_path)
         except Exception as e:
-            rospy.logerr('[CommandPost] Unable to load profile {profile} from {path}'.format(profile=profile, path=profile_path))
-            rospy.logerr(str(e))
+            # rospy.logerr('[CommandPost] Unable to load profile {profile} from {path}'.format(profile=profile, path=profile_path))
+            # rospy.logerr(str(e))
             return False
 
         return self.send_reinit_request()
@@ -53,14 +54,22 @@ class CommandPost(object):
             res = self.maplab_reinit_service()
             return True
         except Exception as e:
-            rospy.logerr('[CommandPost] Service at {topic} is not available'.format(topic=self.config.reinit_service_topic))
+            # rospy.logerr('[CommandPost] Service at {topic} is not available'.format(topic=self.config.reinit_service_topic))
+            return False
+
+    def send_reinit_request(self):
+        try:
+            res = self.maplab_reset_global_map_service()
+            return True
+        except Exception as e:
+            # rospy.logerr('[CommandPost] Service at {topic} is not available'.format(topic=self.config.reinit_service_topic))
             return False
 
     def try_set_param(self, key, value):
         service_topic = self.config.maplab_server_prefix + key
         try:
             rospy.set_param(service_topic, value)
-            rospy.loginfo('[CommandPost] Setting parameter {param} with value {value}'.format(param=service_topic, value=value))
+            # rospy.loginfo('[CommandPost] Setting parameter {param} with value {value}'.format(param=service_topic, value=value))
         except Exception as e:
-            rospy.logerr('[CommandPost] Could not set parameter {param} with value {value}'.format(param=service_topic, value=value))
+            # rospy.logerr('[CommandPost] Could not set parameter {param} with value {value}'.format(param=service_topic, value=value))
             return

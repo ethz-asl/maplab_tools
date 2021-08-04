@@ -27,9 +27,14 @@ class Datasource(object):
         robot_to_msg_dict = {}
 
         publishing = True
+        submap_counter = 0
         while publishing:
             time_elapsed = rospy.Time.now() - start_time
             while submaps:
+                if self.config.profiling_send_n_submaps > 0 and submap_counter >= self.config.profiling_send_n_submaps:
+                    publishing = False
+                    break
+
                 notification_time = float(submaps[0][1][0])
                 if time_elapsed.to_sec() > notification_time:
                     name = submaps[0][1][1]
@@ -46,8 +51,10 @@ class Datasource(object):
                     rospy.loginfo('[Datasource] Publishing submap for {name}'.format(name=name))
                     pub.publish(array_msg)
                     submaps.pop(0)
+                    submap_counter += 1
                 else:
                     break
+
             if not submaps:
                 rospy.loginfo('[Datasource] Done publishing submaps.')
                 publishing = False

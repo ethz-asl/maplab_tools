@@ -12,6 +12,7 @@ class ProfilerConfig(BaseConfig):
         self.mode = 'commander'
         self.maplab_server_prefix = '/maplab_server/maplab_server_node/'
         self.reinit_service_topic = '/maplab_server/reinit_gflags'
+        self.reset_global_map = '/maplab_server/delete_all_robot_missions'
 
         self.init_profile = 'default'
         self.config_root = ''
@@ -19,6 +20,7 @@ class ProfilerConfig(BaseConfig):
 
         self.profiling_notification_topic = '/maplab_server/map_update_notification'
         self.profiling_submap_folder = ''
+        self.profiling_send_n_submaps = -1
         self.profiling_robots = []
         self.profiling_mode = 'parallel'
         self.profiling_delays = []
@@ -26,21 +28,23 @@ class ProfilerConfig(BaseConfig):
         self.profiling_completion_sleep_time_s = 60
         self.profiling_grid_search_params_file = 'grid_search'
 
-    def init_from_config(self):
+    def init_from_rosparams(self):
         # general config
-        self.mode = self.try_get_param("~mode", self.mode)
-        self.maplab_server_prefix = self.try_get_param("~maplab_server_prefix", self.maplab_server_prefix)
-        self.reinit_service_topic = self.try_get_param("~maplab_server_reinit_sevice", self.reinit_service_topic)
+        self.mode = self.try_get_param("/maplab_profiles/mode", self.mode)
+        self.maplab_server_prefix = self.try_get_param("/maplab_profiles/maplab_server_prefix", self.maplab_server_prefix)
+        self.reinit_service_topic = self.try_get_param("/maplab_profiles/maplab_server_reinit_sevice", self.reinit_service_topic)
+        self.reset_global_map = self.try_get_param("/maplab_profiles/maplab_reset_global_map", self.reset_global_map)
 
-        self.init_profile = self.try_get_param("~init_profile", self.init_profile)
-        self.config_root = self.try_get_param("~config_root", self.config_root)
-        self.profiles = self.try_get_param("~profiles", self.profiles)
+        self.init_profile = self.try_get_param("/maplab_profiles/init_profile", self.init_profile)
+        self.config_root = self.try_get_param("/maplab_profiles/config_root", self.config_root)
+        self.profiles = self.try_get_param("/maplab_profiles/profiles", self.profiles)
 
-        self.profiling_notification_topic = self.try_get_param("~profiling_notification_topic", self.profiling_notification_topic)
-        self.profiling_submap_folder = self.try_get_param("~profiling_submap_folder", self.profiling_submap_folder)
-        self.profiling_robots = self.try_get_param("~profiling_robots", self.profiling_robots)
-        self.profiling_mode = self.try_get_param("~profiling_mode", self.profiling_mode)
-        self.profiling_delays = self.try_get_param("~profiling_delays", self.profiling_delays)
-        self.profiling_rate = self.try_get_param("~profiling_rate", self.profiling_rate)
-        self.profiling_completion_sleep_time_s = self.try_get_param("~profiling_completion_sleep_time_s", self.profiling_completion_sleep_time_s)
-        self.profiling_grid_search_params_file = self.try_get_param("~profiling_grid_search_params_file", self.profiling_grid_search_params_file)
+        self.profiling_notification_topic = self.try_get_param("/maplab_profiles/profiling_notification_topic", self.profiling_notification_topic)
+        self.profiling_submap_folder = self.try_get_param("/maplab_profiles/profiling_submap_folder", self.profiling_submap_folder)
+        self.profiling_send_n_submaps = self.try_get_param("/maplab_profiles/profiling_send_n_submaps", self.profiling_send_n_submaps)
+        self.profiling_robots = self.try_get_param("/maplab_profiles/profiling_robots", self.profiling_robots)
+        self.profiling_mode = self.try_get_param("/maplab_profiles/profiling_mode", self.profiling_mode)
+        self.profiling_delays = self.try_get_param("/maplab_profiles/profiling_delays", self.profiling_delays)
+        self.profiling_rate = self.try_get_param("/maplab_profiles/profiling_rate", self.profiling_rate)
+        self.profiling_completion_sleep_time_s = self.try_get_param("/maplab_profiles/profiling_completion_sleep_time_s", self.profiling_completion_sleep_time_s)
+        self.profiling_grid_search_params_file = self.try_get_param("/maplab_profiles/profiling_grid_search_params_file", self.profiling_grid_search_params_file)
