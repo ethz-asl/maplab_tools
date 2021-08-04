@@ -8,7 +8,7 @@
   <!-- Node name -->
   <arg name="node_name"               default="maplab_profiles"/>
 
-  <node name="$(arg node_name)" pkg="maplab_profiles" type="profiler_node.py" output="screen" respawn="true">
+  <node name="$(arg node_name)" pkg="maplab_profiles" type="profiler_node.py" output="screen" respawn="false">
     <rosparam command="load" file="$(arg config_file)"/>
   </node>
 </launch>

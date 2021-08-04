@@ -11,7 +11,9 @@ class CommandPost(object):
         self.config = config
 
         # Publishers and subscribers.
-        self.default_profile = rospy.Service('~maplab_default_profile', Empty, self.default_profile_callback)
+        if config.mode == 'commander':
+            self.default_profile = rospy.Service('~maplab_default_profile', Empty, self.default_profile_callback)
+            
         self.maplab_reinit_service = rospy.ServiceProxy(self.config.reinit_service_topic, Empty)
         self.maplab_reset_global_map_service = rospy.ServiceProxy(self.config.reset_global_map, DeleteAllRobotMissions)
 

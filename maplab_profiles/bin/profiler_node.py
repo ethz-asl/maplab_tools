@@ -15,13 +15,11 @@ class ProfilerNode(object):
         self.config = ProfilerConfig()
         self.config.init_from_rosparams()
 
-        # Initialize with the default profile.
-        self.commander = CommandPost(self.config)
-
         if self.config.mode == 'profiler':
-            self.profiler = Profiler(self.config, self.commander)
+            self.profiler = Profiler(self.config)
             self.profiler.start_profiling()
         elif self.config.mode == 'commander':
+            self.commander = CommandPost(self.config)
             self.commander.set_profile(self.config.init_profile)
             rospy.loginfo('[MaplabProfilerNode] Initialized. Defined profiles are: ')
             rospy.loginfo('[MaplabProfilerNode] ' + str(self.config.profiles))

@@ -5,13 +5,27 @@ import time
 import numpy as np
 import sys
 import yaml
+import os
 from os.path import exists
 from ray import tune
+import ray
+from multiprocessing import Lock
 from functools import partial
 from config import ProfilerConfig
 from datasource import Datasource
 from command_post import CommandPost
 from pose_trajectory_evaluation import PoseTrajectoryEvaluation
+from locker import *
+
+class Locker(object):
+    instance = None
+    mutex = Lock()
+
+    def __new__(cls):
+        if cls.instance is None:
+            cls.instance = super(Locker, cls).__new__(cls)
+            # Put any initialization here.
+        return cls.instance
 
 def compute_loss(config):
     pose_filename = 'vertex_poses_velocities_biases.csv'
@@ -25,33 +39,40 @@ def compute_loss(config):
     return eval.compute_ape()
 
 def training_function(config):
-    rospy.init_node('profiler_function', disable_signals=True)
+    # global_locker.mutex.acquire()
+    print('---------------------------- start --------------------------------')
+    # print(global_locker)
+    node_name = 'profiler_function_' + str(os.getpid())
+    # rospy.init_node(node_name, disable_signals=True)
     profiler_config = ProfilerConfig()
     profiler_config.init_from_rosparams()
-    print('profiler config mode: {mode}'.format(mode=profiler_config.mode))
-    # print('profiler config mode: {mode}'.format(mode=rospy.get_param('')))
-    commander = CommandPost(profiler_config)
-    ds = Datasource(profiler_config)
 
-    if not commander.set_profile(profiler_config.init_profile):
-        tune.track.log(mean_loss=100)
-    commander.set_params_from_dict(config)
-    commander.send_reinit_request()
+    # commander = CommandPost(profiler_config)
+    # ds = Datasource(profiler_config)
+
+    # if not commander.set_profile(profiler_config.init_profile):
+        # tune.track.log(mean_loss=100)
+    # commander.set_params_from_dict(config)
+    # commander.send_reinit_request()
 
     # if not ds.start_publishing_submaps():
         # tune.track.log(mean_loss=200)
 
-    time.sleep(10)
+    # time.sleep(10)
     # tune.report(mean_loss = self.check_result()) only for python3
     # tune.track.log(mean_loss=compute_loss(profiler_config))
-    tune.track.log(mean_loss=3)
-    commander.send_global_map_reset()
+    tune.track.log(mean_loss=300)
+    # commander.send_global_map_reset()
+    # time.sleep(60)
+    # rospy.signal_shutdown('done profiling.')
+    # global_locker.mutex.release()
+    print('---------------------------- end --------------------------------')
 
 class Profiler(object):
-    def __init__(self, config, commander):
+    def __init__(self, config):
         self.config = config
-        self.commander = commander
-        self.ds = Datasource(self.config)
+        # self.commander = commander
+        # self.ds = Datasource(self.config)
 
     def start_profiling(self):
         tune_config = {}
@@ -61,8 +82,8 @@ class Profiler(object):
         rospy.loginfo('[Profiler] Starting profiling with config:')
         rospy.loginfo(tune_config)
         # analysis = tune.run(training_function, config)
-        # train_func = partial(training_function, commander=self.commander, ds = self.ds)
         # train_func = partial(Profiler.profiling_function, self=self)
+        ray.init(local_mode=False, address='10.6.144.158:6379', redis_password='5241590000000000')
         analysis = tune.run(
             training_function,
             stop={
@@ -70,7 +91,9 @@ class Profiler(object):
             },
             verbose=1,
             config = tune_config,
+            resources_per_trial={'cpu': 1},
             num_samples = 1)
+        ray.shutdown()
 
         print("Best config: ", analysis.get_best_config(metric="mean_loss", mode="min"))
 
