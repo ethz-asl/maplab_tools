@@ -11,6 +11,7 @@ from functools import partial
 from config import ProfilerConfig
 from datasource import Datasource
 from command_post import CommandPost
+from pose_trajectory_evaluation import PoseTrajectoryEvaluation
 
 def compute_loss(config):
     pose_filename = 'vertex_poses_velocities_biases.csv'
@@ -42,7 +43,7 @@ def training_function(config):
 
     time.sleep(10)
     # tune.report(mean_loss = self.check_result()) only for python3
-    tune.track.log(mean_loss=compute_loss(config))
+    tune.track.log(mean_loss=compute_loss(profiler_config))
     # tune.track.log(mean_loss=3)
 
 class Profiler(object):

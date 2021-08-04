@@ -26,6 +26,8 @@ class ProfilerConfig(BaseConfig):
         self.profiling_delays = []
         self.profiling_rate = 0.1
         self.profiling_completion_sleep_time_s = 60
+        self.profiling_merged_map_path = '/tmp/maplab_server/merged_map/'
+        self.profiling_ground_truth_path = ''
         self.profiling_grid_search_params_file = 'grid_search'
 
     def init_from_rosparams(self):
@@ -47,4 +49,6 @@ class ProfilerConfig(BaseConfig):
         self.profiling_delays = self.try_get_param("/maplab_profiles/profiling_delays", self.profiling_delays)
         self.profiling_rate = self.try_get_param("/maplab_profiles/profiling_rate", self.profiling_rate)
         self.profiling_completion_sleep_time_s = self.try_get_param("/maplab_profiles/profiling_completion_sleep_time_s", self.profiling_completion_sleep_time_s)
+        self.profiling_merged_map_path = self.try_get_param("/maplab_profiles/profiling_merged_map_path", self.profiling_merged_map_path)
+        self.profiling_ground_truth_path = self.try_get_param("/maplab_profiles/profiling_ground_truth_path", self.profiling_ground_truth_path)
         self.profiling_grid_search_params_file = self.try_get_param("/maplab_profiles/profiling_grid_search_params_file", self.profiling_grid_search_params_file)

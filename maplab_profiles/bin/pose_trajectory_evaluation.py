@@ -68,3 +68,15 @@ class PoseTrajectoryEvaluation(object):
 
         err = np.linalg.norm(est_xyz - gt_xyz, axis=1)
         return np.sqrt(np.mean(err**2))
+
+if __name__ == '__main__':
+    merged_map_path = '/tmp/maplab_server/merged_map/'
+    gt_path = '/home/berlukas/Documents/results/hagerbach_july/mission_05_opt/'
+
+    pose_filename = 'vertex_poses_velocities_biases.csv'
+    est_traj_file = merged_map_path + pose_filename
+    gt_traj_file = gt_path + pose_filename
+
+    eval = PoseTrajectoryEvaluation(est_traj_file, gt_traj_file)
+    est_traj, gt_traj = eval.compute_synchronized_trajectories()
+    print('we have an rmse of {rmse}'.format(rmse=eval.compute_ape()))

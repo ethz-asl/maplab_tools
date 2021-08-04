@@ -15,7 +15,7 @@ profiles:
 # Profiler configs
 ##################
 profiling_submap_folder:           '/home/berlukas/Documents/results/hagerbach_july/'
-profiling_send_n_submaps:          25
+profiling_send_n_submaps:          5
 profiling_robots:
   - 'mission_05_anymal_5'
 profiling_mode:                    parallel
