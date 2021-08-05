@@ -4,7 +4,8 @@ import rospy
 import yaml
 from os.path import exists
 from std_srvs.srv import Empty
-from maplab_msgs.srv import DeleteAllRobotMissions
+from std_msgs.msg import String
+from maplab_msgs.srv import DeleteAllRobotMissions, DeleteAllRobotMissionsRequest
 
 class CommandPost(object):
     def __init__(self, config):
@@ -13,7 +14,7 @@ class CommandPost(object):
         # Publishers and subscribers.
         if config.mode == 'commander':
             self.default_profile = rospy.Service('~maplab_default_profile', Empty, self.default_profile_callback)
-            
+
         self.maplab_reinit_service = rospy.ServiceProxy(self.config.reinit_service_topic, Empty)
         self.maplab_reset_global_map_service = rospy.ServiceProxy(self.config.reset_global_map, DeleteAllRobotMissions)
 
@@ -65,14 +66,18 @@ class CommandPost(object):
         try:
             success = True
             for robot in self.config.profiling_robots:
-                req = DeleteAllRobotMissionsRequest()
-                req.robot_name = robot
+                # req = DeleteAllRobotMissionsRequest()
+                # print(req.robot_name['data'])
+                # name = String()
+                # name.data = robot
+                # req.robot_name = name
                 rospy.logwarn('[CommandPost] Sending global map reset for robot {robot}'.format(robot=robot))
-                res = self.maplab_reset_global_map_service(req)
-                success &= res.success
+                # res = self.maplab_reset_global_map_service(req)
+                # success &= res.success
             return success
         except Exception as e:
             rospy.logerr('[CommandPost] Reset service at {topic} is not available'.format(topic=self.config.reset_global_map))
+            rospy.logerr(str(e))
             return False
 
     def try_set_param(self, key, value):
