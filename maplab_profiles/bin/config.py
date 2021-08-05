@@ -13,6 +13,7 @@ class ProfilerConfig(BaseConfig):
         self.maplab_server_prefix = '/maplab_server/maplab_server_node/'
         self.reinit_service_topic = '/maplab_server/reinit_gflags'
         self.reset_global_map = '/maplab_server/delete_all_robot_missions'
+        self.whitelist_all_missions = '/maplab_server/whitelistAllMissions'
 
         self.init_profile = 'default'
         self.config_root = ''
@@ -38,6 +39,7 @@ class ProfilerConfig(BaseConfig):
         self.maplab_server_prefix = self.try_get_param("/maplab_profiles/maplab_server_prefix", self.maplab_server_prefix)
         self.reinit_service_topic = self.try_get_param("/maplab_profiles/maplab_server_reinit_sevice", self.reinit_service_topic)
         self.reset_global_map = self.try_get_param("/maplab_profiles/maplab_reset_global_map", self.reset_global_map)
+        self.whitelist_all_missions = '/maplab_server/whitelistAllMissions'
 
         self.init_profile = self.try_get_param("/maplab_profiles/init_profile", self.init_profile)
         self.config_root = self.try_get_param("/maplab_profiles/config_root", self.config_root)

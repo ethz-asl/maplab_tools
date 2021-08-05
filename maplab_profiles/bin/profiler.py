@@ -135,7 +135,6 @@ class Profiler(object):
         return tune_config
 
     def profiling_function(self, configuration):
-        self.wait_for_burnout()
         rospy.loginfo('[Profiler] Starting profiling with profile {profile}.'.format(profile=self.config.init_profile))
         if not self.commander.set_profile(self.config.init_profile):
             return -1.0
@@ -154,6 +153,7 @@ class Profiler(object):
         self.commander.send_global_map_reset()
         rospy.loginfo('[Profiler] Waiting {secs}s for server cleanup.'.format(secs=self.config.profiling_completion_sleep_time_s))
         self.wait_for_completion()
+        self.commander.send_whitelist_request()
         return loss
 
     def compute_loss(self):

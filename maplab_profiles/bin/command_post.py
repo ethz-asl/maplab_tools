@@ -1,4 +1,4 @@
-#! /usr/bin/env python2
+#! /usr/bin/env python1
 
 import rospy
 import yaml
@@ -17,6 +17,7 @@ class CommandPost(object):
 
         self.maplab_reinit_service = rospy.ServiceProxy(self.config.reinit_service_topic, Empty)
         self.maplab_reset_global_map_service = rospy.ServiceProxy(self.config.reset_global_map, DeleteAllRobotMissions)
+        self.maplab_whitelist_service = rospy.ServiceProxy(self.config.whitelist_all_missions, Empty)
 
     def default_profile_callback(self, req):
         if self.is_initialized is False:
@@ -66,17 +67,23 @@ class CommandPost(object):
         try:
             success = True
             for robot in self.config.profiling_robots:
-                # req = DeleteAllRobotMissionsRequest()
-                # print(req.robot_name['data'])
-                # name = String()
-                # name.data = robot
-                # req.robot_name = name
+                req = DeleteAllRobotMissionsRequest()
+                req.robot_name = String(robot)
                 rospy.logwarn('[CommandPost] Sending global map reset for robot {robot}'.format(robot=robot))
-                # res = self.maplab_reset_global_map_service(req)
-                # success &= res.success
+                res = self.maplab_reset_global_map_service(req)
+                success &= res.success.data
             return success
         except Exception as e:
             rospy.logerr('[CommandPost] Reset service at {topic} is not available'.format(topic=self.config.reset_global_map))
+            rospy.logerr(str(e))
+            return False
+
+    def send_whitelist_request(self):
+        try:
+            res = self.maplab_whitelist_service()
+            return True
+        except Exception as e:
+            rospy.logerr('[CommandPost] Whitelist service at {topic} is not available'.format(topic=self.config.whitelist_all_missions))
             rospy.logerr(str(e))
             return False
 
