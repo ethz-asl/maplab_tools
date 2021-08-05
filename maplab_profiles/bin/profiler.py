@@ -67,11 +67,10 @@ class Profiler(object):
         # Evaluate results
         n = min(n_combinations, self.config.profiling_show_top_n_configs)
         top_n = self.get_top_n_configs(losses, n, combinations)
-        print('\nTop {n} configs: '.format(n=n))
         for i in range(0, n):
-            print('Top {i} config {top_n} is: '.format(i=i, top_n=top_n[i,:]))
+            rospy.loginfo('Top {i} config {top_n} is (loss={loss}): '.format(i=i+1, top_n=top_n[i,:], loss=losses[i]))
             self.print_combination(tune_config, top_n[i,:])
-            print('--------------------')
+            rospy.loginfo('-----------------------------------------------------------------------------------------')
 
     def find_best_config(self, losses, combinations):
         min_loss = np.amin(losses)
@@ -135,6 +134,7 @@ class Profiler(object):
         return tune_config
 
     def profiling_function(self, configuration):
+        rospy.loginfo('=== Start Profiling ===========================================================================')
         rospy.loginfo('[Profiler] Starting profiling with profile {profile}.'.format(profile=self.config.init_profile))
         if not self.commander.set_profile(self.config.init_profile):
             return -1.0
@@ -145,7 +145,7 @@ class Profiler(object):
         if not self.ds.start_publishing_submaps():
             return -1.0
 
-        rospy.loginfo('[Profiler] Waiting {secs}s for server completion'.format(secs=self.config.profiling_burnout_sleep_time_s))
+        rospy.loginfo('[Profiler] Waiting {secs}s for server completion.'.format(secs=self.config.profiling_burnout_sleep_time_s))
         self.wait_for_burnout()
 
         rospy.loginfo('[Profiler] Checking the results.')
@@ -154,6 +154,7 @@ class Profiler(object):
         rospy.loginfo('[Profiler] Waiting {secs}s for server cleanup.'.format(secs=self.config.profiling_completion_sleep_time_s))
         self.wait_for_completion()
         self.commander.send_whitelist_request()
+        rospy.loginfo('=== End Profiling ===========================================================================')
         return loss
 
     def compute_loss(self):

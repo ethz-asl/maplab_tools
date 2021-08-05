@@ -39,8 +39,7 @@ class CommandPost(object):
         try:
             self.load_and_set_profile(profile_path)
         except Exception as e:
-            rospy.logerr('[CommandPost] Unable to load profile {profile} from {path}'.format(profile=profile, path=profile_path))
-            rospy.logerr(str(e))
+            rospy.logerr('[CommandPost] Unable to load profile {profile} from {path}. Error: {error}'.format(profile=profile, path=profile_path, error=str(e)))
             return False
 
         return self.send_reinit_request()
@@ -59,8 +58,7 @@ class CommandPost(object):
             res = self.maplab_reinit_service()
             return True
         except Exception as e:
-            rospy.logerr('[CommandPost] Reinit service at {topic} is not available'.format(topic=self.config.reinit_service_topic))
-            rospy.logerr(str(e))
+            rospy.logerr('[CommandPost] Reinit service at {topic} is not available. Error: {error}'.format(topic=self.config.reinit_service_topic, error=str(e)))
             return False
 
     def send_global_map_reset(self):
@@ -74,17 +72,16 @@ class CommandPost(object):
                 success &= res.success.data
             return success
         except Exception as e:
-            rospy.logerr('[CommandPost] Reset service at {topic} is not available'.format(topic=self.config.reset_global_map))
-            rospy.logerr(str(e))
+            rospy.logerr('[CommandPost] Reset service at {topic} is not available. Error: {error}'.format(topic=self.config.reset_global_map, error=str(e)))
             return False
 
     def send_whitelist_request(self):
         try:
+            rospy.logwarn('[CommandPost] Sending whitelist request.')
             res = self.maplab_whitelist_service()
             return True
         except Exception as e:
-            rospy.logerr('[CommandPost] Whitelist service at {topic} is not available'.format(topic=self.config.whitelist_all_missions))
-            rospy.logerr(str(e))
+            rospy.logerr('[CommandPost] Whitelist service at {topic} is not available. Error: {error}'.format(topic=self.config.whitelist_all_missions, error=str(e)))
             return False
 
     def try_set_param(self, key, value):
@@ -93,6 +90,5 @@ class CommandPost(object):
             rospy.set_param(service_topic, value)
             rospy.loginfo('[CommandPost] Setting parameter {param} with value {value}'.format(param=service_topic, value=value))
         except Exception as e:
-            rospy.logerr('[CommandPost] Could not set parameter {param} with value {value}'.format(param=service_topic, value=value))
-            rospy.logerr(str(e))
+            rospy.logerr('[CommandPost] Could not set parameter {param} with value {value}. Error: {error}'.format(param=service_topic, value=value, error=str(e)))
             return

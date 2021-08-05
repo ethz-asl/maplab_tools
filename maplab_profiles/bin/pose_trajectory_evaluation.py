@@ -21,7 +21,7 @@ class PoseTrajectoryEvaluation(object):
         missions = np.array(pd.unique(est_df['mission-id']))
         n_mission = missions.shape[0]
         synced_gt_df = gt_df[gt_df['mission-id'].isin(missions)]
-        rospy.loginfo('Synced {n_missions_gt} mission with the GT.'.format(n_missions_gt=len(pd.unique(synced_gt_df["mission-id"]))))
+        rospy.loginfo('[PoseTrajectoryEvaluation] Synced {n_missions_gt} mission with the GT.'.format(n_missions_gt=len(pd.unique(synced_gt_df["mission-id"]))))
         return synced_gt_df
 
     def compute_ape(self):
