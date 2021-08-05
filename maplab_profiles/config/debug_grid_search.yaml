@@ -1,7 +1,2 @@
-vi_map_landmark_quality_min_observers:                      # Default 4
+vi_map_landmark_quality_min_observers: # Default 4
   - 2
-  - 3
-  - 4
-vi_map_landmark_quality_max_distance_from_closest_observer: # Default 40m
-  - 30
-  - 40

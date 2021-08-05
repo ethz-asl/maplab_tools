@@ -16,16 +16,17 @@ profiles:
 # Profiler configs
 ##################
 profiling_submap_folder:           '/home/berlukas/Documents/results/hagerbach_july/'
-profiling_send_n_submaps:          12
+profiling_send_n_submaps:          2
 profiling_robots:
   - 'mission_05_anymal_5'
 profiling_mode:                    parallel
 profiling_delays:
   - 0
 profiling_rate:                    0.1
-profiling_burnout_sleep_time_s:    20
-profiling_completion_sleep_time_s: 60
+profiling_burnout_sleep_time_s:    5
+profiling_completion_sleep_time_s: 10
 profiling_merged_map_path:         '/tmp/maplab_server/merged_map/'
 profiling_ground_truth_path:       '/home/berlukas/Documents/results/hagerbach_july/mission_05_opt/'
 profiling_grid_search_params_file: 'debug_grid_search'
 profiling_show_top_n_configs:      3
+profiling_export_path:             '/mnt/data/logs/maplab_profiles/'

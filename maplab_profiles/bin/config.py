@@ -32,6 +32,7 @@ class ProfilerConfig(BaseConfig):
         self.profiling_ground_truth_path = ''
         self.profiling_grid_search_params_file = 'grid_search'
         self.profiling_show_top_n_configs = 5
+        self.profiling_export_path = ''
 
     def init_from_rosparams(self):
         # general config
@@ -59,3 +60,4 @@ class ProfilerConfig(BaseConfig):
         self.profiling_ground_truth_path = self.try_get_param("/maplab_profiles/profiling_ground_truth_path", self.profiling_ground_truth_path)
         self.profiling_grid_search_params_file = self.try_get_param("/maplab_profiles/profiling_grid_search_params_file", self.profiling_grid_search_params_file)
         self.profiling_show_top_n_configs = self.try_get_param("/maplab_profiles/profiling_show_top_n_configs", self.profiling_show_top_n_configs)
+        self.profiling_export_path = self.try_get_param("/maplab_profiles/profiling_export_path", self.profiling_export_path)

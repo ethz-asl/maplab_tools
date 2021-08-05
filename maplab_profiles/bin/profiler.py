@@ -54,11 +54,15 @@ class Profiler(object):
         n_combinations = combinations.shape[0]
         rospy.loginfo('[Profiler] Starting profiling with {n_config} config combinations.'.format(n_config=n_combinations))
         losses = []
+        est_trajectories = []
+        gt_trajectories = []
         for i in range(0, n_combinations):
             configuration = self.create_config_from_combination(tune_config, combinations[i,:])
-            loss = self.profiling_function(configuration)
+            est_traj, gt_traj, loss = self.profiling_function(configuration)
             if loss > 0.0:
                 losses.append(loss)
+                est_trajectories.append(est_traj)
+                gt_trajectories.append(gt_traj)
         if len(losses) == 0:
             rospy.logerr('[Profiler] No profiling results found.')
             return
@@ -66,11 +70,42 @@ class Profiler(object):
 
         # Evaluate results
         n = min(n_combinations, self.config.profiling_show_top_n_configs)
-        top_n = self.get_top_n_configs(losses, n, combinations)
-        for i in range(0, n):
-            rospy.loginfo('Top {i} config {top_n} is (loss={loss}): '.format(i=i+1, top_n=top_n[i,:], loss=losses[i]))
-            self.print_combination(tune_config, top_n[i,:])
+        rospy.loginfo('[Profiler] Getting results for the top {n} config combinations.'.format(n=n))
+        top_n_indices = self.get_top_n_configs(losses, n, combinations)
+        self.print_results(tune_config, losses, combinations, top_n_indices)
+        self.export_results(tune_config, est_trajectories, gt_trajectories, losses, combinations, top_n_indices)
+
+
+    def print_results(self, tune_config, losses, combinations, top_n_indices):
+        i = 1
+        for top_n_idx in top_n_indices:
+            top_n_combination = combinations[top_n_idx]
+            rospy.loginfo('Top {i} config {top_n} is (loss={loss}): '.format(i=i, top_n=top_n_combination, loss=losses[top_n_idx]))
+            self.print_combination(tune_config, top_n_combination)
             rospy.loginfo('-----------------------------------------------------------------------------------------')
+            i += 1
+
+    def export_results(self, tune_config, est_trajectories, gt_trajectories, losses, combinations, top_n_indices):
+        i = 1
+        for top_n_idx in top_n_indices:
+            top_n_combination = combinations[top_n_idx]
+
+            config_filename = self.config.profiling_export_path + 'config-top-' + str(i) + '.txt'
+            self.write_config_to_file(tune_config, top_n_combination, config_filename)
+
+            est_traj_filename = self.config.profiling_export_path + 'est-traj-top-' + str(i) + '.npy'
+            gt_traj_filename = self.config.profiling_export_path + 'gt-traj-top-' + str(i) + '.npy'
+            np.save(est_traj_filename, est_trajectories[top_n_idx])
+            np.save(gt_traj_filename, gt_trajectories[top_n_idx])
+            i += 1
+        rospy.loginfo('[Profiler] Wrote results to {export_path}'.format(export_path=self.config.profiling_export_path))
+
+    def write_config_to_file(self, tune_config, combination, filename):
+        configuration = self.create_config_from_combination(tune_config, combination)
+        fo = open(filename, "w")
+        for k, v in configuration.items():
+            fo.write(str(k) + ': '+ str(v) + '\n')
+        fo.close()
 
     def find_best_config(self, losses, combinations):
         min_loss = np.amin(losses)
@@ -80,13 +115,14 @@ class Profiler(object):
     def get_top_n_configs(self, losses, n, combinations):
         best_n = []
         if losses.shape[0] == 0:
-            return np.array(best_n).squeeze()
+            return np.array(best_n)
 
         sorted_losses = np.sort(losses)
         for i in range(0,n):
             cur_min_idx =  np.where(losses == sorted_losses[i])[0]
-            best_n.append(combinations[cur_min_idx, :])
-        return np.array(best_n).squeeze()
+            best_n.append(cur_min_idx[0])
+
+        return np.array(best_n)
 
     def generate_combinations(self, config):
         values = [np.arange(0,len(x)) for x in config.values()]
@@ -149,13 +185,13 @@ class Profiler(object):
         self.wait_for_burnout()
 
         rospy.loginfo('[Profiler] Checking the results.')
-        loss = self.compute_loss()
+        est_traj, gt_traj, loss = self.compute_loss()
         self.commander.send_global_map_reset()
         rospy.loginfo('[Profiler] Waiting {secs}s for server cleanup.'.format(secs=self.config.profiling_completion_sleep_time_s))
         self.wait_for_completion()
         self.commander.send_whitelist_request()
         rospy.loginfo('=== End Profiling ===========================================================================')
-        return loss
+        return est_traj, gt_traj, loss
 
     def compute_loss(self):
         pose_filename = 'vertex_poses_velocities_biases.csv'
@@ -166,7 +202,8 @@ class Profiler(object):
         if not exists(gt_traj_file):
             return sys.maxint
         eval = PoseTrajectoryEvaluation(est_traj_file, gt_traj_file)
-        return eval.compute_ape()
+        est_traj, gt_traj = eval.compute_synchronized_trajectories()
+        return est_traj, gt_traj, eval.compute_trans_ape_rmse(est_traj, gt_traj)
 
     def wait_for_burnout(self):
         time.sleep(self.config.profiling_burnout_sleep_time_s)
