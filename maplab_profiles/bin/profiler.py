@@ -7,36 +7,10 @@ import sys
 import yaml
 import os
 from os.path import exists
-from ray import tune
-import ray
-from multiprocessing import Lock
-from functools import partial
 from config import ProfilerConfig
 from datasource import Datasource
 from command_post import CommandPost
 from pose_trajectory_evaluation import PoseTrajectoryEvaluation
-from locker import *
-
-class Locker(object):
-    instance = None
-    mutex = Lock()
-
-    def __new__(cls):
-        if cls.instance is None:
-            cls.instance = super(Locker, cls).__new__(cls)
-            # Put any initialization here.
-        return cls.instance
-
-def compute_loss(config):
-    pose_filename = 'vertex_poses_velocities_biases.csv'
-    est_traj_file = config.profiling_merged_map_path + pose_filename
-    gt_traj_file = config.profiling_ground_truth_path + pose_filename
-    if not exists(est_traj_file):
-        return sys.maxint
-    if not exists(gt_traj_file):
-        return sys.maxint
-    eval = PoseTrajectoryEvaluation(est_traj_file, gt_traj_file)
-    return eval.compute_ape()
 
 class Profiler(object):
     def __init__(self, config, commander):
