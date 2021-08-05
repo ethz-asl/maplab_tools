@@ -103,7 +103,7 @@ class Profiler(object):
         key_list = list(config.keys())
         value_list = list(config.values())
         for i in range(0, n_params):
-            rospy.loginfo('param {key} has value {value}'.format(key=key_list[i], value=value_list[i][combination[i]]))
+            rospy.loginfo('{key}: {value}'.format(key=key_list[i], value=value_list[i][combination[i]]))
 
     def create_config_from_combination(self, config, combination):
         n_params = len(combination)
