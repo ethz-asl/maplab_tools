@@ -4,7 +4,7 @@ resize_img:                    False
 white_balancer:                'image_analysis'
 perform_input_CLAHE:           False
 perform_output_log:            False
-trigger_only_when_overexposed: True
+trigger_only_when_overexposed: False
 
 output_topic_suffix:           /balanced
 path_to_models:                '/home/berlukas/Documents/workspace/fgsp_ws/src/maplab_tools/white_balancer/models'

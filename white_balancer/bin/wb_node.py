@@ -64,7 +64,7 @@ class WhiteBalancerNode(object):
             self.out_pub.publish(msg)
             return None
 
-        rospy.logwarn("Image is badly overexposed. A marvelous sheep is trying to fix it.")
+        rospy.logwarn("[WhiteBalancerNode] Image is badly overexposed. A marvelous sheep is trying to fix it.")
         if self.resize_img:
             img = self.resize_with_aspect_ratio(img, 416, 416)
         if self.perform_input_CLAHE:
@@ -93,25 +93,9 @@ class WhiteBalancerNode(object):
             img = color_correction_of_image_analysis(img)
         else:
             rospy.logerr("[WhiteBalancerNode] Unknown method specified: " + self.white_balancer)
-        print("--- Took %s seconds ---" % (time.time() - start_time))
+        rospy.loginfo("--- White balance took %s seconds ---" % (time.time() - start_time))
 
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        grayimg = gray
-        GLARE_MIN = np.array([0, 0, 50],np.uint8)
-        GLARE_MAX = np.array([0, 0, 225],np.uint8)
-        hsv_img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-
-        #HSV + INPAINT
-        result = cv2.inpaint(img, frame_threshed, 0.1, cv2.INPAINT_TELEA)
-        # CLAHE
-        lab1 = cv2.cvtColor(result, cv2.COLOR_BGR2LAB)
-        lab_planes1 = cv2.split(lab1)
-        clahe1 = cv2.createCLAHE(clipLimit=2.0,tileGridSize=(16, 16))
-        lab_planes1[0] = clahe1.apply(lab_planes1[0])
-        lab1 = cv2.merge(lab_planes1)
-        clahe_bgr1 = cv2.cvtColor(lab1, cv2.COLOR_LAB2BGR)
-
-        return clahe_bgr1
+        return img
 
     def clahe(self, img):
         lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
@@ -125,7 +109,35 @@ class WhiteBalancerNode(object):
         assert self.out_pub != None
         if self.perform_output_log:
             img = exposure.adjust_log(img, 0.95)
-        msg = self.cv_bridge.cv2_to_imgmsg(img, encoding="rgb8")
+
+        start_time = time.time()
+        #HSV + INPAINT
+        GLARE_MIN = np.array([0, 0, 130],np.uint8)
+        GLARE_MAX = np.array([0, 0, 255],np.uint8)
+        hsv_img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+        frame_threshed = cv2.inRange(hsv_img, GLARE_MIN, GLARE_MAX)
+
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        mask = cv2.threshold(gray, 220, 255, cv2.THRESH_BINARY)[1]
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7,7))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel, iterations=1)
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel, iterations=1)
+
+        result = cv2.inpaint(img, frame_threshed, 0.1, cv2.INPAINT_TELEA)
+
+
+        # CLAHE
+        lab1 = cv2.cvtColor(result, cv2.COLOR_BGR2LAB)
+        lab_planes1 = cv2.split(lab1)
+        clahe1 = cv2.createCLAHE(clipLimit=0.5,tileGridSize=(8, 8))
+        lab_planes1[0] = clahe1.apply(lab_planes1[0])
+        lab1 = cv2.merge(lab_planes1)
+        clahe_bgr = cv2.cvtColor(lab1, cv2.COLOR_LAB2BGR)
+        rospy.loginfo("--- Post process took %s seconds ---" % (time.time() - start_time))
+
+        # msg = self.cv_bridge.cv2_to_imgmsg(frame_threshed, encoding="mono8")
+        msg = self.cv_bridge.cv2_to_imgmsg(hsv_img, encoding="rgb8")
         self.out_pub.publish(msg)
 
     def compute_lookup_table(self, gamma):
