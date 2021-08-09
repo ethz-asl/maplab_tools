@@ -106,7 +106,7 @@ class WhiteBalancerNode(object):
         # CLAHE
         lab1 = cv2.cvtColor(result, cv2.COLOR_BGR2LAB)
         lab_planes1 = cv2.split(lab1)
-        clahe1 = cv2.createCLAHE(clipLimit=2.0,tileGridSize=(8,8))
+        clahe1 = cv2.createCLAHE(clipLimit=2.0,tileGridSize=(16, 16))
         lab_planes1[0] = clahe1.apply(lab_planes1[0])
         lab1 = cv2.merge(lab_planes1)
         clahe_bgr1 = cv2.cvtColor(lab1, cv2.COLOR_LAB2BGR)
