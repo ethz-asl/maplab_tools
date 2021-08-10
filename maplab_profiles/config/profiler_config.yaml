@@ -6,6 +6,8 @@ maplab_reset_global_map:           '/maplab_server/delete_all_robot_missions'
 maplab_whitelist_all_missions:     '/maplab_server/whitelistAllMissions'
 
 init_profile:                      'default'
+high_performance_profile:          'high_performance'
+low_performance_profile:           'low_performance'
 config_root:                       '/home/berlukas/darpa_ws/src/darpa_subt_mapping/maplab/dependencies/internal/maplab_tools/maplab_profiles/config/'
 profiles:
   - 'default'

@@ -16,6 +16,8 @@ class ProfilerConfig(BaseConfig):
         self.whitelist_all_missions = '/maplab_server/whitelistAllMissions'
 
         self.init_profile = 'default'
+        self.high_performance_profile = 'high_performance'
+        self.low_performance_profile = 'low_performance'
         self.config_root = ''
         self.profiles = ['default']
 
@@ -40,10 +42,11 @@ class ProfilerConfig(BaseConfig):
         self.maplab_server_prefix = self.try_get_param("/maplab_profiles/maplab_server_prefix", self.maplab_server_prefix)
         self.reinit_service_topic = self.try_get_param("/maplab_profiles/maplab_server_reinit_sevice", self.reinit_service_topic)
         self.reset_global_map = self.try_get_param("/maplab_profiles/maplab_reset_global_map", self.reset_global_map)
-        self.reset_global_map = self.try_get_param("/maplab_profiles/maplab_reset_global_map", self.reset_global_map)
         self.whitelist_all_missions = '/maplab_server/whitelistAllMissions'
 
         self.init_profile = self.try_get_param("/maplab_profiles/init_profile", self.init_profile)
+        self.high_performance_profile = self.try_get_param("/maplab_profiles/high_performance_profile", self.high_performance_profile)
+        self.low_performance_profile = self.try_get_param("/maplab_profiles/low_performance_profile", self.low_performance_profile)
         self.config_root = self.try_get_param("/maplab_profiles/config_root", self.config_root)
         self.profiles = self.try_get_param("/maplab_profiles/profiles", self.profiles)
 

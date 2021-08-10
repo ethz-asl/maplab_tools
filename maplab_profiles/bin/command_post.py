@@ -14,6 +14,8 @@ class CommandPost(object):
         # Publishers and subscribers.
         if config.mode == 'commander':
             self.default_profile = rospy.Service('~maplab_default_profile', Empty, self.default_profile_callback)
+            self.high_performance_profile = rospy.Service('~maplab_high_performance_profile', Empty, self.high_performance_profile_callback)
+            self.low_performance_profile = rospy.Service('~maplab_low_performance_profile', Empty, self.low_performance_profile_callback)
 
         self.maplab_reinit_service = rospy.ServiceProxy(self.config.reinit_service_topic, Empty)
         self.maplab_reset_global_map_service = rospy.ServiceProxy(self.config.reset_global_map, DeleteAllRobotMissions)
@@ -22,8 +24,20 @@ class CommandPost(object):
     def default_profile_callback(self, req):
         if self.is_initialized is False:
             return
-        rospy.loginfo('[CommandPost] Called default profile service')
+        rospy.logwarn('[CommandPost] Called default profile service')
         self.set_profile(self.config.init_profile)
+
+    def high_performance_profile_callback(self, req):
+        if self.is_initialized is False:
+            return
+        rospy.logwarn('[CommandPost] Called high performance profile service')
+        self.set_profile(self.config.high_performance_profile)
+
+    def low_performance_profile_callback(self, req):
+        if self.is_initialized is False:
+            return
+        rospy.logwarn('[CommandPost] Called low performance profile service')
+        self.set_profile(self.config.low_performance_profile)
 
     def set_profile(self, profile):
         if profile not in self.config.profiles:

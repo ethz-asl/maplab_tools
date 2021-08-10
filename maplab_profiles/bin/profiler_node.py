@@ -18,6 +18,8 @@ class ProfilerNode(object):
         self.commander = CommandPost(self.config)
         self.commander.set_profile(self.config.init_profile)
 
+
+        rospy.loginfo('[MaplabProfilerNode] Starting in mode: {mode}'.format(mode=self.config.mode))
         if self.config.mode == 'profiler':
             self.profiler = Profiler(self.config, self.commander)
             self.profiler.start_profiling()
