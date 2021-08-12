@@ -1,6 +1,7 @@
 #! /usr/bin/env python2
 
 import rospy
+import numpy as np
 from os.path import exists
 from nav_msgs.msg import Path
 
@@ -37,7 +38,7 @@ class SaverNode(object):
         self.last_seq = msg.header.seq
 
     def parse_path_msg(self, msg):
-        n_poses = len(poses)
+        n_poses = len(msg.poses)
         poses = np.zeros((n_poses, 8))
         for i in range(n_poses):
             pose_msg = msg.poses[i]
