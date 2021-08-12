@@ -11,8 +11,8 @@ class SaverNode(object):
         input_path_topic = self.try_get_param('~input_path_topic', '/icp_odometry/poses')
         out_dir = self.try_get_param('~export_directory', '/tmp/')
 
-        rospy.loginfo('[PathSaverNode] Starting with input topic: {input_path_topic}'.format(input_path_topic=self.config.mode))
-        rospy.loginfo('[PathSaverNode] Writing ground truth values to {export_dir}'.format(mode=self.config.mode))
+        rospy.loginfo('[PathSaverNode] Starting with input topic: {input_path_topic}'.format(input_path_topic=input_path_topic))
+        rospy.loginfo('[PathSaverNode] Writing ground truth values to {export_dir}'.format(export_dir=out_dir))
 
         rospy.Subscriber(input_path_topic, Path, self.path_callback)
         self.last_seq = -1
@@ -20,7 +20,7 @@ class SaverNode(object):
         self.is_initialized = True
 
     def try_get_param(self, key, default=None):
-        rospy.logdebug(f'[PathSaverNode] try_get_param: {key} with default {default}')
+        rospy.logdebug('[PathSaverNode] try_get_param: {key} with default {default}'.format(key=key, default=default))
         return rospy.get_param(key) if rospy.has_param(key) else default
 
     def path_callback(self, msg):
