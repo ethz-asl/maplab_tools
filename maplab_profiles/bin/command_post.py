@@ -9,6 +9,7 @@ from maplab_msgs.srv import DeleteAllRobotMissions, DeleteAllRobotMissionsReques
 
 class CommandPost(object):
     def __init__(self, config):
+        self.is_initialized = False
         self.config = config
 
         # Publishers and subscribers.
@@ -20,6 +21,7 @@ class CommandPost(object):
         self.maplab_reinit_service = rospy.ServiceProxy(self.config.reinit_service_topic, Empty)
         self.maplab_reset_global_map_service = rospy.ServiceProxy(self.config.reset_global_map, DeleteAllRobotMissions)
         self.maplab_whitelist_service = rospy.ServiceProxy(self.config.whitelist_all_missions, Empty)
+        self.is_initialized = True
 
     def default_profile_callback(self, req):
         if self.is_initialized is False:
@@ -40,6 +42,8 @@ class CommandPost(object):
         self.set_profile(self.config.low_performance_profile)
 
     def set_profile(self, profile):
+        if profile == '':
+            return False
         if profile not in self.config.profiles:
             rospy.logerr('[CommandPost] Profile {profile} not found in configured profiles.'.format(profile=profile))
             return False

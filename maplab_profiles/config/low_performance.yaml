@@ -1,23 +1,24 @@
 
 # VISUAL LANDMARKS
 #################
-vi_map_landmark_quality_min_observers:                          4   # Default 4
+vi_map_landmark_quality_min_observers:                          5   # Default 4
 vi_map_landmark_quality_max_distance_from_closest_observer:     20  # Default 40m
-vi_map_landmark_quality_min_distance_from_closest_observer:     0.02 # Default 0.05m
+vi_map_landmark_quality_min_distance_from_closest_observer:     0.05 # Default 0.05m
 vi_map_landmark_quality_min_observation_angle_deg:              5  # Default 5deg
 
 
 # OPTIMIZATION
 ##############
-ba_num_iterations:                                              3
+ba_num_iterations:                                              2
 ba_max_time_seconds:                                            30
 ba_enable_signal_handler:                                       false
 ba_hide_iterations_console_output:                              true
-ba_include_visual:                                              true
+ba_include_visual:                                              false
 ba_include_inertial:                                            true
 ba_include_loop_closure_edges:                                  true
 ba_include_absolute_pose_constraints:                           true
 ba_include_6dof_odometry:                                       true
+ba_parameter_tolerance:                                         1e-4
 
 
 # LiDAR Registrations
@@ -28,30 +29,30 @@ maplab_server_perform_global_admc_every_nth:                    15
 
 dm_candidate_search_enable_intra_mission_consecutive:           true # Default true
 dm_candidate_search_consecutive_max_delta_time_s:               25 # Default 20.0
-dm_candidate_search_consecutive_max_delta_position_m:           6.0 # Default 5.0
-dm_candidate_search_consecutive_max_delta_rotation_deg:         270 # Default 180
+dm_candidate_search_consecutive_max_delta_position_m:           3.0 # Default 5.0
+dm_candidate_search_consecutive_max_delta_rotation_deg:         30 # Default 180
 dm_candidate_search_enable_intra_mission_proximity:             true # Default true
 dm_candidate_search_enable_inter_mission_proximity:             true # Default true
-dm_candidate_search_proximity_max_delta_position_m:             6.0 # Default 2.0
-dm_candidate_search_proximity_max_delta_rotation_deg:           270.0 # Default 180.0
+dm_candidate_search_proximity_max_delta_position_m:             3.0 # Default 2.0
+dm_candidate_search_proximity_max_delta_rotation_deg:           30.0 # Default 180.0
 dm_candidate_search_proximity_min_distance_along_graph_m:       1 # Default 1.0
 dm_candidate_search_proximity_take_closest_n_candidates:        20 # Default 3
 dm_candidate_search_enable_intra_mission_global:                false # Default true
 dm_candidate_search_enable_inter_mission_global:                false # Default true
 dm_candidate_selection_recompute_all_constraints:               false # Default false
-dm_candidate_selection_recompute_invalid_constraints:           true # Default true
+dm_candidate_selection_recompute_invalid_constraints:           false # Default true
 dm_candidate_selection_min_switch_variable_value:               0.4 # Default 0.5
 dm_candidate_selection_max_number_of_candidates:                10
 
-dm_candidate_alignment_max_delta_position_to_initial_guess_m:   3.5  # Default 0.5
-dm_candidate_alignment_max_delta_rotation_to_initial_guess_deg: 20 # Default 10
+dm_candidate_alignment_max_delta_position_to_initial_guess_m:   1.5  # Default 0.5
+dm_candidate_alignment_max_delta_rotation_to_initial_guess_deg: 15 # Default 10
 dm_candidate_alignment_type:                                    "PclGIcp"
 
 regbox_lpm_icp_match_residual_error_threshold_m:                0.1
 regbox_pcl_downsample_leaf_size_m:                              0.05
 regbox_pcl_fitness_max_considered_distance_m:                   1
 regbox_pcl_max_fitness_score_m:                                 0.55
-regbox_pcl_max_iterations:                                      50
+regbox_pcl_max_iterations:                                      30
 
 # VISUAL LOOP CLOSURE
 #####################
@@ -68,6 +69,7 @@ lc_edge_covariance_scaler:                                      1e-7 # Default 1
 lc_edge_min_distance_meters:                                    1.0 # Default 1.0
 lc_edge_min_inlier_ratio:                                       0.5 # Default 0.5
 lc_edge_min_inlier_count:                                       20 # Default 20
+maplab_server_perform_global_visual_lc_every_nth:               5
 
 # DENSE MAP
 ###########

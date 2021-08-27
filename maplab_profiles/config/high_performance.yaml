@@ -18,6 +18,7 @@ ba_include_inertial:                                            true
 ba_include_loop_closure_edges:                                  true
 ba_include_absolute_pose_constraints:                           true
 ba_include_6dof_odometry:                                       true
+ba_parameter_tolerance:                                         1e-12
 
 
 # LiDAR Registrations
@@ -28,26 +29,26 @@ maplab_server_perform_global_admc_every_nth:                    1
 
 dm_candidate_search_enable_intra_mission_consecutive:           true # Default true
 dm_candidate_search_consecutive_max_delta_time_s:               25 # Default 20.0
-dm_candidate_search_consecutive_max_delta_position_m:           6.0 # Default 5.0
+dm_candidate_search_consecutive_max_delta_position_m:           8.0 # Default 5.0
 dm_candidate_search_consecutive_max_delta_rotation_deg:         270 # Default 180
 dm_candidate_search_enable_intra_mission_proximity:             true # Default true
 dm_candidate_search_enable_inter_mission_proximity:             true # Default true
-dm_candidate_search_proximity_max_delta_position_m:             9.0 # Default 2.0
+dm_candidate_search_proximity_max_delta_position_m:             10.0 # Default 2.0
 dm_candidate_search_proximity_max_delta_rotation_deg:           270.0 # Default 180.0
-dm_candidate_search_proximity_min_distance_along_graph_m:       1 # Default 1.0
-dm_candidate_search_proximity_take_closest_n_candidates:        20 # Default 3
+dm_candidate_search_proximity_min_distance_along_graph_m:       0.5 # Default 1.0
+dm_candidate_search_proximity_take_closest_n_candidates:        21 # Default 3
 dm_candidate_search_enable_intra_mission_global:                false # Default true
 dm_candidate_search_enable_inter_mission_global:                false # Default true
 dm_candidate_selection_recompute_all_constraints:               false # Default false
 dm_candidate_selection_recompute_invalid_constraints:           true # Default true
 dm_candidate_selection_min_switch_variable_value:               0.4 # Default 0.5
-dm_candidate_selection_max_number_of_candidates:                100
+dm_candidate_selection_max_number_of_candidates:                1200
 
-dm_candidate_alignment_max_delta_position_to_initial_guess_m:   5.0  # Default 0.5
+dm_candidate_alignment_max_delta_position_to_initial_guess_m:   3.0  # Default 0.5
 dm_candidate_alignment_max_delta_rotation_to_initial_guess_deg: 20 # Default 10
 dm_candidate_alignment_type:                                    "PclGIcp"
 
-regbox_lpm_icp_match_residual_error_threshold_m:                0.1
+regbox_lpm_icp_match_residual_error_threshold_m:                0.3
 regbox_pcl_downsample_leaf_size_m:                              0.05
 regbox_pcl_fitness_max_considered_distance_m:                   1
 regbox_pcl_max_fitness_score_m:                                 0.55
