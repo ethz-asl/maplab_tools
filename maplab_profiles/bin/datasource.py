@@ -48,7 +48,7 @@ class Datasource(object):
                     for name in robot_to_msg_dict:
                         array_msg.robots_with_subfolders.append(
                             robot_to_msg_dict[name])
-                    rospy.loginfo('[Datasource] Publishing submap for {name}'.format(name=name))
+                    rospy.logdebug('[Datasource] Publishing submap for {name}'.format(name=name))
                     pub.publish(array_msg)
                     submaps.pop(0)
                     submap_counter += 1
@@ -56,7 +56,7 @@ class Datasource(object):
                     break
 
             if not submaps:
-                rospy.loginfo('[Datasource] Done publishing submaps.')
+                rospy.logdebug('[Datasource] Done publishing submaps.')
                 publishing = False
         return True
 

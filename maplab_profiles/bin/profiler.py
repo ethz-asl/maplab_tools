@@ -34,13 +34,19 @@ class Profiler(object):
         losses = []
         est_trajectories = []
         gt_trajectories = []
-        for i in tqdm(range(0, n_combinations)):
+        for i in range(0, n_combinations):
+            tic = time.time()
             configuration = self.create_config_from_combination(tune_config, combinations[i,:])
             est_traj, gt_traj, loss = self.profiling_function(configuration, i, n_combinations)
             if loss > 0.0:
+                rospy.loginfo('[Profiler] Loss is {err}.'.format(err=loss))
                 losses.append(loss)
                 est_trajectories.append(est_traj)
                 gt_trajectories.append(gt_traj)
+
+            delta = time.time() - tic
+            rospy.loginfo('[Profiler] Profiling took {timing:.2f} seconds'.format(timing=delta))
+
         if len(losses) == 0:
             rospy.logerr('[Profiler] No profiling results found.')
             return
@@ -148,7 +154,7 @@ class Profiler(object):
         return tune_config
 
     def profiling_function(self, configuration, idx, n_combinations):
-        rospy.loginfo('=== Start Profiling {i}/{n} ==========================================================================='.format(i=idx, n=n_combinations))
+        rospy.loginfo('=== Start Profiling {i}/{n} ====================================='.format(i=idx, n=n_combinations))
         rospy.loginfo('[Profiler] Starting profiling with profile {profile}.'.format(profile=self.config.init_profile))
         if not self.commander.set_profile(self.config.init_profile):
             return None, None, -1.0
@@ -163,12 +169,17 @@ class Profiler(object):
         self.wait_for_burnout()
 
         rospy.loginfo('[Profiler] Checking the results.')
-        est_traj, gt_traj, loss = self.compute_loss_with_gt()
+        try:
+            est_traj, gt_traj, loss = self.compute_loss_with_gt()
+        except:
+            rospy.loginfo('[Profiler] Loss computation failed.')
+            return None, None, -1.0
+
         self.commander.send_global_map_reset()
         rospy.loginfo('[Profiler] Waiting {secs}s for server cleanup.'.format(secs=self.config.profiling_completion_sleep_time_s))
         self.wait_for_completion()
         self.commander.send_whitelist_request()
-        rospy.loginfo('=== End Profiling ===========================================================================')
+        rospy.loginfo('=== End Profiling ===============================================')
         return est_traj, gt_traj, loss
 
     def compute_loss_optimized(self):
@@ -186,14 +197,15 @@ class Profiler(object):
     def compute_loss_with_gt(self):
         pose_filename = 'vertex_poses_velocities_biases.csv'
         est_traj_file = self.config.profiling_merged_map_path + pose_filename
-        gt_traj = np.load(self.config.profiling_ground_truth_file)
+        gt_traj_file = self.config.profiling_ground_truth_file
         if not exists(est_traj_file):
             return sys.maxint
         if not exists(gt_traj_file):
             return sys.maxint
         eval = PoseTrajectoryEvaluation(est_traj_file)
-        est_traj, gt_traj = eval.compute_synchronized_trajectories_with_gt(gt_traj)
-        return est_traj, gt_traj, eval.compute_trans_ape_rmse(est_traj, gt_traj)
+        gt_traj = np.load(gt_traj_file)
+        est_traj, gt_traj = eval.compute_synchronized_trajectories_with_evo2(gt_traj)
+        return est_traj, gt_traj, eval.compute_evo_trans_ape_rmse(est_traj, gt_traj)
 
     def wait_for_burnout(self):
         time.sleep(self.config.profiling_burnout_sleep_time_s)

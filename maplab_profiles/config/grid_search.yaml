@@ -5,3 +5,7 @@ maplab_server_perform_global_admc_every_nth:
 maplab_server_perform_global_visual_lc_every_nth:
   - 5
   - 10
+
+ba_num_iterations:
+  - 2
+  - 4 

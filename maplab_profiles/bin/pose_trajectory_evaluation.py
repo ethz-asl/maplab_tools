@@ -4,6 +4,13 @@ import pandas as pd
 import os
 import pprint
 import rospy
+from os.path import exists
+
+
+from evo.core.trajectory import PoseTrajectory3D
+from evo.core import trajectory
+from evo.core import metrics
+from evo.core import sync
 
 class PoseTrajectoryEvaluation(object):
     def __init__(self, est_traj_file = None, gt_traj_file = None):
@@ -37,7 +44,7 @@ class PoseTrajectoryEvaluation(object):
         return df[df['mission-id'].str.contains(mission_id)]
 
     def compute_ape(self):
-        est_traj, gt_traj = self.compute_synchronized_trajectories()
+        est_traj, gt_traj = self.compute_synchronized_trajectories_df()
         return self.compute_trans_ape_rmse(est_traj, gt_traj)
 
     def compute_synchronized_trajectories_df(self):
@@ -46,10 +53,23 @@ class PoseTrajectoryEvaluation(object):
         est_traj, gt_traj = self.synchronize_timestamps(est_traj, gt_traj)
         return est_traj, gt_traj
 
-    def compute_synchronized_trajectories_with_gt(self, gt_traj):
+    def compute_synchronized_trajectories_with_evo2(self, gt_traj):
         est_traj = self.convert_df_to_traj(self.est_df)
-        est_traj, gt_traj = self.synchronize_timestamps(est_traj, gt_traj)
-        return est_traj, gt_traj
+        est_evo_traj = self.convert_to_evo_traj(est_traj)
+        gt_evo_traj = self.convert_to_evo_traj(gt_traj)
+        gt_evo_traj, est_evo_traj = sync.associate_trajectories(gt_evo_traj, est_evo_traj, 0.1)
+
+        est_evo_traj = trajectory.align_trajectory(est_evo_traj, gt_evo_traj, correct_scale=False, correct_only_scale=False)
+        return est_evo_traj, gt_evo_traj
+
+    def compute_synchronized_trajectories_with_evo3(self, gt_traj):
+        est_traj = self.convert_df_to_traj(self.est_df)
+        est_evo_traj = self.convert_to_evo_traj(est_traj)
+        gt_evo_traj = self.convert_to_evo_traj(gt_traj)
+        gt_evo_traj, est_evo_traj = sync.associate_trajectories(gt_evo_traj, est_evo_traj, 0.1)
+
+        est_evo_traj.align(gt_evo_traj, correct_scale=False, correct_only_scale=False, n=200)
+        return est_evo_traj, gt_evo_traj
 
     def synchronize_timestamps(self, est_traj, gt_traj):
         est_size = est_traj.shape[0]
@@ -79,6 +99,16 @@ class PoseTrajectoryEvaluation(object):
         wxyz = df[['q_G_Iw', 'q_G_Ix', 'q_G_Iy', 'q_G_Iz']].to_numpy()
         return np.column_stack((ts, xyz, wxyz))
 
+    def ts_ns_to_seconds(self, ts_ns):
+        k_ns_per_s = 1e9;
+        return ts_ns / k_ns_per_s;
+
+    def convert_to_evo_traj(self, trajectory):
+        ts = self.ts_ns_to_seconds(trajectory[:,0])
+        xyz = trajectory[:,1:4]
+        wxyz = trajectory[:,4:8]
+        return PoseTrajectory3D(positions_xyz = xyz, orientations_quat_wxyz = wxyz, timestamps = ts)
+
     def compute_trans_ape_rmse(self, est_traj, gt_traj):
         est_xyz = est_traj[:, 1:4]
         gt_xyz = gt_traj[:, 1:4]
@@ -86,14 +116,36 @@ class PoseTrajectoryEvaluation(object):
         err = np.linalg.norm(est_xyz - gt_xyz, axis=1)
         return np.sqrt(np.mean(err**2))
 
+    def compute_evo_trans_ape_rmse(self, est_evo_traj, gt_evo_traj):
+        data = (gt_evo_traj, est_evo_traj)
+
+        pose_relation = metrics.PoseRelation.translation_part
+        ape_metric_trans = metrics.APE(pose_relation)
+        ape_metric_trans.process_data(data)
+        return ape_metric_trans.get_statistic(metrics.StatisticsType.rmse)
+
 if __name__ == '__main__':
-    merged_map_path = '/tmp/maplab_server/merged_map/'
-    gt_path = '/home/berlukas/Documents/results/hagerbach_july/mission_05_opt/'
-
+    # merged_map_path = '/tmp/maplab_server/merged_map/'
+    # gt_path = '/home/berlukas/Documents/results/hagerbach_july/mission_05_opt/'
+    #
+    # pose_filename = 'vertex_poses_velocities_biases.csv'
+    # est_traj_file = merged_map_path + pose_filename
+    # gt_traj_file = gt_path + pose_filename
+    #
+    # eval = PoseTrajectoryEvaluation(est_traj_file, gt_traj_file)
+    # est_traj, gt_traj = eval.compute_synchronized_trajectories_df()
+    # print('we have an rmse of {rmse}'.format(rmse=eval.compute_ape()))
     pose_filename = 'vertex_poses_velocities_biases.csv'
-    est_traj_file = merged_map_path + pose_filename
-    gt_traj_file = gt_path + pose_filename
+    server_path = '/tmp/maplab_server/merged_map/'
 
-    eval = PoseTrajectoryEvaluation(est_traj_file, gt_traj_file)
-    est_traj, gt_traj = eval.compute_synchronized_trajectories()
-    print('we have an rmse of {rmse}'.format(rmse=eval.compute_ape()))
+    est_traj_file = server_path + pose_filename
+    gt_traj_file = '/mnt/data/datasets/fgsp/gt/hagerbach_anymal_2/gt.npy'
+    if exists(est_traj_file) and exists(gt_traj_file):
+        eval = PoseTrajectoryEvaluation(est_traj_file)
+        gt_traj = np.load(gt_traj_file)
+
+        est_traj, gt_traj = eval.compute_synchronized_trajectories_with_evo2(gt_traj)
+        error = eval.compute_evo_trans_ape_rmse(est_traj, gt_traj)
+        print('we have an rmse of {rmse}'.format(rmse=error))
+    else:
+        print('Input data does not exist.')
