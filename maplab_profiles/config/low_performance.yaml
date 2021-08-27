@@ -25,7 +25,7 @@ ba_parameter_tolerance:                                         1e-4
 #####################
 maplab_server_enable_lidar_loop_closure:                        true
 maplab_server_dense_map_resource_type:                          25
-maplab_server_perform_global_admc_every_nth:                    15
+maplab_server_perform_global_admc_every_nth:                    10
 
 dm_candidate_search_enable_intra_mission_consecutive:           true # Default true
 dm_candidate_search_consecutive_max_delta_time_s:               25 # Default 20.0

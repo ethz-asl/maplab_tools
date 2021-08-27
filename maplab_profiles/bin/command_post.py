@@ -25,21 +25,21 @@ class CommandPost(object):
 
     def default_profile_callback(self, req):
         if self.is_initialized is False:
-            return
+            return False
         rospy.logwarn('[CommandPost] Called default profile service')
-        self.set_profile(self.config.init_profile)
+        return self.set_profile(self.config.init_profile)
 
     def high_performance_profile_callback(self, req):
         if self.is_initialized is False:
-            return
+            return False
         rospy.logwarn('[CommandPost] Called high performance profile service')
-        self.set_profile(self.config.high_performance_profile)
+        return self.set_profile(self.config.high_performance_profile)
 
     def low_performance_profile_callback(self, req):
         if self.is_initialized is False:
-            return
+            return False
         rospy.logwarn('[CommandPost] Called low performance profile service')
-        self.set_profile(self.config.low_performance_profile)
+        return self.set_profile(self.config.low_performance_profile)
 
     def set_profile(self, profile):
         if profile == '':
@@ -106,7 +106,7 @@ class CommandPost(object):
         service_topic = self.config.maplab_server_prefix + key
         try:
             rospy.set_param(service_topic, value)
-            rospy.loginfo('[CommandPost] Setting parameter {param} with value {value}'.format(param=service_topic, value=value))
+            rospy.logdebug('[CommandPost] Setting parameter {param} with value {value}'.format(param=service_topic, value=value))
         except Exception as e:
             rospy.logerr('[CommandPost] Could not set parameter {param} with value {value}. Error: {error}'.format(param=service_topic, value=value, error=str(e)))
             return

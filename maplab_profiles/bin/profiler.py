@@ -6,6 +6,7 @@ import numpy as np
 import sys
 import yaml
 import os
+from tqdm.auto import tqdm
 from os.path import exists
 from config import ProfilerConfig
 from datasource import Datasource
@@ -22,6 +23,9 @@ class Profiler(object):
         tune_config = {}
         tune_config = self.read_grid_search_params(tune_config)
         tune_config = self.read_choice_params(tune_config)
+        if tune_config is None or len(tune_config) == 0:
+            rospy.logerr('Config is not correct. Aborting profiling.')
+            return
 
         # Perform profiling
         combinations = self.generate_combinations(tune_config)
@@ -30,9 +34,9 @@ class Profiler(object):
         losses = []
         est_trajectories = []
         gt_trajectories = []
-        for i in range(0, n_combinations):
+        for i in tqdm(range(0, n_combinations)):
             configuration = self.create_config_from_combination(tune_config, combinations[i,:])
-            est_traj, gt_traj, loss = self.profiling_function(configuration)
+            est_traj, gt_traj, loss = self.profiling_function(configuration, i, n_combinations)
             if loss > 0.0:
                 losses.append(loss)
                 est_trajectories.append(est_traj)
@@ -143,23 +147,23 @@ class Profiler(object):
     def read_choice_params(self, tune_config):
         return tune_config
 
-    def profiling_function(self, configuration):
-        rospy.loginfo('=== Start Profiling ===========================================================================')
+    def profiling_function(self, configuration, idx, n_combinations):
+        rospy.loginfo('=== Start Profiling {i}/{n} ==========================================================================='.format(i=idx, n=n_combinations))
         rospy.loginfo('[Profiler] Starting profiling with profile {profile}.'.format(profile=self.config.init_profile))
         if not self.commander.set_profile(self.config.init_profile):
-            return -1.0
+            return None, None, -1.0
         self.commander.set_params_from_dict(configuration)
         self.commander.send_reinit_request()
 
         rospy.loginfo('[Profiler] Starting publishing submaps to the server.')
         if not self.ds.start_publishing_submaps():
-            return -1.0
+            return None, None, -1.0
 
         rospy.loginfo('[Profiler] Waiting {secs}s for server completion.'.format(secs=self.config.profiling_burnout_sleep_time_s))
         self.wait_for_burnout()
 
         rospy.loginfo('[Profiler] Checking the results.')
-        est_traj, gt_traj, loss = self.compute_loss()
+        est_traj, gt_traj, loss = self.compute_loss_with_gt()
         self.commander.send_global_map_reset()
         rospy.loginfo('[Profiler] Waiting {secs}s for server cleanup.'.format(secs=self.config.profiling_completion_sleep_time_s))
         self.wait_for_completion()
@@ -167,7 +171,7 @@ class Profiler(object):
         rospy.loginfo('=== End Profiling ===========================================================================')
         return est_traj, gt_traj, loss
 
-    def compute_loss(self):
+    def compute_loss_optimized(self):
         pose_filename = 'vertex_poses_velocities_biases.csv'
         est_traj_file = self.config.profiling_merged_map_path + pose_filename
         gt_traj_file = self.config.profiling_ground_truth_path + pose_filename
@@ -177,6 +181,18 @@ class Profiler(object):
             return sys.maxint
         eval = PoseTrajectoryEvaluation(est_traj_file, gt_traj_file)
         est_traj, gt_traj = eval.compute_synchronized_trajectories()
+        return est_traj, gt_traj, eval.compute_trans_ape_rmse(est_traj, gt_traj)
+
+    def compute_loss_with_gt(self):
+        pose_filename = 'vertex_poses_velocities_biases.csv'
+        est_traj_file = self.config.profiling_merged_map_path + pose_filename
+        gt_traj = np.load(self.config.profiling_ground_truth_file)
+        if not exists(est_traj_file):
+            return sys.maxint
+        if not exists(gt_traj_file):
+            return sys.maxint
+        eval = PoseTrajectoryEvaluation(est_traj_file)
+        est_traj, gt_traj = eval.compute_synchronized_trajectories_with_gt(gt_traj)
         return est_traj, gt_traj, eval.compute_trans_ape_rmse(est_traj, gt_traj)
 
     def wait_for_burnout(self):

@@ -3,7 +3,7 @@
   <param name="/use_sim_time" value="false" />
 
   <!-- Config file -->
-  <arg name="config_file"             default="$(find maplab_profiles)/config/profiler_config.yaml"/>
+  <arg name="config_file"             default="$(find maplab_profiles)/config/profiler_config_local.yaml"/>
 
   <!-- Node name -->
   <arg name="node_name"               default="maplab_profiles"/>

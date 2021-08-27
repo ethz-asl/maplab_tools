@@ -1,21 +1,7 @@
-vi_map_landmark_quality_min_observers:                      # Default 4
-  - 2
-  - 3
-  - 4
-  - 5
-vi_map_landmark_quality_max_distance_from_closest_observer: # Default 40m
-  - 10
-  - 20
-  - 30
-  - 40
-  - 50
-vi_map_landmark_quality_min_distance_from_closest_observer: # Default 0.05m
-  - 0.02
-  - 0.05
-  - 0.1
-  - 0.3
-vi_map_landmark_quality_min_observation_angle_deg:          # Default 5deg
-  - 2
+maplab_server_perform_global_admc_every_nth:
   - 5
   - 10
-  - 15
+
+maplab_server_perform_global_visual_lc_every_nth:
+  - 5
+  - 10
