@@ -169,12 +169,12 @@ class Profiler(object):
         self.wait_for_burnout()
 
         rospy.loginfo('[Profiler] Checking the results.')
-        #try:
-        est_traj, gt_traj, loss = self.compute_loss_with_gt()
-        #except Exception as e: 
-            #rospy.logerr('[Profiler] Loss computation failed:')
-            #print(e)
-            #return None, None, -1.0
+        try:
+            est_traj, gt_traj, loss = self.compute_loss_with_gt()
+        except Exception as e: 
+            rospy.logerr('[Profiler] Loss computation failed:')
+            print(e)
+            return None, None, -1.0
         if loss < 0:
             return None, None, -1.0
 
