@@ -169,11 +169,15 @@ class Profiler(object):
         self.wait_for_burnout()
 
         rospy.loginfo('[Profiler] Checking the results.')
-        try:
-            est_traj, gt_traj, loss = self.compute_loss_with_gt()
-        except:
-            rospy.loginfo('[Profiler] Loss computation failed.')
+        #try:
+        est_traj, gt_traj, loss = self.compute_loss_with_gt()
+        #except Exception as e: 
+            #rospy.logerr('[Profiler] Loss computation failed:')
+            #print(e)
+            #return None, None, -1.0
+        if loss < 0:
             return None, None, -1.0
+
 
         self.commander.send_global_map_reset()
         rospy.loginfo('[Profiler] Waiting {secs}s for server cleanup.'.format(secs=self.config.profiling_completion_sleep_time_s))
@@ -199,9 +203,11 @@ class Profiler(object):
         est_traj_file = self.config.profiling_merged_map_path + pose_filename
         gt_traj_file = self.config.profiling_ground_truth_file
         if not exists(est_traj_file):
-            return sys.maxint
+            rospy.logerr('[Profiler] Estimated trajectory does not exist!')
+            return None, None, -1
         if not exists(gt_traj_file):
-            return sys.maxint
+            rospy.logerr('[Profiler] Ground truth trajectory does not exist!')
+            return None, None, -1
         eval = PoseTrajectoryEvaluation(est_traj_file)
         gt_traj = np.load(gt_traj_file)
         est_traj, gt_traj = eval.compute_synchronized_trajectories_with_evo2(gt_traj)
