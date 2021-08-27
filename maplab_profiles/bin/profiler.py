@@ -161,7 +161,7 @@ class Profiler(object):
         self.commander.set_params_from_dict(configuration)
         self.commander.send_reinit_request()
 
-        rospy.loginfo('[Profiler] Starting publishing submaps to the server.')
+        rospy.loginfo('[Profiler] Starting publishing submaps to the server from: {path}'.format(path=self.config.profiling_submap_folder))
         if not self.ds.start_publishing_submaps():
             return None, None, -1.0
 
