@@ -30,9 +30,9 @@ class PoseTrajectoryEvaluation(object):
         header_names = ['timestamp [ns]', 'vertex-id', 'mission-id', 'p_G_Ix [m]', 'p_G_Iy [m]', 'p_G_Iz [m]', 'q_G_Iw', 'q_G_Ix', 'q_G_Iy', 'q_G_Iz', 'p_M_Ix [m]', 'p_M_Iy [m]', 'p_M_Iz [m]', 'q_M_Iw', 'q_M_Ix', 'q_M_Iy', 'q_M_Iz', 'v_Mx [m/s]', 'v_My [m/s]', 'v_Mz [m/s]', 'bgx [rad/s]', 'bgy [rad/s]', 'bgz [rad/s]', 'bax [m/s^2]', 'bay [m/s^2]', 'baz [m/s^2]']
         return pd.read_csv(file, names=header_names, delimiter=',', comment='#', header=None)
     
-    def parse_trajectory_txt(self, file):
+    def parse_trajectory_txt(self, file, delimiter=' '):
         header_names = ['timestamp [ns]', 'p_G_Ix [m]', 'p_G_Iy [m]', 'p_G_Iz [m]', 'q_G_Ix', 'q_G_Iy', 'q_G_Iz', 'q_G_Iw']
-        return pd.read_csv(file, names=header_names, delimiter=' ', comment='#', header=None)
+        return pd.read_csv(file, names=header_names, delimiter=delimiter, comment='#', header=None)
 
     def synchronize_missions(self, est_df, gt_df):
         missions = np.array(pd.unique(est_df['mission-id']))
