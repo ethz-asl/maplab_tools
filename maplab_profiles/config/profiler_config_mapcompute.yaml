@@ -25,8 +25,8 @@ profiling_mode:                    parallel
 profiling_delays:
   - 0
 profiling_rate:                    0.1
-profiling_burnout_sleep_time_s:    10
-profiling_completion_sleep_time_s: 5
+profiling_burnout_sleep_time_s:    5
+profiling_completion_sleep_time_s: 6
 profiling_merged_map_path:         '/tmp/maplab_server/merged_map/'
 profiling_ground_truth_file:       '/media/scratch/berlukas/hagerbach_july/mission_05_anymal_2_gt.npy'
 profiling_grid_search_params_file: 'grid_search'

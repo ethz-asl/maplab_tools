@@ -79,8 +79,15 @@ class Profiler(object):
 
             est_traj_filename = self.config.profiling_export_path + 'est-traj-top-' + str(i) + '.npy'
             gt_traj_filename = self.config.profiling_export_path + 'gt-traj-top-' + str(i) + '.npy'
-            np.save(est_traj_filename, est_trajectories[top_n_idx])
-            np.save(gt_traj_filename, gt_trajectories[top_n_idx])
+
+            est_pose_traj = est_trajectories[top_n_idx]
+            est_traj = np.column_stack((est_pose_traj.timestamps, est_pose_traj.positions_xyz, est_pose_traj.orientations_quat_wxyz))
+
+            gt_pose_traj = gt_trajectories[top_n_idx]
+            gt_traj = np.column_stack((gt_pose_traj.timestamps, gt_pose_traj.positions_xyz, gt_pose_traj.orientations_quat_wxyz))
+
+            np.save(est_traj_filename, est_traj)
+            np.save(gt_traj_filename, gt_traj)
             i += 1
         rospy.loginfo('[Profiler] Wrote results to {export_path}'.format(export_path=self.config.profiling_export_path))
 

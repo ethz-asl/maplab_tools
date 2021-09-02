@@ -9,7 +9,7 @@ vi_map_landmark_quality_min_observation_angle_deg:              5  # Default 5de
 
 # OPTIMIZATION
 ##############
-ba_num_iterations:                                              2
+ba_num_iterations:                                              3
 ba_max_time_seconds:                                            30
 ba_enable_signal_handler:                                       false
 ba_hide_iterations_console_output:                              true
@@ -69,7 +69,7 @@ lc_edge_covariance_scaler:                                      1e-7 # Default 1
 lc_edge_min_distance_meters:                                    1.0 # Default 1.0
 lc_edge_min_inlier_ratio:                                       0.5 # Default 0.5
 lc_edge_min_inlier_count:                                       20 # Default 20
-maplab_server_perform_global_visual_lc_every_nth:               5
+maplab_server_perform_global_visual_lc_every_nth:               2
 
 # DENSE MAP
 ###########
