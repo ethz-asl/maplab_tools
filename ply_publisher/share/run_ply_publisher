@@ -5,6 +5,8 @@ REST=$@
 rosrun ply_publisher ply_publisher \
   --v=3 \
   --alsologtostderr \
-  --publish_topic="/point_cloud" \
-  --PLY_directory="/home/berlukas/Documents/ply_datasets/phaser_test/" \
+  --publish_topic="/ply_point_cloud" \
+  --PLY_directory="/media/berlukas/Data/data/cdpgo/teaser_img/init/" \
+  --frame_id="map" \
+  --enable_suffix \
   $REST

@@ -1,31 +1,41 @@
-#include "ply-publisher/ply-publisher-node.h"
 #include <map-resources/resource-conversion.h>
+#include "ply-publisher/ply-publisher-node.h"
 
-#include <visualization/common-rviz-visualization.h>
-#include <boost/filesystem.hpp>                                                 
+#include <boost/filesystem.hpp>
 #include <glog/logging.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <visualization/common-rviz-visualization.h>
 
 #include <sstream>
 
-DEFINE_string(publish_topic, "/ply",
+DEFINE_string(
+    publish_topic, "/ply",
     "Defines the topic used for republishing the converted submaps.");
 
-DEFINE_string(PLY_directory, "",
-    "If set will store the extracted submap as PLY to the given path.");
+DEFINE_string(PLY_directory, "", "Directory containing the pointclouds");
+
+DEFINE_string(frame_id, "map", "Frame in which the pointclouds are published.");
+
+DEFINE_bool(
+    enable_suffix, false,
+    "Will add a suffix to the published topic for each pointcloud.");
 
 namespace maplab {
 
-PlyPublisher::PlyPublisher(ros::NodeHandle& nh, 
-    const ros::NodeHandle& nh_private) : nh_(nh), nh_private_(nh_private), 
-    spinner_(1), should_exit_(false), processed_plys_(0), 
-    ply_directory_(FLAGS_PLY_directory), publish_topic_(FLAGS_publish_topic) {
+PlyPublisher::PlyPublisher(
+    ros::NodeHandle& nh, const ros::NodeHandle& nh_private)
+    : nh_(nh),
+      nh_private_(nh_private),
+      spinner_(1),
+      should_exit_(false),
+      processed_plys_(0),
+      ply_directory_(FLAGS_PLY_directory),
+      publish_topic_(FLAGS_publish_topic) {
   LOG(INFO) << "[PlyPublisher] Initializing publisher...";
 
   // Normalize input.
   ply_directory_.erase(ply_directory_.find_last_not_of("/") + 1);
   ply_directory_ += "/";
-
 
   // Initialize the submap republish.
   ply_pub_ = nh.advertise<sensor_msgs::PointCloud2>(publish_topic_, 1);
@@ -38,9 +48,7 @@ bool PlyPublisher::run() {
   return true;
 }
 
-void PlyPublisher::shutdown(){
-
-}
+void PlyPublisher::shutdown() {}
 
 std::atomic<bool>& PlyPublisher::shouldExit() {
   return should_exit_;
@@ -53,15 +61,16 @@ std::string PlyPublisher::printStatistics() const {
   return ss.str();
 }
 
-void PlyPublisher::readDirectory(const std::string& directory,
-     std::vector<std::string>* files) const {
-   boost::filesystem::path p(directory);
-    boost::filesystem::directory_iterator start(p);
-    boost::filesystem::directory_iterator end;
-    std::transform(start, end, std::back_inserter(*files),
-        [] (const boost::filesystem::directory_entry& entry) {
-          return entry.path().leaf().string();
-    });
+void PlyPublisher::readDirectory(
+    const std::string& directory, std::vector<std::string>* files) const {
+  boost::filesystem::path p(directory);
+  boost::filesystem::directory_iterator start(p);
+  boost::filesystem::directory_iterator end;
+  std::transform(
+      start, end, std::back_inserter(*files),
+      [](const boost::filesystem::directory_entry& entry) {
+        return entry.path().leaf().string();
+      });
 }
 
 void PlyPublisher::readPointclouds(const std::string& dir) {
@@ -71,8 +80,8 @@ void PlyPublisher::readPointclouds(const std::string& dir) {
   std::vector<std::string> files;
   readDirectory(dir, &files);
 
-  if (files.empty()) { 
-    LOG(FATAL) << "Given directory is empty"; 
+  if (files.empty()) {
+    LOG(FATAL) << "Given directory is empty";
   }
   for (const std::string& file : files) {
     const std::string full_path = dir + file;
@@ -83,19 +92,24 @@ void PlyPublisher::readPointclouds(const std::string& dir) {
       LOG(WARNING) << "Empty point cloud. Skipping";
       continue;
     }
-    publishPointcloud(maplab_pointcloud);
-    //sleep(5);
+    if (FLAGS_enable_suffix) {
+      std::stringstream ss;
+      ss << publish_topic_ << publish_topic_ << "/" << processed_plys_;
+      publishPointcloud(maplab_pointcloud, ss.str());
+    } else {
+      publishPointcloud(maplab_pointcloud, publish_topic_);
+    }
+    // sleep(5);
     ++processed_plys_;
   }
-
 }
 
-void PlyPublisher::publishPointcloud(const resources::PointCloud& pc) const {
+void PlyPublisher::publishPointcloud(
+    const resources::PointCloud& pc, const std::string& topic) const {
   sensor_msgs::PointCloud2 ros_point_cloud;
   backend::convertPointCloudType(pc, &ros_point_cloud);
-  ros_point_cloud.header.frame_id = "map";
-  visualization::RVizVisualizationSink::publish(
-      publish_topic_, ros_point_cloud);             
+  ros_point_cloud.header.frame_id = FLAGS_frame_id;
+  visualization::RVizVisualizationSink::publish(topic, ros_point_cloud);
 }
 
-} // namespace maplab
+}  // namespace maplab
