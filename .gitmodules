@@ -1,0 +1,3 @@
+[submodule "white_balancer/deps/WB_sRGB"]
+	path = white_balancer/deps/WB_sRGB
+	url = git@github.com:mahmoudnafifi/WB_sRGB.git

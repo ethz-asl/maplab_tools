@@ -17,6 +17,8 @@
   <depend>vi_map</depend>
   <depend>vio_common</depend>
   <depend>aslam_cv_cameras</depend>
-
+  <depend>sensor_msgs</depend>
+  <depend>opencv3_catkin</depend>
+  <depend>cv_bridge</depend>
 
 </package>

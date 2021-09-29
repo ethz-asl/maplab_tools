@@ -1,0 +1,34 @@
+mode:                              'profiler'
+
+maplab_server_prefix:              '/maplab_server/maplab_server_node/'
+maplab_server_reinit_sevice:       '/maplab_server/reinit_gflags'
+maplab_reset_global_map:           '/maplab_server/delete_all_robot_missions'
+maplab_whitelist_all_missions:     '/maplab_server/whitelistAllMissions'
+
+init_profile:                      'low_performance'
+high_performance_profile:          'high_performance'
+low_performance_profile:           'low_performance'
+config_root:                       '/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/maplab/dependencies/internal/maplab_tools/maplab_profiles/config/'
+profiles:
+  - 'default'
+  - 'high_performance'
+  - 'low_performance'
+  - 'lidar-only'
+
+# Profiler configs
+##################
+profiling_submap_folder:           '/home/berlukas/Documents/results/hagerbach_july/'
+profiling_send_n_submaps:          20
+profiling_robots:
+  - 'mission_05_anymal_2'
+profiling_mode:                    parallel
+profiling_delays:
+  - 0
+profiling_rate:                    0.1
+profiling_burnout_sleep_time_s:    10
+profiling_completion_sleep_time_s: 10
+profiling_merged_map_path:         '/tmp/maplab_server/merged_map/'
+profiling_ground_truth_file:       '/mnt/data/datasets/fgsp/gt/hagerbach_anymal_2/gt.npy'
+profiling_grid_search_params_file: 'grid_search'
+profiling_show_top_n_configs:      10
+profiling_export_path:             '/mnt/data/logs/maplab_profiles/'

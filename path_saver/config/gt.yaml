@@ -1,0 +1,2 @@
+input_path_topic: '/icp_odometry/poses'
+export_directory: '/mnt/data/datasets/fgsp/gt/'

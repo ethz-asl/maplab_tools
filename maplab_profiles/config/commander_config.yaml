@@ -1,0 +1,16 @@
+mode:                          'commander'
+
+maplab_server_prefix:          '/maplab_server/maplab_server_node/'
+maplab_server_reinit_sevice:   '/maplab_server/reinit_gflags'
+maplab_reset_global_map:       '/maplab_server/delete_all_robot_missions'
+maplab_whitelist_all_missions: '/maplab_server/whitelistAllMissions'
+
+init_profile:                  ''
+high_performance_profile:      'high_performance'
+low_performance_profile:       'low_performance'
+config_root:                   '/home/berlukas/Documents/workspace/darpa/src/darpa_subt_mapping/maplab/dependencies/internal/maplab_tools/maplab_profiles/config/'
+profiles:
+  - 'default'
+  - 'high_performance'
+  - 'low_performance'
+  - 'lidar-only'

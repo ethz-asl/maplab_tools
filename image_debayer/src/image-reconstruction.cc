@@ -68,7 +68,7 @@ void ImageReconstruction::imageCallback(
   }
   CHECK_NOTNULL(cv_ptr);
   debayer(&cv_ptr->image, FLAGS_bayer_pattern);
-  // adjustWhiteBalance(&cv_ptr->image);
+  adjustWhiteBalance(&cv_ptr->image);
 
   // Rotation
   if (FLAGS_image_rotation_angle_deg != 0 &&

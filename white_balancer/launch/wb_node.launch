@@ -7,11 +7,18 @@
 
   <!-- Node name -->
   <arg name="node_name"               default="white_balancer_test"/>
+  <arg name="img_topic"               default="/alphasense_driver_ros/cam4/debayered"/>
+  <arg name="img_drop"                default="3"/>
+  <arg name="img_drop_from"           default="4"/>
+
+  <node
+    name="img_dropper"
+    type="drop"
+    pkg="topic_tools"
+    args="$(arg img_topic) $(arg img_drop) $(arg img_drop_from) $(arg img_topic)_throttled" />
 
   <node name="$(arg node_name)" pkg="white_balancer" type="wb_node.py" output="screen" respawn="true">
-    <!--
     <rosparam command="load" file="$(arg config_file)"/>
-  -->
   </node>
 
 </launch>
